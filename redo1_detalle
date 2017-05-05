@@ -1,0 +1,47 @@
+<div class="col-md-4">
+  <div class="panel panel-default" >
+    <div class="panel-heading text-white bg-orange">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-warning btn-xs">Tipo</button>
+        <button type="button" class="btn btn-warning btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="javascript:;" onclick="cambiar_tipo_graph('column');">Columnas</a></li>
+          <li><a href="javascript:;" onclick="cambiar_tipo_graph('line');">Lineas</a></li>
+          <li><a href="javascript:;" onclick="cambiar_tipo_graph('table');">Tabla</a></li>
+        </ul>
+      </div>
+
+      <h4 class="panel-title">Comparacion por Mes</h4>
+    </div>
+    <div class="panel-body">
+      <div id="container"></div>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="panel panel-default" >
+    <div class="panel-heading text-white bg-orange">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-warning btn-xs">Tipo</button>
+        <button type="button" class="btn btn-warning btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="javascript:;" onclick="cambiar_tipo_graph('column');">Columnas</a></li>
+          <li><a href="javascript:;" onclick="cambiar_tipo_graph('line');">Lineas</a></li>
+          <li><a href="javascript:;" onclick="cambiar_tipo_graph('table');">Tabla</a></li>
+        </ul>
+      </div>
+
+      <h4 class="panel-title">Comparación por Especialidad</h4>
+
+    </div>
+    <div class="panel-body">
+
+
+      <div id="container"></div>
+    </div>
+  </div>
+</div>
