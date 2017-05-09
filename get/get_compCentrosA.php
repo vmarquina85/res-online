@@ -9,10 +9,10 @@ if ($mes!='*') {
   $index=0;
 }
 $mesnombre=array('(TOTAL)','ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
-$resultado=$claseConsulta->compCentros_ingresos($anio,$mes);
+$resultado=$claseConsulta->compCentros_atenciones($anio,$mes);
 $anio=(string)$anio;
 if (sizeof($resultado)>0 ){
-  echo  "<table id='tb_response_Centro_I' class='table table-striped table-bordered'>
+  echo  "<table id='tb_response_Centro_A' class='table table-striped table-bordered'>
     <thead>
       <tr>
         <th class='text-center'>E.E.S.S.</th>
