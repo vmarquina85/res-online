@@ -540,7 +540,6 @@ function initDatatable(jqueryID){
   });
   //e.ajax.reload();
   // $(jqueryID).DataTable.destroy();
-  fn.
 }
 </script>
 </body>
