@@ -315,7 +315,8 @@ $(document).ready(function() {
   $(".datepicker-default").datepicker({
     format: "yyyy",
       startView: "years",
-      minViewMode: "years"
+      minViewMode: "years",
+            autoclose: "true"
   })
 
   var hoy =f.getDate() + "/" + pad((f.getMonth() +1),2,0) + "/" + f.getFullYear();
@@ -534,12 +535,11 @@ function initDatatable(jqueryID){
     },
     scrollY: "330px",
     //scrollX: "100%",
-    scrollCollapse: false,
+    scrollCollapse: true,
     paging: false,
     searching:false
   });
-  //e.ajax.reload();
-  // $(jqueryID).DataTable.destroy();
+  new $.fn.dataTable.FixedColumns( e,{});
 }
 </script>
 </body>
