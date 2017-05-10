@@ -131,24 +131,13 @@ require '../class/consultas/consultas_cls.php';
     </div>
     <div id="content" class="content">
       <!-- <h1 class="page-header" >Reporte 2</h1> -->
-      <div class="wrapper bg-silver-lighter m-b-15">
-        <h5>Parametros de Busqueda</h5>
 
-        <form class="form-inline" action="javascript:;">
-          <!-- <div class="input-group m-b-5">
-          <span class="input-group-addon  input-sm" >Año</span>
-          <select  id="sl_anio" class='form-control' >
-          <option value="*">--Seleccionar--</option>
-          <option value="2012">2012</option>
-          <option value="2013">2013</option>
-          <option value="2014">2014</option>
-          <option value="2015">2015</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-        </select>
-      </div> -->
+    <div class="row">
+      <div class="col-xs-6">
+      <div class="wrapper bg-silver-lighter m-b-15">
+        <form class="form-inline text-center" action="javascript:;">
       <div class="input-group m-b-5">
-        <span class="input-group-addon  input-sm" >Año</span>
+        <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
         <input id="sl_anio" type="text" class='datepicker-default form-control'>
       </div>
       <div class="input-group m-b-5 ">
@@ -171,9 +160,42 @@ require '../class/consultas/consultas_cls.php';
       </div>
       <button  onclick ='mostrarResultados()' class="btn btn-primary m-b-5">Mostrar</button>
     </form>
-  </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6">
+        <form class="form-inline" action="javascript:;">
+      <div class="input-group m-b-5">
+        <span class="input-group-addon  input-sm" >Año</span>
+        <input id="sl_anio" type="text" class='datepicker-default form-control'>
+      </div>
+      <div class="input-group m-b-5 ">
+        <span class="input-group-addon  input-sm" >Mes</span>
+        <select  id="sl_mes" class='form-control'>
+          <option value="*">--TODOS--</option>
+          <option value="01">ENERO</option>
+          <option value="02">FEBRERO</option>
+          <option value="03">MARZO</option>
+          <option value="04">ABRIL</option>
+          <option value="05">MAYO</option>
+          <option value="06">JUNIO</option>
+          <option value="07">JULIO</option>
+          <option value="08">AGOSTO</option>
+          <option value="09">SEPTIEMBRE</option>
+          <option value="10">OCTUBRE</option>
+          <option value="11">NOVIEMBRE</option>
+          <option value="12">DICIEMBRE</option>
+        </select>
+      </div>
+
+    </form>
+      </div>
+    </div>
+
   <div class="row">
-    <div class="col-md-6">
+<div class="col-xs-6">
+  <div class="row">
+    <div class="col-xs-6">
       <div class="widget widget-stats bg-green">
         <div class="stats-icon"><i class="fa fa-usd"></i></div>
         <div class="stats-info">
@@ -182,7 +204,7 @@ require '../class/consultas/consultas_cls.php';
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <div class="widget widget-stats  bg-blue">
         <div class="stats-icon"><i class="fa fa-plus-circle"></i></div>
         <div class="stats-info">
@@ -192,13 +214,37 @@ require '../class/consultas/consultas_cls.php';
       </div>
     </div>
   </div>
+</div>
+<div class="col-xs-6">
   <div class="row">
-    <div class="col-md-6">
-      <div id='pnl_Ingresos' class="panel panel-default" style='height: 100%;' >
-        <div class="panel-heading  text-white bg-green">
+    <div class="col-xs-6">
+      <div class="widget widget-stats bg-green">
+        <div class="stats-icon"><i class="fa fa-usd"></i></div>
+        <div class="stats-info">
+          <h4>TOTAL INGRESOS</h4>
+          <span>S/. </span><p id='data_ingresos' class="odometer">0</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="widget widget-stats  bg-blue">
+        <div class="stats-icon"><i class="fa fa-plus-circle"></i></div>
+        <div class="stats-info">
+          <h4>TOTAL ATENCIONES</h4>
+          <span></span><p id='data_atenciones' class="odometer">0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div id='pnl_Ingresos' class="panel panel-inverse" style='height: 100%;' >
+        <div class="panel-heading">
           <div class="btn-group pull-right">
-            <button type="button" class="btn btn-info text-white btn-xs">Tipo</button>
-            <button type="button" class="btn btn-info text-white btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn bg-orange text-white btn-xs">Tipo</button>
+            <button type="button" class="btn bg-orange text-white btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" >
@@ -228,27 +274,12 @@ require '../class/consultas/consultas_cls.php';
               </div>
             </div>
           </div>
-
-
-
-
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div id='pnl_Atenciones' class="panel panel-default" style='height: 100%;' >
-        <div class="panel-heading  text-white bg-blue">
-          <div class="btn-group pull-right">
-            <button type="button" class="btn btn-info btn-xs">Tipo</button>
-            <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" >
-              <li ><a data-target="#resultados_A" data-slide-to="0">Por Centros</a></li>
-              <li ><a data-target="#resultados_A" data-slide-to="1">Por Mes</a></li>
-              <li ><a data-target="#resultados_A" data-slide-to="2">Por Especialidades</a></li>
-            </ul>
-          </div>
+    <div class="col-xs-6">
+      <div id='pnl_Atenciones' class="panel panel-inverse" style='height: 100%;' >
+        <div class="panel-heading">
           <h4 class="panel-title">Tabla Comparativa - Atenciones</h4>
         </div>
         <div class="panel-body">
@@ -274,7 +305,11 @@ require '../class/consultas/consultas_cls.php';
     </div>
 
   </div>
-
+<div class="btn-group">
+  <button data-target="#resultados_I" data-slide-to="0" class="btn btn-white">Centros</button>
+  <button data-target="#resultados_I" data-slide-to="1" class="btn btn-white">Meses</button>
+  <button data-target="#resultados_I" data-slide-to="2" class="btn btn-white">Especialidades</button>
+</div>
 
 
   <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
@@ -534,7 +569,7 @@ function initDatatable(jqueryID){
       }
     },
     scrollY: "330px",
-    //scrollX: "100%",
+    scrollX: "100%",
     scrollCollapse: true,
     paging: false,
     searching:false
