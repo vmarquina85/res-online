@@ -24,7 +24,7 @@ if (sizeof($resultado)>0 ){
  for ($i=0; $i <sizeof($resultado) ; $i++) {
    echo   "<tr>
           <td class='p-3 f-s-11 text-left m-r-10 m-l-10'> ".$resultado[$i]['operativo']."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href=''>".number_format($resultado[$i]['atenciones'],2,'.',',')."</a></td>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i]['atenciones'],2,'.',',')."</td>
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i]['ingresos'],2,'.',',')."</td>
 
           </tr>";
