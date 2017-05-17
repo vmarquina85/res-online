@@ -66,6 +66,9 @@ require '../class/consultas/consultas_cls.php';
       <!-- inicio container-fluid   -->
       <div class="container-fluid bg-orange">
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle pull-left" data-click="sidebar-toggled">
+            <span class="fa fa-chevron-left fa-1x text-white"></span>
+          </button>
           <a href="../index.php" class="navbar-brand">
             <!-- <i class="fa fa-table" style='color:#ffffff'></i> -->
             <img src="../assets/img/logo.png" alt="">
@@ -73,9 +76,7 @@ require '../class/consultas/consultas_cls.php';
 
           </a>
           <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-            <span class="icon-bar bg-white"></span>
-            <span class="icon-bar bg-white"></span>
-            <span class="icon-bar bg-white"></span>
+<i class="fa fa-filter fa-1x text-white sombrear" aria-hidden="true"></i>
           </button>
         </div>
       </div><!-- Final container-fluid    -->
@@ -131,11 +132,18 @@ require '../class/consultas/consultas_cls.php';
             <form class="form-inline text-center" action="javascript:;">
               <div class="input-group m-b-5">
                 <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-                <input id="sl_anio1" onchange="mostrarResultados()" type="text" class='datepicker-default form-control'>
+                <select onchange="mostrarResultados1()" id="sl_anio1" class='form-control'>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                </select>
               </div>
               <div class="input-group m-b-5 ">
                 <span class="input-group-addon  input-sm" >Mes</span>
-                <select  onchange="mostrarResultados()" id="sl_mes1" class='form-control'>
+                <select  onchange="mostrarResultados1()" id="sl_mes1" class='form-control'>
                   <option value="*">--TODOS--</option>
                   <option value="01">ENERO</option>
                   <option value="02">FEBRERO</option>
@@ -161,7 +169,7 @@ require '../class/consultas/consultas_cls.php';
                   <div class="stats-icon"><i class="fa fa-usd"></i></div>
                   <div class="stats-info">
                     <h4>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos' class="odometer">0</p>
+                    <span>S/. </span><p id='data_ingresos1' class="odometer">0</p>
                   </div>
                 </div>
               </div>
@@ -170,26 +178,14 @@ require '../class/consultas/consultas_cls.php';
                   <div class="stats-icon"><i class="fa fa-plus-circle"></i></div>
                   <div class="stats-info">
                     <h4>TOTAL ATENCIONES</h4>
-                    <span></span><p id='data_atenciones' class="odometer">0</p>
+                    <span></span><p id='data_atenciones1' class="odometer">0</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div id='pnl_Ingresos' class="panel panel-inverse" style='height: 100%;' >
+            <div id='pnl_Ingresos1' class="panel panel-inverse" style='height: 100%;' >
               <div class="panel-heading">
-                <div class="btn-group pull-right">
-                  <button type="button" class="btn bg-orange text-white btn-xs">Tipo</button>
-                  <button type="button" class="btn bg-orange text-white btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" >
-                    <li ><a data-target="#resultados_I" data-slide-to="0">Por Centros</a></li>
-                    <li ><a data-target="#resultados_I" data-slide-to="1">Por Mes</a></li>
-                    <li ><a data-target="#resultados_I" data-slide-to="2">Por Especialidades</a></li>
-                  </ul>
-                </div>
-
-                <h4 class="panel-title">Tabla Comparativa- Ingresos</h4>
+                <h4 class="panel-title">Tabla Comparativa</h4>
               </div>
               <div class="panel-body">
                 <div class="carousel slide" data-ride="carousel" id=resultados_I>
@@ -197,15 +193,15 @@ require '../class/consultas/consultas_cls.php';
                   <div class="carousel-inner">
                     <!-- begin item -->
                     <div class="item active">
-                      <div id='tb_comp_I1' class="table-responsive"></div>
+                      <div id='tb_comp_I11' class="table-responsive"></div>
                     </div>
                     <!-- end item -->
                     <!-- begin item -->
                     <div class="item">
-                      <div id='tb_comp_I2' class="table-responsive"></div>
+                      <div id='tb_comp_I21' class="table-responsive"></div>
                     </div>
                     <div class="item">
-                      <div id='tb_comp_I3' class="table-responsive"></div>
+                      <div id='tb_comp_I31' class="table-responsive"></div>
                     </div>
                   </div>
                 </div>
@@ -218,11 +214,19 @@ require '../class/consultas/consultas_cls.php';
             <form class="form-inline text-center" action="javascript:;">
               <div class="input-group m-b-5">
                 <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-                <input id="sl_anio"  onchange="mostrarResultados()" type="text" class='datepicker-default form-control'>
+                <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
+                <select  onchange="mostrarResultados2()" id="sl_anio2" class='form-control'>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                </select>
               </div>
               <div class="input-group m-b-5 ">
                 <span class="input-group-addon  input-sm" >Mes</span>
-                <select onchange="mostrarResultados()"  id="sl_mes" class='form-control'>
+                <select onchange="mostrarResultados2()"  id="sl_mes2" class='form-control'>
                   <option value="*">--TODOS--</option>
                   <option value="01">ENERO</option>
                   <option value="02">FEBRERO</option>
@@ -248,7 +252,7 @@ require '../class/consultas/consultas_cls.php';
                   <div class="stats-icon"><i class="fa fa-usd"></i></div>
                   <div class="stats-info">
                     <h4>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos' class="odometer">0</p>
+                    <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
                   </div>
                 </div>
               </div>
@@ -257,42 +261,30 @@ require '../class/consultas/consultas_cls.php';
                   <div class="stats-icon"><i class="fa fa-plus-circle"></i></div>
                   <div class="stats-info">
                     <h4>TOTAL ATENCIONES</h4>
-                    <span></span><p id='data_atenciones' class="odometer">0</p>
+                    <span></span><p id='data_atenciones2' class="odometer">0</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div id='pnl_Ingresos' class="panel panel-inverse" style='height: 100%;' >
+            <div id='pnl_Ingresos2' class="panel panel-inverse" style='height: 100%;' >
               <div class="panel-heading">
-                <div class="btn-group pull-right">
-                  <button type="button" class="btn bg-orange text-white btn-xs">Tipo</button>
-                  <button type="button" class="btn bg-orange text-white btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" >
-                    <li ><a data-target="#resultados_I" data-slide-to="0">Por Centros</a></li>
-                    <li ><a data-target="#resultados_I" data-slide-to="1">Por Mes</a></li>
-                    <li ><a data-target="#resultados_I" data-slide-to="2">Por Especialidades</a></li>
-                  </ul>
-                </div>
-
-                <h4 class="panel-title">Tabla Comparativa- Ingresos</h4>
+                <h4 class="panel-title">Tabla Comparativa</h4>
               </div>
               <div class="panel-body">
-                <div class="carousel slide" data-ride="carousel" id=resultados_I>
+                <div class="carousel slide" data-ride="carousel" id=resultados_II>
                   <!-- begin carousel-inner -->
                   <div class="carousel-inner">
                     <!-- begin item -->
                     <div class="item active">
-                      <div id='tb_comp_I1' class="table-responsive"></div>
+                      <div id='tb_comp_I12' class="table-responsive"></div>
                     </div>
                     <!-- end item -->
                     <!-- begin item -->
                     <div class="item">
-                      <div id='tb_comp_I2' class="table-responsive"></div>
+                      <div id='tb_comp_I22' class="table-responsive"></div>
                     </div>
                     <div class="item">
-                      <div id='tb_comp_I3' class="table-responsive"></div>
+                      <div id='tb_comp_I32' class="table-responsive"></div>
                     </div>
                   </div>
                 </div>
@@ -302,9 +294,9 @@ require '../class/consultas/consultas_cls.php';
         </div>
       </div>
       <div class="btn-group">
-        <button data-target="#resultados_I" data-slide-to="0" class="btn btn-white">Centros</button>
-        <button data-target="#resultados_I" data-slide-to="1" class="btn btn-white">Meses</button>
-        <button data-target="#resultados_I" data-slide-to="2" class="btn btn-white">Especialidades</button>
+        <button onclick='show_centros()' class="btn btn-white">Centros</button>
+        <button onclick='show_mes()' class="btn btn-white">Meses</button>
+        <button onclick='show_especialidades()' class="btn btn-white">Especialidades</button>
       </div>
 
 
@@ -334,7 +326,7 @@ require '../class/consultas/consultas_cls.php';
     //globals
     var f= new Date();
     var activado=false;
-    var panio=f.getFullYear(), pmes='*';
+    // var panio=f.getFullYear(), pmes='*';
 
     $(document).ready(function() {
 
@@ -349,11 +341,26 @@ require '../class/consultas/consultas_cls.php';
         minViewMode: "years",
         autoclose: "true"
       })
-
       var hoy =f.getDate() + "/" + pad((f.getMonth() +1),2,0) + "/" + f.getFullYear();
       $('[data-toggle="tooltip"]').tooltip();
       iniciarControles();
     });
+function show_centros(){
+  $("#resultados_II").carousel(0);
+    $("#resultados_I").carousel(0);
+}
+function show_mes(){
+  $("#resultados_II").carousel(1);
+    $("#resultados_I").carousel(1);
+}
+function show_especialidades(){
+$("#resultados_II").carousel(2);
+$("#resultados_I").carousel(2);
+
+}
+
+
+
     function pad(n, width, z) {
       z = z || '0';
       n = n + '';
@@ -371,85 +378,163 @@ require '../class/consultas/consultas_cls.php';
         $(div).removeClass('has-error');
       }
     }
-
     function iniciarControles(){
-      document.getElementById('sl_anio').selectedIndex='6';
-      document.getElementById('sl_mes').selectedIndex='0';
+      // document.getElementById('sl_anio1').value=f.getFullYear();
+      document.getElementById('sl_anio1').selectedIndex='5';
+      document.getElementById('sl_mes1').selectedIndex='0';
+      document.getElementById('sl_anio2').selectedIndex='5';
+      document.getElementById('sl_mes2').selectedIndex='0';
     }
-    function mostrarResultados(){
-      // part1
-      $('#data_ingresos').text(0);
-      $('#data_atenciones').text(0);
-      panio=document.getElementById('sl_anio1').value;
-      pmes=document.getElementById('sl_mes1').value;
+    //parametro: 1 o 2 quien activo el evento
+    function mostrarResultados1(){
+      $('#data_ingresos1').text(0);
+      $('#data_atenciones1').text(0);
+      var panio=document.getElementById('sl_anio1').value;
+      var pmes=document.getElementById('sl_mes1').value;
       var url = "../get/get_redo1_totales.php?anio="+panio+"&mes="+pmes;
       $.getJSON (url, function (datatable) {
         var data = datatable;
-        $('#data_ingresos').text(data[0]['ingresos']);
-        $('#data_atenciones').text(data[0]['atenciones']);
+        $('#data_ingresos1').text(data[0]['ingresos']);
+        $('#data_atenciones1').text(data[0]['atenciones']);
         // ingresos
-        compCentrosIngresos(panio,pmes);
-        compMesIngresos(panio,pmes);
-        compEspIngresos(panio,pmes);
-        //atenciones
-        compCentrosAtenciones(panio,pmes);
-        compMesAtenciones(panio,pmes);
-        compEspAtenciones(panio,pmes);
+        compCentrosIngresos1(panio,pmes);
+        compMesIngresos1(panio,pmes);
+        compEspIngresos1(panio,pmes);
       });
     }
-    function compCentrosIngresos(anio,mes){
-      startLoading('#pnl_Ingresos');
+
+
+    function compCentrosIngresos1(anio,mes){
+      startLoading('#pnl_Ingresos1');
       if (window.XMLHttpRequest) {
         var http=getXMLHTTPRequest();
       }
-      var modurl = "../get/get_compCentros.php?anio="+anio+"&mes="+mes;
+      var modurl = "../get/get_compCentros.php?anio="+anio+"&mes="+mes+"&tipoanno=1";
       http.open("GET", modurl, true);
       http.addEventListener('readystatechange', function() {
         if (http.readyState == 4) {
           if(http.status == 200) {
             var resultado = http.responseText;
 
-            document.getElementById('tb_comp_I1').innerHTML=(resultado);
+            document.getElementById('tb_comp_I11').innerHTML=(resultado);
             initDatatable("#tb_response_Centro_I");
-            endLoading('#pnl_Ingresos');
+            endLoading('#pnl_Ingresos1');
           }
         }
       });
       http.send(null);
     }
-    function compMesIngresos(anio,mes){
-      startLoading('#pnl_Ingresos');
+    function compMesIngresos1(anio,mes){
+      startLoading('#pnl_Ingresos1');
       if (window.XMLHttpRequest) {
         var http=getXMLHTTPRequest();
       }
-      var modurl = "../get/get_compMes.php?anio="+anio+"&mes="+mes;
+      var modurl = "../get/get_compMes.php?anio="+anio+"&mes="+mes+"&tipoanno=1";
       http.open("GET", modurl, true);
       http.addEventListener('readystatechange', function() {
         if (http.readyState == 4) {
           if(http.status == 200) {
             var resultado = http.responseText;
-            document.getElementById('tb_comp_I2').innerHTML=(resultado);
-          //initDatatable("#tb_response_mes_I");
-            endLoading('#pnl_Ingresos');
+            document.getElementById('tb_comp_I21').innerHTML=(resultado);
+            //initDatatable("#tb_response_mes_I");
+            endLoading('#pnl_Ingresos1');
           }
         }
       });
       http.send(null);
     }
-    function compEspIngresos(anio,mes){
-      startLoading('#pnl_Ingresos');
+    function compEspIngresos1(anio,mes){
+      startLoading('#pnl_Ingresos1');
       if (window.XMLHttpRequest) {
         var http=getXMLHTTPRequest();
       }
-      var modurl = "../get/get_compEsp.php?anio="+anio+"&mes="+mes;
+      var modurl = "../get/get_compEsp.php?anio="+anio+"&mes="+mes+"&tipoanno=1";
       http.open("GET", modurl, true);
       http.addEventListener('readystatechange', function() {
         if (http.readyState == 4) {
           if(http.status == 200) {
             var resultado = http.responseText;
-            document.getElementById('tb_comp_I3').innerHTML=(resultado);
+            document.getElementById('tb_comp_I31').innerHTML=(resultado);
             initDatatable("#tb_response_esp_I");
-            endLoading('#pnl_Ingresos');
+            endLoading('#pnl_Ingresos1');
+          }
+        }
+      });
+      http.send(null);
+    }
+    // PARA EL AÑO A COMPARAR
+    //parametro: 1 o 2 quien activo el evento
+    function mostrarResultados2(){
+      $('#data_ingresos2').text(0);
+      $('#data_atenciones2').text(0);
+      var panio=document.getElementById('sl_anio2').value;
+      var pmes=document.getElementById('sl_mes2').value;
+      var url = "../get/get_redo1_totales.php?anio="+panio+"&mes="+pmes;
+      $.getJSON (url, function (datatable) {
+        var data = datatable;
+        $('#data_ingresos2').text(data[0]['ingresos']);
+        $('#data_atenciones2').text(data[0]['atenciones']);
+        // ingresos
+        compCentrosIngresos2(panio,pmes);
+        compMesIngresos2(panio,pmes);
+        compEspIngresos2(panio,pmes);
+      });
+    }
+
+
+    function compCentrosIngresos2(anio,mes){
+      startLoading('#pnl_Ingresos2');
+      if (window.XMLHttpRequest) {
+        var http=getXMLHTTPRequest();
+      }
+      var modurl = "../get/get_compCentrosA.php?anio="+anio+"&mes="+mes+"&tipoanno=2";
+      http.open("GET", modurl, true);
+      http.addEventListener('readystatechange', function() {
+        if (http.readyState == 4) {
+          if(http.status == 200) {
+            var resultado = http.responseText;
+
+            document.getElementById('tb_comp_I12').innerHTML=(resultado);
+            initDatatable("#tb_response_Centro_I_2");
+            endLoading('#pnl_Ingresos2');
+          }
+        }
+      });
+      http.send(null);
+    }
+    function compMesIngresos2(anio,mes){
+      startLoading('#pnl_Ingresos2');
+      if (window.XMLHttpRequest) {
+        var http=getXMLHTTPRequest();
+      }
+      var modurl = "../get/get_compMesA.php?anio="+anio+"&mes="+mes+"&tipoanno=2";
+      http.open("GET", modurl, true);
+      http.addEventListener('readystatechange', function() {
+        if (http.readyState == 4) {
+          if(http.status == 200) {
+            var resultado = http.responseText;
+            document.getElementById('tb_comp_I22').innerHTML=(resultado);
+            //initDatatable("#tb_response_mes_I");
+            endLoading('#pnl_Ingresos2');
+          }
+        }
+      });
+      http.send(null);
+    }
+    function compEspIngresos2(anio,mes){
+      startLoading('#pnl_Ingresos2');
+      if (window.XMLHttpRequest) {
+        var http=getXMLHTTPRequest();
+      }
+      var modurl = "../get/get_compEspA.php?anio="+anio+"&mes="+mes+"&tipoanno=2";
+      http.open("GET", modurl, true);
+      http.addEventListener('readystatechange', function() {
+        if (http.readyState == 4) {
+          if(http.status == 200) {
+            var resultado = http.responseText;
+            document.getElementById('tb_comp_I32').innerHTML=(resultado);
+            initDatatable("#tb_response_esp_I_2");
+            endLoading('#pnl_Ingresos2');
           }
         }
       });
@@ -457,71 +542,6 @@ require '../class/consultas/consultas_cls.php';
     }
 
     // funciones de atenciones
-    function compCentrosAtenciones(anio,mes){
-      startLoading('#pnl_Atenciones');
-      if (window.XMLHttpRequest) {
-        var http=getXMLHTTPRequest();
-      }
-      var modurl = "../get/get_compCentrosA.php?anio="+anio+"&mes="+mes;
-      http.open("GET", modurl, true);
-      http.addEventListener('readystatechange', function() {
-        if (http.readyState == 4) {
-          if(http.status == 200) {
-            var resultado = http.responseText;
-
-            document.getElementById('tb_comp_A1').innerHTML=(resultado);
-            initDatatable("#tb_response_Centro_A");
-            endLoading('#pnl_Atenciones');
-          }
-        }
-      });
-      http.send(null);
-    }
-    function compMesAtenciones(anio,mes){
-      startLoading('#pnl_Atenciones');
-      if (window.XMLHttpRequest) {
-        var http=getXMLHTTPRequest();
-      }
-      var modurl = "../get/get_compMesA.php?anio="+anio+"&mes="+mes;
-      http.open("GET", modurl, true);
-      http.addEventListener('readystatechange', function() {
-        if (http.readyState == 4) {
-          if(http.status == 200) {
-            var resultado = http.responseText;
-            document.getElementById('tb_comp_A2').innerHTML=(resultado);
-            initDatatable("#tb_response_mes_A");
-            endLoading('#pnl_Atenciones');
-          }
-        }
-      });
-      http.send(null);
-    }
-    function compEspAtenciones(anio,mes){
-      startLoading('#pnl_Atenciones');
-      if (window.XMLHttpRequest) {
-        var http=getXMLHTTPRequest();
-      }
-      var modurl = "../get/get_compEspA.php?anio="+anio+"&mes="+mes;
-      http.open("GET", modurl, true);
-      http.addEventListener('readystatechange', function() {
-        if (http.readyState == 4) {
-          if(http.status == 200) {
-            var resultado = http.responseText;
-            document.getElementById('tb_comp_A3').innerHTML=(resultado);
-            initDatatable("#tb_response_esp_A");
-            endLoading('#pnl_Atenciones');
-          }
-        }
-      });
-      http.send(null);
-    }
-
-
-
-
-
-
-
     function numberWithCommas(x) {
       var parts = x.toString().split(".");
       parts[0] = parts[0].replace(/\B(?=(?=\d*\.)(\d{3})+(?!\d))/g, '_');
@@ -565,7 +585,7 @@ require '../class/consultas/consultas_cls.php';
           }
         },
         scrollY: "330px",
-      //  scrollX: "100%",
+        //  scrollX: "100%",
         scrollCollapse: true,
         paging: false,
         searching:false

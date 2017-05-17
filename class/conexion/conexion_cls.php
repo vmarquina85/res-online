@@ -2,7 +2,8 @@
 class conectar
 {
 function conexion_resumen(){
-$pconnect=pg_connect("host=10.10.10.4 port=5432 dbname=summary user=webserver password=W38Serv3R879*-$");
+$pconnect=pg_connect("host=192.168.1.95 port=5432 dbname=summary user=usredo password=usredo");
+ //$pconnect=pg_connect("host=10.10.10.4 port=5432 dbname=summary user=webserver password=W38Serv3R879*-$");
 	if (!$pconnect)
 	   return "fracaso";
 	else

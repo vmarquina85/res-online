@@ -1,6 +1,6 @@
 <?php
 require '../class/consultas/consultas_cls.php';
-$claseConsulta= new consultas;
+$claseConsulta4= new consultas;
 $anio=$_REQUEST['anio'];
 $mes=$_REQUEST['mes'];
 if ($mes!='*') {
@@ -9,24 +9,23 @@ if ($mes!='*') {
   $index=0;
 }
 $mesnombre=array('MESES','ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
-$resultado=$claseConsulta->compEspecialidades_atenciones($anio,$mes);
+$resultado=$claseConsulta4->compEspecialidades_ingresos($anio,$mes);
 if (sizeof($resultado)>0 ){
-  echo  "<table id='tb_response_esp_A' class='table  table-striped table-bordered'>
+  echo  "<table id='tb_response_esp_I_2' class='table  table-striped table-bordered'>
     <thead>
       <tr>
         <th>Especialidad</th>
-        <th>".$anio."</th>
-        <th>".($anio-1)."</th>
-        <th>".($anio-2)."</th>
+        <th>Atenciones</th>
+        <th>Ingresos</th>
       </tr>
     </thead>
     <tbody>";
  for ($i=0; $i <sizeof($resultado) ; $i++) {
    echo   "<tr>
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$resultado[$i]['especialidad']."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href=''>".number_format($resultado[$i][$anio],2,'.',',')."</a></td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i][($anio-1)],2,'.',',')."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i][($anio-2)],2,'.',',')."</td>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href=''>".number_format($resultado[$i]['atenciones'],2,'.',',')."</a></td>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i]['ingresos'],2,'.',',')."</td>
+
           </tr>";
 }
 echo "</tbody>";
