@@ -129,12 +129,30 @@ if (!isset($_SESSION["resonlinepermitido"])) {
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
         <ul class="nav">
+        <li class="nav-header">MENÚ PRINCIPAL</li>
           <li class="has-sub active">
             <a href="../pages/p_redo1.php">
               <i class="fa fa-laptop"></i>
               <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
             </a>
           </li>
+
+            <!-- <li class="nav-header pull-down sesion">SESIÓN</li>
+            <li class="has-sub sesion">
+              <a href="../pages/p_redo1.php">
+                <i class="fa fa-key"></i>
+                <span>CAMBIAR CONTRASEÑA</span>
+              </a>
+            </li>
+            <li class="has-sub sesion">
+              <a href="../pages/p_redo1.php">
+                <i class="fa fa-times"></i>
+                <span>CERRAR SESIÓN</span>
+              </a>
+            </li> -->
+
+
+
           <!-- <li class="has-sub">
           <a href="../pages/p_redo2.php">
           <i class="fa fa-laptop"></i>

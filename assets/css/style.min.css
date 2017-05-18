@@ -7537,6 +7537,10 @@ body.flat-black {
 .profile-section .title small {
     font-weight: 400
 }
+.sesion{
+  display: none;
+}
+
 @media (max-width: 767px){
   .navbar-user img {
       display: none;
@@ -7545,6 +7549,9 @@ body.flat-black {
   }
   .navbar-nav{
       display: none;
-
   }
+  .sesion{
+    display: run-in;
+  }
+  
 }
