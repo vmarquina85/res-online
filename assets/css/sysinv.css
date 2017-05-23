@@ -45,7 +45,7 @@ i.hover-blue:hover{
   @media (min-width: 768px){
     .modal-dialog {
      margin: 30px auto;
-     width: 1024px;
+     width: 600px;
    }
    .dialog-normal{
     margin: 30px auto;

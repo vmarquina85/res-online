@@ -4609,8 +4609,8 @@ ul.tagit.inverse li.tagit-choice .tagit-close:hover .ui-icon-close:before {
     position: absolute;
     right: 15px;
     top: 15px;
-    opacity: .2;
-    filter: alpha(opacity=20)
+    opacity: 1;
+    
 }
 
 .widget-stats .stats-info p {
@@ -7553,5 +7553,5 @@ body.flat-black {
   .sesion{
     display: run-in;
   }
-  
+
 }

@@ -1,0 +1,376 @@
+
+function show_centros(){
+  $("#resultados_II").carousel(0);
+  // $('#tb_response_Centro_I_2').draw();
+  $("#resultados_I").carousel(0);
+  // $('#tb_response_Centro_I').draw();
+}
+function show_mes(){
+  $("#resultados_II").carousel(1);
+  // $('#tb_response_mes_I_2').draw();
+  $("#resultados_I").carousel(1);
+  // $('#tb_response_mes_I').draw();
+}
+function show_especialidades(){
+  $("#resultados_II").carousel(2);
+  // $('#tb_response_esp_I_2').DataTable.draw();
+  $("#resultados_I").carousel(2);
+  // $('#tb_response_esp_I').DataTable.draw();
+
+}
+
+
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+function controlValidar(){
+  if (document.getElementById('txt_bienDescripcionUpdt').value==''){
+    alert('Seleccione un tipo de bien');
+    var div=document.getElementById('txt_bienDescripcionUpdt').closest('div');
+    $(div).toggleClass('has-error');
+    document.getElementById('txt_bienDescripcionUpdt').focus();
+    return false;
+  }else{
+    var div=document.getElementById('txt_bienDescripcionUpdt').closest('div');
+    $(div).removeClass('has-error');
+  }
+}
+function iniciarControles(){
+  // document.getElementById('sl_anio1').value=f.getFullYear();
+//  document.getElementById('sl_anio1').selectedIndex='5';
+  document.getElementById('sl_mes1').selectedIndex='0';
+//  document.getElementById('sl_anio2').selectedIndex='5';
+  document.getElementById('sl_mes2').selectedIndex='0';
+}
+//parametro: 1 o 2 quien activo el evento
+function mostrarResultados1(){
+  $('#data_ingresos1').text(0);
+  $('#data_atenciones1').text(0);
+  var panio=document.getElementById('sl_anio1').value;
+  var pmes=document.getElementById('sl_mes1').value;
+  ganio1=document.getElementById('sl_anio1').value;
+  gmes1=document.getElementById('sl_mes1').value;
+  var url = "../get/get_redo1_totales.php?anio="+panio+"&mes="+pmes;
+  $.getJSON (url, function (datatable) {
+    var data = datatable;
+    $('#data_ingresos1').text(data[0]['ingresos']);
+    $('#data_atenciones1').text(data[0]['atenciones']);
+    // ingresos
+    compCentrosIngresos1(panio,pmes);
+    compMesIngresos1(panio,pmes);
+    compEspIngresos1(panio,pmes);
+  });
+}
+
+
+function compCentrosIngresos1(anio,mes){
+  startLoading('#pnl_Ingresos1');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compCentros.php?anio="+anio+"&mes="+mes+"&tipoanno=1";
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+
+        document.getElementById('tb_comp_I11').innerHTML=(resultado);
+        initDatatable("#tb_response_Centro_I");
+        endLoading('#pnl_Ingresos1');
+      }
+    }
+  });
+  http.send(null);
+}
+function compMesIngresos1(anio,mes){
+  startLoading('#pnl_Ingresos1');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compMes.php?anio="+anio+"&mes="+mes+"&tipoanno=1";
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('tb_comp_I21').innerHTML=(resultado);
+        //initDatatable("#tb_response_mes_I");
+        endLoading('#pnl_Ingresos1');
+      }
+    }
+  });
+  http.send(null);
+}
+function compEspIngresos1(anio,mes){
+  startLoading('#pnl_Ingresos1');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compEsp.php?anio="+anio+"&mes="+mes+"&tipoanno=1";
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('tb_comp_I31').innerHTML=(resultado);
+        initDatatable("#tb_response_esp_I");
+        endLoading('#pnl_Ingresos1');
+      }
+    }
+  });
+  http.send(null);
+}
+// PARA EL AÑO A COMPARAR
+//parametro: 1 o 2 quien activo el evento
+function mostrarResultados2(){
+  $('#data_ingresos2').text(0);
+  $('#data_atenciones2').text(0);
+  var panio=document.getElementById('sl_anio2').value;
+  var pmes=document.getElementById('sl_mes2').value;
+  ganio2=document.getElementById('sl_anio2').value;
+  gmes2=document.getElementById('sl_mes2').value;
+  var url = "../get/get_redo1_totales.php?anio="+panio+"&mes="+pmes;
+  $.getJSON (url, function (datatable) {
+    var data = datatable;
+    $('#data_ingresos2').text(data[0]['ingresos']);
+    $('#data_atenciones2').text(data[0]['atenciones']);
+    // ingresos
+    compCentrosIngresos2(panio,pmes);
+    compMesIngresos2(panio,pmes);
+    compEspIngresos2(panio,pmes);
+  });
+}
+
+
+function compCentrosIngresos2(anio,mes){
+  startLoading('#pnl_Ingresos2');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compCentrosA.php?anio="+anio+"&mes="+mes+"&tipoanno=2";
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+
+        document.getElementById('tb_comp_I12').innerHTML=(resultado);
+        initDatatable("#tb_response_Centro_I_2");
+        endLoading('#pnl_Ingresos2');
+      }
+    }
+  });
+  http.send(null);
+}
+function compMesIngresos2(anio,mes){
+  startLoading('#pnl_Ingresos2');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compMesA.php?anio="+anio+"&mes="+mes+"&tipoanno=2";
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('tb_comp_I22').innerHTML=(resultado);
+        //initDatatable("#tb_response_mes_I");
+        endLoading('#pnl_Ingresos2');
+      }
+    }
+  });
+  http.send(null);
+}
+function compEspIngresos2(anio,mes){
+  startLoading('#pnl_Ingresos2');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compEspA.php?anio="+anio+"&mes="+mes+"&tipoanno=2";
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('tb_comp_I32').innerHTML=(resultado);
+        initDatatable("#tb_response_esp_I_2");
+        endLoading('#pnl_Ingresos2');
+      }
+    }
+  });
+  http.send(null);
+}
+
+// funciones de atenciones
+function numberWithCommas(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(?=\d*\.)(\d{3})+(?!\d))/g, '_');
+  return parts.join(".");
+}
+function startLoading(panel){
+  if (!$(panel).hasClass('panel-loading')) {
+    var targetBody = $(panel).find('.panel-body');
+    var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
+    $(panel).addClass('panel-loading');
+    $(targetBody).prepend(spinnerHtml);
+  }
+}
+function endLoading(panel){
+  setTimeout(function () {
+    $(panel).removeClass('panel-loading');
+    $(panel).find('.panel-loader').remove();
+  }, 2000);
+}
+function initDatatable(jqueryID){
+
+  var e=$(jqueryID).DataTable({
+    "language": {
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+      }
+    },
+    scrollY: "330px",
+   //scrollX: "100%",
+    scrollCollapse: true,
+    paging: false,
+    searching:false
+  });
+  //new $.fn.dataTable.FixedColumns( e,{});
+}
+function get_details_1(objeto,tipanio){
+    fila=objeto.closest('tr');
+  var centro=fila.getElementsByTagName("td")[0].innerHTML;
+if (tipanio==0) {
+  var parametros = {
+    "anio":ganio1 ,
+    "mes": gmes1,
+    "centro":centro
+    };
+}else{
+  var parametros = {
+    "anio":ganio2 ,
+    "mes": gmes2,
+    "centro":centro
+    };
+}
+  $.ajax({
+     	data:  parametros,
+    url:   '../get/get_detalle_1.php',
+    type:  'post',
+    success:  function (response) {
+        document.getElementById("tabla_det").innerHTML=response;
+      //  initDatatable('#tb_esp_aten');
+        $('#modal_detalles').modal();
+    }
+  });
+}
+function get_details_2(objeto,tipanio){
+    fila=objeto.closest('tr');
+  var centro=fila.getElementsByTagName("td")[0].innerHTML;
+  if (tipanio==0) {
+    var parametros = {
+      "anio":ganio1 ,
+      "mes": gmes1,
+      "centro":centro
+      };
+  }else{
+    var parametros = {
+      "anio":ganio2 ,
+      "mes": gmes2,
+      "centro":centro
+      };
+  }
+
+  $.ajax({
+     	data:  parametros,
+    url:   '../get/get_detalle_2.php',
+    type:  'post',
+    success:  function (response) {
+        document.getElementById("tabla_det").innerHTML=response;
+      //  initDatatable('#tb_esp_aten');
+        $('#modal_detalles').modal();
+    }
+  });
+}
+// function get_details_2(){
+//   $('#modal_detalles').modal();
+// $('#container').highcharts({
+//   chart: {
+//       renderTo: 'modal_detalles',
+//     type: 'column',
+//   },
+//
+//   colors:["#99DC79"],
+//   title: {
+//     text: 'GRÁFICO'
+//   },
+//   subtitle: {
+//     // text: 'Fecha : '+ f.getDate() + "/" + pad(f.getMonth()+1,2) + "/" + f.getFullYear()
+//     text: 'INGRESOS POR ESPECIALIDAD'
+//   },
+//   xAxis: {
+//     type: 'category',
+//     labels: {
+//
+//       enabled: true
+//     }
+//   },
+//   legend: {
+//     layout: 'vertical',
+//     align: 'right',
+//     verticalAlign: 'top',
+//     x: -70,
+//     y: 100,
+//     floating: true,
+//     borderWidth: 1,
+//     backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+//     shadow: true
+//   },
+//   yAxis: {
+//     min: 0,
+//     title: {
+//       text: 'Ingresos (Soles)'
+//     }
+//   },
+//   tooltip: {
+//     pointFormat: 'Ventas: S/. <b>{point.y:.2f} </b>'
+//   },
+//   credits: {
+//     enabled: false
+//   },
+//   exporting: {
+//     enabled: false
+//   },
+//   series: [{
+//     name: 'Ingresos',
+//     data: [ ]
+//   }],
+// });
+// var chart = $('#container').highcharts();
+// $('#modal_detalles').on('show.bs.modal', function() {
+//  $('#container').css('visibility', 'hidden');
+// });
+// $('#modal_detalles').on('shown.bs.modal', function() {
+//  $('#container').css('visibility', 'initial');
+//  chart.reflow();
+// });
+// }

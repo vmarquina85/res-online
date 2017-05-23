@@ -72,6 +72,38 @@ class consultas extends conectar
 		}
 		return $this->t;
 	}
+	function esp_aten($anio,$mes,$centro){
+		$sql="select especialidad,sum(atenciones) as atenciones from summary.redo where operativo='".trim($centro)."'  and date_part('year' ,fecha)=".$anio;
+		if ($mes!='*') {
+			$sql=$sql." and date_part('month' ,fecha)=".$mes;
+		}
+		$sql=$sql." group by especialidad,date_part('year' ,fecha)";
+		if ($mes!='*') {
+			$sql=$sql.",date_part('month' ,fecha)";
+		}
+		$sql=$sql." order by 1";
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+	function esp_ing($anio,$mes,$centro){
+		$sql="select especialidad,sum(ingresos) as ingresos from summary.redo where operativo='".trim($centro)."'  and date_part('year' ,fecha)=".$anio;
+		if ($mes!='*') {
+			$sql=$sql." and date_part('month' ,fecha)=".$mes;
+		}
+		$sql=$sql." group by especialidad,date_part('year' ,fecha)";
+		if ($mes!='*') {
+			$sql=$sql.",date_part('month' ,fecha)";
+		}
+		$sql=$sql." order by 1";
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
 
 }
 	?>
