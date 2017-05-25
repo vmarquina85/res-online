@@ -1,21 +1,41 @@
-
+function disclamer(){
+  $('#disclamer').modal();
+}
 function show_centros(){
   $("#resultados_II").carousel(0);
-  // $('#tb_response_Centro_I_2').draw();
+  var table = $.fn.dataTable.fnTables(true);
+  if ( table.length > 0 ) {
+  $(table).dataTable().fnAdjustColumnSizing();
+  }
   $("#resultados_I").carousel(0);
-  // $('#tb_response_Centro_I').draw();
+  var table = $.fn.dataTable.fnTables(true);
+  if ( table.length > 0 ) {
+  $(table).dataTable().fnAdjustColumnSizing();
+  }
 }
 function show_mes(){
   $("#resultados_II").carousel(1);
-  // $('#tb_response_mes_I_2').draw();
+  var table = $.fn.dataTable.fnTables(true);
+  if ( table.length > 0 ) {
+  $(table).dataTable().fnAdjustColumnSizing();
+  }
   $("#resultados_I").carousel(1);
-  // $('#tb_response_mes_I').draw();
+  var table = $.fn.dataTable.fnTables(true);
+  if ( table.length > 0 ) {
+  $(table).dataTable().fnAdjustColumnSizing();
+  }
 }
 function show_especialidades(){
   $("#resultados_II").carousel(2);
-  // $('#tb_response_esp_I_2').DataTable.draw();
+  var table = $.fn.dataTable.fnTables(true);
+  if ( table.length > 0 ) {
+  $(table).dataTable().fnAdjustColumnSizing();
+  }
   $("#resultados_I").carousel(2);
-  // $('#tb_response_esp_I').DataTable.draw();
+  var table = $.fn.dataTable.fnTables(true);
+  if ( table.length > 0 ) {
+  $(table).dataTable().fnAdjustColumnSizing();
+  }
 
 }
 
@@ -79,7 +99,7 @@ function compCentrosIngresos1(anio,mes){
         var resultado = http.responseText;
 
         document.getElementById('tb_comp_I11').innerHTML=(resultado);
-        initDatatable("#tb_response_Centro_I");
+        // initDatatable("#tb_response_Centro_I");
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -117,7 +137,7 @@ function compEspIngresos1(anio,mes){
       if(http.status == 200) {
         var resultado = http.responseText;
         document.getElementById('tb_comp_I31').innerHTML=(resultado);
-        initDatatable("#tb_response_esp_I");
+        // initDatatable("#tb_response_esp_I");
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -159,7 +179,7 @@ function compCentrosIngresos2(anio,mes){
         var resultado = http.responseText;
 
         document.getElementById('tb_comp_I12').innerHTML=(resultado);
-        initDatatable("#tb_response_Centro_I_2");
+        // initDatatable("#tb_response_Centro_I_2");
         endLoading('#pnl_Ingresos2');
       }
     }
@@ -197,7 +217,7 @@ function compEspIngresos2(anio,mes){
       if(http.status == 200) {
         var resultado = http.responseText;
         document.getElementById('tb_comp_I32').innerHTML=(resultado);
-        initDatatable("#tb_response_esp_I_2");
+        // initDatatable("#tb_response_esp_I_2");
         endLoading('#pnl_Ingresos2');
       }
     }
@@ -249,12 +269,12 @@ function initDatatable(jqueryID){
       }
     },
     scrollY: "330px",
-   //scrollX: "100%",
+   scrollX: "100%",
     scrollCollapse: true,
     paging: false,
     searching:false
   });
-  //new $.fn.dataTable.FixedColumns( e,{});
+  new $.fn.dataTable.FixedColumns( e,{});
 }
 function get_details_1(objeto,tipanio){
     fila=objeto.closest('tr');

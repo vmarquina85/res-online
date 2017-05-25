@@ -16,8 +16,8 @@ if (sizeof($resultado)>0 ){
     <thead>
       <tr>
         <th class='text-center'>E.E.S.S.</th>
-        <th class='text-center'>Atenciones <br> ".$mesnombre[$index]."</th>
-        <th class='text-center'>Ingresos <br> ".$mesnombre[$index]."</th>
+        <th class='text-center'>Atenciones<br> ".$mesnombre[$index]."</th>
+        <th class='text-center'>Ingresos<br> ".$mesnombre[$index]."</th>
       </tr>
     </thead>
     <tbody>";

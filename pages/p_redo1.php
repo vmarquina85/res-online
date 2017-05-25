@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo $_SESSION["fechAct"];
 if (!isset($_SESSION["resonlinepermitido"])) {
   header("location:../index.php");
   exit();
@@ -51,17 +52,40 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   .table-responsive{
     height:100%;
   }
-  table{
-    table-layout:auto;
+  table tbody, table thead
+  {
+    display: block;
+
+  }
+
+  table tbody
+  {
+    overflow: overlay;
+    height: 300px;
+
+  }
+
+
+  th,td
+  {
+  width: 100%;
   }
   .container-scrolled{
-		height:300px;
-		z-index:2;
-		overflow-x:hidden;
-		overflow-y:scroll;
-		padding:0px;
-		border: 1px solid #e3e3e3;
-	}
+    height:300px;
+    z-index:2;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    padding:0px;
+    border: 1px solid #e3e3e3;
+  }
+  .nav>li.mobile{
+    display: none;
+  }
+@media (max-width:480px){
+  .nav>li.mobile{
+display:block;
+  }
+}
 
   </style>
 </head>
@@ -79,7 +103,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
           <!-- <button type="button" class="navbar-toggle pull-left" data-click="sidebar-toggled">
           <span class="fa fa-chevron-left fa-1x text-white"></span>
         </button> -->
-        <a href="../index.php" class="navbar-brand">
+        <a href="javascript:disclamer();" class="navbar-brand">
           <!-- <i class="fa fa-table" style='color:#ffffff'></i> -->
           <img src="../assets/img/logo.png" alt="">
           <strong class='text-white sombrear'>Res-online</strong>
@@ -145,6 +169,17 @@ if (!isset($_SESSION["resonlinepermitido"])) {
               <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
             </a>
           </li>
+          <li class="has-sub mobile">
+						<a href="javascript:;">
+              <b class="caret pull-right"></b>
+							<i class="fa fa-key"></i>
+							<span>USUARIO</span>
+						</a>
+						<ul class="sub-menu">
+						    <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+                <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
+						</ul>
+					</li>
           <!-- <li class="nav-header pull-down sesion">SESIÓN</li>
           <li class="has-sub sesion">
           <a href="../pages/p_redo1.php">
@@ -178,8 +213,14 @@ if (!isset($_SESSION["resonlinepermitido"])) {
 </div>
 <div id="content" class="content">
   <!-- <h1 class="page-header" >Reporte 2</h1> -->
+  <div class="alert alert-info fade in m-b-15">
+								<strong>Fecha de Actualizacion</strong>
+								Datos Actualizados hasta el <?php echo $_SESSION['fechact'];?>
+                <button type="button" class='btn btn-info btn-xs pull-right'>Ver Detalles</button>
+
+							</div>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-6">
       <div class="wrapper bg-silver-lighter m-b-15">
         <form class="form-inline text-center" action="javascript:;">
           <div class="input-group m-b-5">
@@ -262,7 +303,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-6">
       <div class="wrapper bg-silver-lighter m-b-15">
         <form class="form-inline text-center" action="javascript:;">
           <div class="input-group m-b-5">
@@ -354,7 +395,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-orange">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title text-white">Detalles Especialidades</h4>
 
         </div>
@@ -370,6 +411,28 @@ if (!isset($_SESSION["resonlinepermitido"])) {
     </div>
   </div>
 
+  <div id='disclamer' class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-orange">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-white">Acerca</h4>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <img src="../assets/img/logo_big.png" alt="">
+            <h4>Res-online</h4>
+            <h4>V0.4</h4>
+            <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+            <P>SISOL - 2017</P>
+            <button class="btn btn-warning" data-dismiss="modal">OK</button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="btn-group">
     <button onclick='show_centros()' class="btn btn-white">Centros</button>
@@ -408,8 +471,8 @@ if (!isset($_SESSION["resonlinepermitido"])) {
 //globals
 var f= new Date();
 var activado=false;
- var ganio1='', gmes1='';
-  var ganio2='', gmes2='';
+var ganio1='', gmes1='';
+var ganio2='', gmes2='';
 
 $(document).ready(function() {
 
