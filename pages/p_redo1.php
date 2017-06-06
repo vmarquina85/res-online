@@ -1,12 +1,16 @@
 <?php
 session_start();
-echo $_SESSION["fechAct"];
 if (!isset($_SESSION["resonlinepermitido"])) {
   header("location:../index.php");
   exit();
 };
-//require '../class/consultas/consultas_cls.php';
-// require '../class/config/inicializar_cls.php';
+include_once '../class/conexion/conexion_cls.php';
+$class2=new conectar;
+$conexion2=$class2->conexion_resumen();
+  $consulta ="select to_char(max(fecha),'dd/mm/yyyy') as fechact from summary.redo";
+  $result = pg_query($conexion2, $consulta);
+  $query = pg_fetch_array($result, 0);
+  $fechAct = $query["fechact"];
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -28,6 +32,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="../assets/plugins/tablesorter/themes/blue/style.css" rel="stylesheet"/>
   <link href="../assets/css/orange.css" rel="stylesheet" id="theme" />
   <link href="../assets/css/sysinv.css" rel="stylesheet" id="theme" />
   <link href="../assets/css/datepicker.css" rel="stylesheet"/>
@@ -35,7 +40,8 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   <link href="../assets/css/password-indicator.css" rel="stylesheet"/>
   <link rel="stylesheet" href="../assets/plugins//odometer/themes/odometer-theme-default.css"/>
   <!-- ================== END BASE CSS STYLE ================== -->
-  <link href="../assets/css/data-table.css" rel="stylesheet" />
+  <!-- <link href="../assets/css/data-table.css" rel="stylesheet" /> -->
+  <!-- <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" /> -->
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/js/pace.min.js"></script>
   <!-- ================== END BASE JS ================== -->
@@ -50,41 +56,24 @@ if (!isset($_SESSION["resonlinepermitido"])) {
     height:100%
   }
   .table-responsive{
-    height:100%;
-  }
-  table tbody, table thead
-  {
-    display: block;
-
-  }
-
-  table tbody
-  {
-    overflow: overlay;
-    height: 300px;
-
-  }
-
-
-  th,td
-  {
-  width: 100%;
-  }
-  .container-scrolled{
     height:300px;
-    z-index:2;
-    overflow-x:hidden;
-    overflow-y:scroll;
-    padding:0px;
-    border: 1px solid #e3e3e3;
+    overflow-y: auto;
   }
+
   .nav>li.mobile{
     display: none;
   }
-@media (max-width:480px){
-  .nav>li.mobile{
-display:block;
+  @media (max-width:768px){
+    .nav>li.mobile{
+      display:block;
+    }
   }
+
+.clickable{
+  cursor:pointer;
+}
+.navbar-fixed-bottom{
+      bottom: 0;
 }
 
   </style>
@@ -100,11 +89,7 @@ display:block;
       <!-- inicio container-fluid   -->
       <div class="container-fluid bg-orange">
         <div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle pull-left" data-click="sidebar-toggled">
-          <span class="fa fa-chevron-left fa-1x text-white"></span>
-        </button> -->
         <a href="javascript:disclamer();" class="navbar-brand">
-          <!-- <i class="fa fa-table" style='color:#ffffff'></i> -->
           <img src="../assets/img/logo.png" alt="">
           <strong class='text-white sombrear'>Res-online</strong>
 
@@ -116,8 +101,8 @@ display:block;
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown navbar-user">
           <a href="javascript:;" class="dropdown-toggle text-white sombrear" data-toggle="dropdown">
-            <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["user_name"])) ?></span>
-            <?php if ($_SESSION['sexo']=='M') {
+            <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["resonline_user_name"])) ?></span>
+            <?php if ($_SESSION["resonline_sexo"]=='M') {
               echo '<img src="../assets/img/man.png" alt="">';
             } else{
               echo '<img src="../assets/img/girl.png" alt="">';
@@ -145,7 +130,7 @@ display:block;
           <li class="nav-profile">
             <div class="image">
               <a href="javascript:;">
-                <?php if ($_SESSION['sexo']=='M') {
+                <?php if ($_SESSION["resonline_sexo"]=='M') {
                   echo '<img src="../assets/img/man.png" alt="">';
                 } else{
                   echo '<img src="../assets/img/girl.png" alt="">';
@@ -163,46 +148,30 @@ display:block;
         <!-- begin sidebar nav -->
         <ul class="nav">
           <li class="nav-header">MENÚ PRINCIPAL</li>
-          <li class="has-sub active">
+        <li class="has-sub active" data-toggle="tooltip" title='REDO' data-placement="right">
             <a href="../pages/p_redo1.php">
               <i class="fa fa-book fa-2x" aria-hidden="true"></i>
               <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
             </a>
           </li>
+            <li class="has-sub" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
+            <a href="../pages/p_bdupdateState.php">
+              <i class="fa fa-database fa-2x" aria-hidden="true"></i>
+              <span>ESTADO DE DATOS</span>
+            </a>
+          </li>
           <li class="has-sub mobile">
-						<a href="javascript:;">
+            <a href="javascript:;">
               <b class="caret pull-right"></b>
-							<i class="fa fa-key"></i>
-							<span>USUARIO</span>
-						</a>
-						<ul class="sub-menu">
-						    <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
-                <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
-						</ul>
-					</li>
-          <!-- <li class="nav-header pull-down sesion">SESIÓN</li>
-          <li class="has-sub sesion">
-          <a href="../pages/p_redo1.php">
-          <i class="fa fa-key"></i>
-          <span>CAMBIAR CONTRASEÑA</span>
-        </a>
-      </li>
-      <li class="has-sub sesion">
-      <a href="../pages/p_redo1.php">
-      <i class="fa fa-times"></i>
-      <span>CERRAR SESIÓN</span>
-    </a>
-  </li> -->
-
-
-
-  <!-- <li class="has-sub">
-  <a href="../pages/p_redo2.php">
-  <i class="fa fa-laptop"></i>
-  <span>REPORTE DETALLADO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POR CENTRO</span>
-</a>
-</li> -->
-<!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
+              <i class="fa fa-key"></i>
+              <span>USUARIO</span>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+              <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
+            </ul>
+          </li>
+          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
 </ul>
 <!-- end sidebar nav -->
 </div>
@@ -212,13 +181,17 @@ display:block;
 </div>
 </div>
 <div id="content" class="content">
-  <!-- <h1 class="page-header" >Reporte 2</h1> -->
-  <div class="alert alert-info fade in m-b-15">
-								<strong>Fecha de Actualizacion</strong>
-								Datos Actualizados hasta el <?php echo $_SESSION['fechact'];?>
-                <button type="button" class='btn btn-info btn-xs pull-right'>Ver Detalles</button>
+  <ol class="breadcrumb pull-right">
+    <li>Menu Principal</li>
+    <li class="active" >Redo</li>
+  </ol>
+      <h3 class="page-header">Resumen de Operaciones</h3>
 
-							</div>
+  <div class="alert alert-info fade in m-b-15">
+    <strong>Fecha de Actualizacion:</strong>
+    Datos Actualizados hasta el <?php echo $fechAct;?>
+    <a href='p_bdupdateState.php' class='btn btn-info btn-xs pull-right'>Ver Detalles</a>
+  </div>
   <div class="row">
     <div class="col-md-6">
       <div class="wrapper bg-silver-lighter m-b-15">
@@ -391,27 +364,9 @@ display:block;
     </div>
   </div>
 
-  <div id='modal_detalles' class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-orange">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-white">Detalles Especialidades</h4>
 
-        </div>
-        <div class="modal-body">
-          <div id="container"></div>
-          <div id ='tabla_det' class="table-responsive">
-          </div>
 
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id='disclamer' class="modal fade">
+  <div id='disclamer' class="modal fade" aria-hidden='true'>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-orange">
@@ -434,11 +389,27 @@ display:block;
     </div>
   </div>
 
-  <div class="btn-group">
-    <button onclick='show_centros()' class="btn btn-white">Centros</button>
-    <button onclick='show_mes()' class="btn btn-white">Meses</button>
-    <button onclick='show_especialidades()' class="btn btn-white">Especialidades</button>
+  <div id='loading' class="modal fade" aria-hidden='true'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-body">
+            <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 100%">Cargando</div>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
+
+  <div id="header" class="navbar-fixed-bottom text-center">
+    <div class="btn-group">
+      <button onclick='show_centros()' class="btn btn-white">Centros</button>
+      <button onclick='show_mes()' class="btn btn-white">Meses</button>
+      <button onclick='show_especialidades()' class="btn btn-white">Especialidades</button>
+    </div>
+    </div>
+
+
 
 
   <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
@@ -457,13 +428,15 @@ display:block;
 <!-- ================== END BASE JS ========================== -->
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="../assets/js/bootstrap-datepicker.js"></script>
-<script src="../assets/js/jquery.dataTables.js"></script>
-<script src="../assets/js/dataTables.fixedColumns.js"></script>
-<script src="../assets/js/table-manage-fixed-columns.demo.min.js"></script>
+<!-- <script src="../assets/js/jquery.dataTables.js"></script> -->
+<!-- <script src="../assets/js/dataTables.fixedColumns.js"></script>
+<script src="../assets/js/table-manage-fixed-columns.demo.min.js"></script> -->
 <script src="../assets/js/password-indicator.js"></script>
+<!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
 
 <script src="../class/config/config.js"></script>
 <script src="../class/redo1/redo1.js"></script>
+<script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
 <script src="../assets/js/apps.min.js"></script>
 <script src="../assets/js/ajax.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
@@ -475,6 +448,16 @@ var ganio1='', gmes1='';
 var ganio2='', gmes2='';
 
 $(document).ready(function() {
+  jQuery.tablesorter.addParser({
+    id: "FancyNumber",
+    is: function(s) {
+      return /^[0-9]?[0-9,\.]*$/.test(s);
+    },
+    format: function(s) {
+      return jQuery.tablesorter.formatFloat( s.replace(/,/g,'') );
+    },
+    type: "numeric"
+  });
 
   App.init();
   $('.carousel').carousel({
@@ -494,5 +477,22 @@ $(document).ready(function() {
 
 
 </script>
+<div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
+  <div class='dialog-normal modal-dialog'>
+    <div class='modal-content'>
+    <div class='modal-header bg-orange'>
+      <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+      <h4 class='modal-title text-white'>Detalles Especialidades</h4>
+    </div>
+    <div class='modal-body'>
+      <div id ='tabla_det' class="table-responsive">
+      </div>
+      </div>
+      <div class='modal-footer'>
+
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

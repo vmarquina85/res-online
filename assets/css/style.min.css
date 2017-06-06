@@ -165,7 +165,7 @@ label {
     left: 50%;
     margin: -20px -20px 0 0;
     border: 2px solid #fff;
-    border-top: 2px solid #24B498;
+    border-top: 2px solid #f59c1a;
     border-radius: 100%
 }
 
@@ -179,7 +179,7 @@ label {
 
 .spinner-small {
     border: 2px solid rgba(0, 0, 0, .05);
-    border-top: 2px solid #24B498;
+    border-top: 2px solid #f59c1a;
     height: 30px;
     width: 30px;
     margin: -15px -15px 0 0
@@ -638,7 +638,7 @@ label {
 
 .page-sidebar-minified .sidebar {
     width: 60px;
-    position: absolute
+
 }
 
 .page-sidebar-minified .sidebar-bg {
@@ -3378,7 +3378,7 @@ a.text-white:hover {
 }
 
 .bg-silver {
-    background: #f0f3f4!important
+    background-color: #f0f3f4!important
 }
 
 .bg-silver-darker {
@@ -4610,7 +4610,7 @@ ul.tagit.inverse li.tagit-choice .tagit-close:hover .ui-icon-close:before {
     right: 15px;
     top: 15px;
     opacity: 1;
-    
+
 }
 
 .widget-stats .stats-info p {

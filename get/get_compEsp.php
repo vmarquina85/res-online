@@ -11,20 +11,20 @@ if ($mes!='*') {
 $mesnombre=array('MESES','ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
 $resultado=$claseConsulta3->compEspecialidades_ingresos($anio,$mes);
 if (sizeof($resultado)>0 ){
-  echo  "<table id='tb_response_esp_I' class='table  table-striped table-bordered'>
+  echo  "<table id='tb_response_esp_I' class='table tablesorter table-bordered'>
     <thead>
       <tr>
-        <th>Especialidad</th>
-        <th>Atenciones</th>
-        <th>Ingresos</th>
+        <th class='bg-silver'>Especialidad</th>
+        <th class='bg-silver'>Atenciones</th>
+        <th class='bg-silver'>Ingresos</th>
       </tr>
     </thead>
     <tbody>";
  for ($i=0; $i <sizeof($resultado) ; $i++) {
    echo   "<tr>
           <td class='p-3 f-s-11 text-left m-r-10 m-l-10'> ".$resultado[$i]['especialidad']."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i]['atenciones'],2,'.',',')."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i]['ingresos'],2,'.',',')."</td>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10 clickable'>".$resultado[$i]['atenciones']."</td>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10 clickable'>".$resultado[$i]['ingresos']."</td>
 
           </tr>";
 }

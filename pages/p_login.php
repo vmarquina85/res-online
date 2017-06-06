@@ -45,7 +45,7 @@
 			<!-- begin brand -->
 			<div class="login-header">
 				<div class="brand">
-					<span class='logo'></span>
+				<span><img src="../assets/img/logo.png"></span>
 					<strong class='text-white sombrear'>Res-online</strong>
 					<small>Reportes Gerenciales - PE/GG</small>
 				</div>
