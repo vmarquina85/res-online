@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo $_SESSION["fechAct"];
 if (!isset($_SESSION["resonlinepermitido"])) {
   header("location:../index.php");
   exit();
@@ -169,7 +168,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
           </li>
-          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+          <!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
         </ul>
         <!-- end sidebar nav -->
       </div>
@@ -230,7 +229,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                <h4>V0.4</h4>
+                <h4>V2.5</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2017</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
