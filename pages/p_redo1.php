@@ -29,6 +29,7 @@ $conexion2=$class2->conexion_resumen();
   <link href="../assets/css/jquery-ui.min.css" rel="stylesheet" />
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
@@ -68,14 +69,21 @@ $conexion2=$class2->conexion_resumen();
       display:block;
     }
   }
-
 .clickable{
   cursor:pointer;
 }
 .navbar-fixed-bottom{
       bottom: 0;
 }
-
+/*ploader*/
+.pLoader{
+  display: block;
+     margin: auto;
+}
+svg path,
+svg rect{
+  fill: #FF6700;
+}
   </style>
 </head>
 <body>
@@ -150,7 +158,7 @@ $conexion2=$class2->conexion_resumen();
           <li class="nav-header">MENÚ PRINCIPAL</li>
         <li class="has-sub active" data-toggle="tooltip" title='REDO' data-placement="right">
             <a href="../pages/p_redo1.php">
-              <i class="fa fa-book fa-2x" aria-hidden="true"></i>
+              <i class="ion-arrow-graph-up-right" aria-hidden="true"></i>
               <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
             </a>
           </li>
@@ -163,7 +171,7 @@ $conexion2=$class2->conexion_resumen();
           <li class="has-sub mobile">
             <a href="javascript:;">
               <b class="caret pull-right"></b>
-              <i class="fa fa-key"></i>
+            <i class="ion-android-contact"></i>
               <span>USUARIO</span>
             </a>
             <ul class="sub-menu">
@@ -255,6 +263,7 @@ $conexion2=$class2->conexion_resumen();
             <h4 class="panel-title">Tabla Comparativa</h4>
           </div>
           <div class="panel-body" id='prueba'>
+            <div class="pLoader"></div>
             <div class="carousel slide" data-ride="carousel" id=resultados_I>
               <!-- begin carousel-inner -->
               <div class="carousel-inner">
@@ -377,7 +386,7 @@ $conexion2=$class2->conexion_resumen();
           <div class="text-center">
             <img src="../assets/img/logo_big.png" alt="">
             <h4>Res-online</h4>
-            <h4>V0.4</h4>
+            <h4>V0.5</h4>
             <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
             <P>SISOL - 2017</P>
             <button class="btn btn-warning" data-dismiss="modal">OK</button>
@@ -408,12 +417,9 @@ $conexion2=$class2->conexion_resumen();
       <button onclick='show_especialidades()' class="btn btn-white">Especialidades</button>
     </div>
     </div>
-
-
-
-
   <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
   <!-- end scroll to top btn -->
+</div>
 </div>
 <!-- end page container -->
 <!-- ================== BEGIN BASE JS ================== -->
@@ -437,6 +443,7 @@ $conexion2=$class2->conexion_resumen();
 <script src="../class/config/config.js"></script>
 <script src="../class/redo1/redo1.js"></script>
 <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
+<!-- <script src="../assets/js/dataloader.js"></script> -->
 <script src="../assets/js/apps.min.js"></script>
 <script src="../assets/js/ajax.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
@@ -448,6 +455,8 @@ var ganio1='', gmes1='';
 var ganio2='', gmes2='';
 
 $(document).ready(function() {
+// mostrarLoader();
+    App.init();
   jQuery.tablesorter.addParser({
     id: "FancyNumber",
     is: function(s) {
@@ -458,8 +467,6 @@ $(document).ready(function() {
     },
     type: "numeric"
   });
-
-  App.init();
   $('.carousel').carousel({
     pause: true,
     interval: false

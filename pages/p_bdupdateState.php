@@ -25,6 +25,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   <link href="../assets/css/jquery-ui.min.css" rel="stylesheet" />
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
@@ -147,7 +148,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
           <li class="nav-header">MENÚ PRINCIPAL</li>
           <li class="has-sub" data-toggle="tooltip" title='REDO' data-placement="right">
             <a href="../pages/p_redo1.php">
-              <i class="fa fa-book fa-2x" aria-hidden="true"></i>
+              <i class="ion-arrow-graph-up-right" aria-hidden="true"></i>
               <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
             </a>
           </li>
@@ -160,7 +161,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
           <li class="has-sub mobile">
             <a href="javascript:;">
               <b class="caret pull-right"></b>
-              <i class="fa fa-key"></i>
+              <i class="ion-android-contact"></i>
               <span>USUARIO</span>
             </a>
             <ul class="sub-menu">

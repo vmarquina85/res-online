@@ -307,58 +307,84 @@ function endLoading(panel){
   }, 2000);
 }
 function get_details_1(objeto,tipanio){
-  $('#loading').modal();
+  // $('#loading').modal();
   fila=objeto.closest('tr');
   var centro=fila.getElementsByTagName("td")[0].innerHTML;
   if (tipanio==0) {
+      startLoading('#pnl_Ingresos1');
     var parametros = {
       "anio":ganio1 ,
       "mes": gmes1,
       "centro":centro
     };
+    $.ajax({
+      data:  parametros,
+      url:   '../get/get_detalle_1.php',
+      type:  'post',
+      success:  function (response) {
+        document.getElementById("tabla_det").innerHTML=response;
+        endLoading('#pnl_Ingresos1');
+        $('#modal_detalles').modal();
+        }
+    });
   }else{
+      startLoading('#pnl_Ingresos2');
     var parametros = {
       "anio":ganio2 ,
       "mes": gmes2,
       "centro":centro
     };
+    $.ajax({
+      data:  parametros,
+      url:   '../get/get_detalle_1.php',
+      type:  'post',
+      success:  function (response) {
+        document.getElementById("tabla_det").innerHTML=response;
+        endLoading('#pnl_Ingresos2');
+        $('#modal_detalles').modal();
+        }
+    });
   }
-  $.ajax({
-    data:  parametros,
-    url:   '../get/get_detalle_1.php',
-    type:  'post',
-    success:  function (response) {
-      document.getElementById("tabla_det").innerHTML=response;
-       $('#loading').modal('toggle');
-      $('#modal_detalles').modal();
-    }
-  });
+
 }
 function get_details_2(objeto,tipanio){
-  $('#loading').modal();
+  // $('#loading').modal();
   fila=objeto.closest('tr');
   var centro=fila.getElementsByTagName("td")[0].innerHTML;
   if (tipanio==0) {
+      startLoading('#pnl_Ingresos1');
     var parametros = {
       "anio":ganio1 ,
       "mes": gmes1,
       "centro":centro
     };
+    $.ajax({
+      data:  parametros,
+      url:   '../get/get_detalle_2.php',
+      type:  'post',
+      success:  function (response) {
+        document.getElementById("tabla_det").innerHTML=response;
+        endLoading('#pnl_Ingresos1');
+        $('#modal_detalles').modal();
+      }
+    });
   }else{
+      startLoading('#pnl_Ingresos2');
     var parametros = {
       "anio":ganio2 ,
       "mes": gmes2,
       "centro":centro
     };
+    $.ajax({
+      data:  parametros,
+      url:   '../get/get_detalle_2.php',
+      type:  'post',
+      success:  function (response) {
+        document.getElementById("tabla_det").innerHTML=response;
+        endLoading('#pnl_Ingresos2');
+        $('#modal_detalles').modal();
+      }
+    });
   }
-  $.ajax({
-    data:  parametros,
-    url:   '../get/get_detalle_2.php',
-    type:  'post',
-    success:  function (response) {
-      document.getElementById("tabla_det").innerHTML=response;
-       $('#loading').modal('toggle');
-      $('#modal_detalles').modal();
-    }
-  });
+
 }

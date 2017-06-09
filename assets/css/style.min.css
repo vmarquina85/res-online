@@ -5,9 +5,9 @@ body {
     color: #707478
 }
 
-.ie8 body {
+/*.ie8 body {
     font-family: Arial, sans-serif
-}
+}*/
 
 h1,
 h2,
@@ -62,6 +62,9 @@ label {
 
 .page-sidebar-fixed .sidebar {
     position: fixed
+}
+.page-sidebar-fixed .content{
+      margin-left: 220px
 }
 
 .page-with-right-sidebar .content {
@@ -593,9 +596,11 @@ label {
 }
 
 .sidebar .nav>li.nav-profile {
-    padding: 20px;
-    color: #fff;
-    background: #1a2229
+  padding: 20px;
+  color: #fff;
+  background: url(../img/profile_bg_3.png) no-repeat;
+  background-size: 100%;
+  position: relative;
 }
 
 .sidebar .nav>li.nav-profile a {
@@ -625,7 +630,7 @@ label {
 
 .sidebar .nav>li.nav-profile .info small {
     display: block;
-    color: #889097
+    /*color: #889097*/
 }
 
 .sidebar .nav>li.nav-widget {
@@ -794,7 +799,7 @@ label {
 }
 
 .content {
-    margin-left: 220px;
+  /*margin-left: 220px;*/
     padding: 20px 25px
 }
 
