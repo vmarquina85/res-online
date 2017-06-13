@@ -1600,18 +1600,20 @@ legend {
 }
 
 .btn.btn-default {
-    color: #fff;
-    background: #b6c2c9;
-    border-color: #b6c2c9
+    color: #000;
+    background: #fff;
+    border-color: #fff
 }
-
+.panel.panel-expand>.panel-body .table-responsive {
+height:90%;
+}
 .btn-default.active,
 .btn-default:active,
 .btn-default:focus,
 .btn-default:hover,
 .open .dropdown-toggle.btn-default {
-    background: #929ba1;
-    border-color: #929ba1
+    background: #fff;
+    border-color: #fff;
 }
 
 .btn-group .btn.btn-default:not(.active)+.btn.btn-default,

@@ -185,7 +185,11 @@ if (!isset($_SESSION["resonlinepermitido"])) {
     <h3 class="page-header">Estado de datos </h3>
     <div class="panel panel-info">
       <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+        </div>
         <h4 class="panel-title">ESTADO DE ACTUALIZACIÓN DE BASE DE DATOS</h4>
+
       </div>
       <div class="panel-body">
         <div class="table-responsive m-b-5">

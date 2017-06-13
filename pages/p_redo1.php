@@ -61,6 +61,9 @@ $conexion2=$class2->conexion_resumen();
     overflow-y: auto;
   }
 
+  /*.panel.panel-expand>.panel-body .table-responsive {
+  height:90%;
+  }*/
   .nav>li.mobile{
     display: none;
   }
@@ -260,6 +263,9 @@ svg rect{
         </div>
         <div id='pnl_Ingresos1' class="panel panel-inverse" style='height: 100%;' >
           <div class="panel-heading">
+            <!-- <div class="panel-heading-btn">
+              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+            </div> -->
             <h4 class="panel-title">Tabla Comparativa</h4>
           </div>
           <div class="panel-body" id='prueba'>
@@ -347,6 +353,9 @@ svg rect{
         </div>
         <div id='pnl_Ingresos2' class="panel panel-inverse" style='height: 100%;' >
           <div class="panel-heading">
+            <!-- <div class="panel-heading-btn">
+              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+            </div> -->
             <h4 class="panel-title">Tabla Comparativa</h4>
           </div>
           <div class="panel-body">
@@ -412,9 +421,9 @@ svg rect{
 
   <div id="header" class="navbar-fixed-bottom text-center">
     <div class="btn-group">
-      <button onclick='show_centros()' class="btn btn-white">Centros</button>
-      <button onclick='show_mes()' class="btn btn-white">Meses</button>
-      <button onclick='show_especialidades()' class="btn btn-white">Especialidades</button>
+      <button onclick='show_centros()' class="btn btn-warning"><i class="fa fa-home" aria-hidden="true"></i> Centros</button>
+      <button onclick='show_mes()' class="btn btn-warning"> <i class="fa fa-calendar" aria-hidden="true"></i> Meses</button>
+      <button onclick='show_especialidades()' class="btn btn-warning"> <i class="fa fa-medkit" aria-hidden="true"></i> Especialidades</button>
     </div>
     </div>
   <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
