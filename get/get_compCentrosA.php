@@ -15,9 +15,9 @@ if (sizeof($resultado)>0 ){
   echo  "<table id='tb_response_Centro_I_2' class='table table-hover tablesorter table-bordered'>
     <thead>
       <tr>
-        <th class='bg-silver text-center'>E.E.S.S.</th>
-        <th class='bg-silver text-center'>Atenciones <br>".$mesnombre[$index]."</th>
-        <th class='bg-silver text-center'>Ingresos <br>".$mesnombre[$index]."</th>
+        <th class='bg-silver text-center f-s-12'>E.E.S.S.</th>
+        <th class='bg-silver text-center f-s-12'>Atenciones <br>".$mesnombre[$index]."</th>
+        <th class='bg-silver text-center f-s-12'>Ingresos <br>".$mesnombre[$index]."</th>
       </tr>
     </thead>
     <tbody>";

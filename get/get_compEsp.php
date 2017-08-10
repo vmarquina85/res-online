@@ -14,9 +14,9 @@ if (sizeof($resultado)>0 ){
   echo  "<table id='tb_response_esp_I' class='table tablesorter table-bordered'>
     <thead>
       <tr>
-        <th class='bg-silver'>Especialidad</th>
-        <th class='bg-silver'>Atenciones</th>
-        <th class='bg-silver'>Ingresos</th>
+        <th class='bg-silver f-s-12'>Especialidad</th>
+        <th class='bg-silver f-s-12'>Atenciones</th>
+        <th class='bg-silver f-s-12'>Ingresos</th>
       </tr>
     </thead>
     <tbody>";

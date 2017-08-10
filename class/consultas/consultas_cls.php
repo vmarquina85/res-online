@@ -112,6 +112,41 @@ class consultas extends conectar
 		}
 		return $this->t;
 	}
+	function getEspecialidades(){
+		$sql="select distinct n_esp from summary.res_pro_ven_ate order by 1";
+		$res=pg_query(parent::conexion_resumen_prueba(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+	function getReporteAsociados($mes,$anio,$especialidad,$parametro,$tipo){
+		if ($tipo=='1') {
+			$sql="Select SubString(p_atr,1,4)año,to_char(date('01-'||SubString(p_atr,5,2)||'-16'),'TMMonth')mes,n_esp,trim(n_ras) as denominacion,trim(n_ruc) as ruc,Sum(c_ate)atenciones,Sum(v_pag)importe
+		From summary.res_pro_ven_ate where n_con!='' and trim(n_ras) like '%".strtoupper($parametro)."%' and SubString(p_atr,1,4)='".$annio."' ";
+		}else if ($tipo=='2') {
+			$sql="Select SubString(p_atr,1,4)año,to_char(date('01-'||SubString(p_atr,5,2)||'-16'),'TMMonth')mes,n_esp,trim(n_per) as denominacion,trim(n_ruc) as ruc,Sum(c_ate)atenciones,Sum(v_pag)importe
+		From summary.res_pro_ven_ate where n_con!='' and trim(n_per) like '%".strtoupper($parametro)."%' and SubString(p_atr,1,4)='".$annio."' ";
+		}
+if ($mes!='*'){
+	$sql=$sql."and SubString(p_atr,5,2)='".$mes."' ";
+}
+if ($especialidad) {
+	$sql=$sql. "and n_esp ='".strtoupper($especialidad)."' ";
+}
+if ($tipo=='1') {
+	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),n_esp,trim(n_ras),n_ruc
+	order by SubString(p_atr,5,2)";
+}else if ($tipo=='2') {
+	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),n_esp,trim(n_per),n_ruc
+	order by SubString(p_atr,5,2)";
+}
 
+		$res=pg_query(parent::conexion_resumen_prueba(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
 }
 	?>

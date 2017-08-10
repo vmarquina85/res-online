@@ -13,6 +13,7 @@ function show_centros(){
   // $(table).dataTable().fnAdjustColumnSizing();
   // }
 }
+
 function show_mes(){
   $("#resultados_II").carousel(1);
   // var table = $.fn.dataTable.fnTables(true);
@@ -67,6 +68,15 @@ function iniciarControles(){
 }
 //parametro: 1 o 2 quien activo el evento
 function mostrarResultados1(){
+  // if (document.getElementById('sl_anio1').value=='2017' && document.getElementById('sl_mes1').value=='*') {
+  //   $('#sl_mes2').prop('disabled', 'disabled');
+  //    $('#message').removeClass('hide');
+  //    gdate=gfecphp;
+  //
+  // }else {
+  //     $('#sl_mes2').removeAttr("disabled");
+  //        gdate="";
+  // }
   $('#data_ingresos1').text(0);
   $('#data_atenciones1').text(0);
   var panio=document.getElementById('sl_anio1').value;

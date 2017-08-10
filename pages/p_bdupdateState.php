@@ -1,11 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION["resonlinepermitido"])) {
-  header("location:../index.php");
-  exit();
-};
-//require '../class/consultas/consultas_cls.php';
-// require '../class/config/inicializar_cls.php';
+// session_start();
+// if (!isset($_SESSION["resonlinepermitido"])) {
+//   header("location:../index.php");
+//   exit();
+// };
+//
+ require '../class/config/inicializar_cls.php';
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -20,7 +20,8 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   <meta content="" name="author" />
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
   <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/logo.png">
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/css/jquery-ui.min.css" rel="stylesheet" />
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -157,6 +158,12 @@ if (!isset($_SESSION["resonlinepermitido"])) {
               <span>ESTADO DE DATOS</span>
             </a>
           </li>
+          <li class="has-sub" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
+          <a href="../pages/p_produccionEmpresas.php">
+            <i class="ion-person-stalker" aria-hidden="true"></i>
+            <span>REPORTE ASOCIADOS</span>
+          </a>
+        </li>
           <li class="has-sub mobile">
             <a href="javascript:;">
               <b class="caret pull-right"></b>

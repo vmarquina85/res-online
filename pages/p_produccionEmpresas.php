@@ -4,16 +4,8 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   header("location:../index.php");
   exit();
 };
-include_once '../class/conexion/conexion_cls.php';
-$class2=new conectar;
-$conexion2=$class2->conexion_resumen();
-$consulta ="select to_char(max(fecha),'dd/mm/yyyy') as fechact from summary.redo";
-$result = pg_query($conexion2, $consulta);
-$query = pg_fetch_array($result, 0);
-$fechAct = $query["fechact"];
-echo "<script>
-  var gfecphp='".$fechAct."'
-</script>"
+include ("../class/config/inicializar_cls.php");
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -163,7 +155,7 @@ echo "<script>
           <!-- begin sidebar nav -->
           <ul class="nav">
             <li class="nav-header">MENÚ PRINCIPAL</li>
-            <li class="has-sub active" data-toggle="tooltip" title='REDO' data-placement="right">
+            <li class="has-sub" data-toggle="tooltip" title='REDO' data-placement="right">
               <a href="../pages/p_redo1.php">
                 <i class="ion-arrow-graph-up-right" aria-hidden="true"></i>
                 <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
@@ -175,7 +167,7 @@ echo "<script>
                 <span>ESTADO DE DATOS</span>
               </a>
             </li>
-            <li class="has-sub" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
+            <li class="has-sub active" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
               <a href="../pages/p_produccionEmpresas.php">
                 <i class="ion-person-stalker" aria-hidden="true"></i>
                 <span>REPORTE ASOCIADOS</span>
@@ -204,22 +196,42 @@ echo "<script>
     <div id="content" class="content">
       <ol class="breadcrumb pull-right">
         <li>Menu Principal</li>
-        <li class="active" >Redo</li>
+        <li><strong>Reporte de Asociados</strong></li>
       </ol>
-      <h3 class="page-header">Resumen de Operaciones</h3>
+      <h3 class="page-header">Reporte de Asociados</h3>
+      <!-- inicio contenido -->
 
-      <div class="alert alert-info fade in m-b-15">
-        <strong>Fecha de Actualizacion:</strong>
-        Datos Actualizados hasta el <?php echo $fechAct;?>
-        <a href='p_bdupdateState.php' class='btn btn-info btn-xs pull-right'>Ver Detalles</a>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="wrapper bg-silver-lighter m-b-15">
-            <form class="form-inline text-center" action="javascript:;">
+      <div id='pnl_Ingresos1' class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">PARAMETROS PARA REPORTE</h4>
+        </div>
+        <div class="panel-body" id='prueba'>
+          <div class="input-group m-b-5">
+            <span class="input-group-addon input-sm">Tipo de consulta</span>
+            <select id='ra_tipo_consulta' onchange="ra_cambio_label()" class='form-control input-sm'>
+              <option value=""  disabled selected >--SELECCIONAR--</option>
+              <option value="1">RAZÓN SOCIAL</option>
+              <option value="2">NOMBRE ASOCIADO</option>
+            </select>
+          </div>
+          <div class="input-group m-b-5">
+            <span id='ra_label_razon_nombre' class="input-group-addon input-sm">Razon Social</span>
+            <input id='ra_razon_nombre' type="text"  class='form-control input-sm'>
+          </div>
+          <div class="input-group m-b-5">
+            <span class="input-group-addon input-sm">Especialidad</span>
+            <select class='default-select2 select form-control input-sm' id="ra_especialidad">
+              <option value="" disabled selected>--SELECCIONAR--</option>
+              <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
+                <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_decode($rs_esp[$i]['n_esp']); ?></option>
+                <?php  }?>
+              </select>
+            </div>
+            <div class="form-inline">
               <div class="input-group m-b-5">
                 <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-                <select onchange="mostrarResultados1();disableMes()" id="sl_anio1" class='form-control'>
+                <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
+                <select  onchange="" id="ra_annio" class='form-control input-sm'>
                   <option value="" disabled selected>--SELECCIONAR--</option>
                   <option value="2012">2012</option>
                   <option value="2013">2013</option>
@@ -231,7 +243,7 @@ echo "<script>
               </div>
               <div class="input-group m-b-5 ">
                 <span class="input-group-addon  input-sm" >Mes</span>
-                <select  onchange="mostrarResultados1()" id="sl_mes1" class='form-control'>
+                <select id="ra_mes" class='form-control input-sm'>
                   <option value="*">--TODOS--</option>
                   <option value="01">ENERO</option>
                   <option value="02">FEBRERO</option>
@@ -247,199 +259,61 @@ echo "<script>
                   <option value="12">DICIEMBRE</option>
                 </select>
               </div>
-              <!-- <button  onclick ='mostrarResultados()' class="btn btn-primary m-b-5">Mostrar</button> -->
-
-            </form>
-            <br>
-            <div class="row">
-              <div class="col-md-7">
-                <div class="widget widget-stats bg-green">
-                  <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
-                  <div class="stats-info">
-                    <h4>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos1' class="odometer">0</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="widget widget-stats  bg-blue">
-                  <div class="stats-icon"><img src="../assets/img/atenciones.png" alt=""></div>
-                  <div class="stats-info">
-                    <h4>TOTAL ATENCIONES</h4>
-                    <span></span><p id='data_atenciones1' class="odometer">0</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id='pnl_Ingresos1' class="panel panel-inverse">
-              <div class="panel-heading">
-                <!-- <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
-              </div> -->
-              <h4 class="panel-title">Tabla Comparativa</h4>
-            </div>
-            <div class="panel-body" id='prueba'>
-              <div class="pLoader"></div>
-              <div class="carousel slide" data-ride="carousel" id=resultados_I>
-                <!-- begin carousel-inner -->
-                <div class="carousel-inner">
-                  <!-- begin item -->
-                  <div class="item active">
-                    <div id='tb_comp_I11' class="table-responsive"></div>
-                  </div>
-                  <!-- end item -->
-                  <!-- begin item -->
-                  <div class="item">
-                    <div id='tb_comp_I21' class="table-responsive"></div>
-                  </div>
-                  <div class="item">
-                    <div id='tb_comp_I31' class="table-responsive"></div>
-                  </div>
-                </div>
+              <div class="input-group m-b-5 pull-right">
+                <button class="btn btn-warning">Generar Reporte</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="wrapper bg-silver-lighter m-b-15">
-          <form class="form-inline text-center" action="javascript:;">
-            <div class="input-group m-b-5">
-              <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-              <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
-              <select  onchange="mostrarResultados2()" id="sl_anio2" class='form-control'>
-                <option value="" disabled selected>--SELECCIONAR--</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-              </select>
-            </div>
-            <div class="input-group m-b-5 ">
-              <span class="input-group-addon  input-sm" >Mes</span>
-              <select onchange="mostrarResultados2()"  id="sl_mes2" class='form-control'>
-                <option value="*">--TODOS--</option>
-                <option value="01">ENERO</option>
-                <option value="02">FEBRERO</option>
-                <option value="03">MARZO</option>
-                <option value="04">ABRIL</option>
-                <option value="05">MAYO</option>
-                <option value="06">JUNIO</option>
-                <option value="07">JULIO</option>
-                <option value="08">AGOSTO</option>
-                <option value="09">SEPTIEMBRE</option>
-                <option value="10">OCTUBRE</option>
-                <option value="11">NOVIEMBRE</option>
-                <option value="12">DICIEMBRE</option>
-              </select>
-            </div>
-<!-- <div class="input-group m-b-5">
-  <button class='btn btn-default' title='Fecha Equivalente' data-toggle='tooltip'><img src="../assets/img/date.png" alt=""> </button>
-</div> -->
-
-          </form>
-          <br>
-          <div class="row">
-            <div class="col-md-7">
-              <div class="widget widget-stats bg-green">
-                <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
-                <div class="stats-info">
-                  <h4>TOTAL INGRESOS</h4>
-                  <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="widget widget-stats  bg-blue">
-                <!-- <div class="stats-icon"><i class="fa fa-plus-circle"></i></div> -->
-                <div class="stats-icon"><img src="../assets/img/atenciones.png" alt=""></div>
-
-                <div class="stats-info">
-                  <h4>TOTAL ATENCIONES</h4>
-                  <span></span><p id='data_atenciones2' class="odometer">0</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id='pnl_Ingresos2' class="panel panel-inverse" >
-            <div class="panel-heading">
-              <!-- <div class="panel-heading-btn">
-              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
-            </div> -->
-            <h4 class="panel-title">Tabla Comparativa</h4>
+        <div id='ra_panel_resultado' class="panel panel-inverse">
+          <div class="panel-heading">
+            <h4 class="panel-title">RESULTADOS</h4>
           </div>
           <div class="panel-body">
-            <div class="carousel slide" data-ride="carousel" id=resultados_II>
-              <!-- begin carousel-inner -->
-              <div class="carousel-inner">
-                <!-- begin item -->
-                <div class="item active">
-                  <div id='tb_comp_I12' class="table-responsive"></div>
+            <table class='table table-bordered table-condensed' id='ra_table_reporte'>
+
+            </table>
+          </div>
+        </div>
+        <!-- fin  contenido -->
+        <div id='disclamer' class="modal fade" aria-hidden='true'>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header bg-orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-white">Acerca</h4>
+              </div>
+              <div class="modal-body">
+                <div class="text-center">
+                  <img src="../assets/img/logo_big.png" alt="">
+                  <h4>Res-online</h4>
+                  <h4>V2.5</h4>
+                  <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+                  <P>SISOL - 2017</P>
+                  <button class="btn btn-warning" data-dismiss="modal">OK</button>
                 </div>
-                <!-- end item -->
-                <!-- begin item -->
-                <div class="item">
-                  <div id='tb_comp_I22' class="table-responsive"></div>
-                </div>
-                <div class="item">
-                  <div id='tb_comp_I32' class="table-responsive"></div>
-                </div>
+
+
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-
-
-  <div id='disclamer' class="modal fade" aria-hidden='true'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-orange">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-white">Acerca</h4>
-        </div>
+        <!-- <div id='loading' class="modal fade" aria-hidden='true'>
+        <div class="modal-dialog">
+        <div class="modal-content">
         <div class="modal-body">
-          <div class="text-center">
-            <img src="../assets/img/logo_big.png" alt="">
-            <h4>Res-online</h4>
-            <h4>V2.5</h4>
-            <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
-            <P>SISOL - 2017</P>
-            <button class="btn btn-warning" data-dismiss="modal">OK</button>
-          </div>
-
-
-        </div>
+        <div class="progress progress-striped active">
+        <div class="progress-bar" style="width: 100%">Cargando</div>
       </div>
     </div>
   </div>
+</div>
+</div> -->
 
-  <div id='loading' class="modal fade" aria-hidden='true'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="progress progress-striped active">
-            <div class="progress-bar" style="width: 100%">Cargando</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div id="header" class="navbar-fixed-bottom text-center">
-    <div class="btn-group">
-      <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
-      <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
-      <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
-    </div>
-  </div>
-  <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-  <!-- end scroll to top btn -->
+<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+<!-- end scroll to top btn -->
 </div>
 </div>
 <!-- end page container -->
@@ -462,7 +336,7 @@ echo "<script>
 <!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
 
 <script src="../class/config/config.js"></script>
-<script src="../class/redo1/redo1.js"></script>
+<script src="../class/ra/ra.js"></script>
 <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
 <!-- <script src="../assets/js/dataloader.js"></script> -->
 <script src="../assets/js/apps.min.js"></script>
@@ -470,41 +344,10 @@ echo "<script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
 //globals
-var f= new Date();
-// var ultimoAnnioSelect=false;
-// var activado=false;
-var ganio1='', gmes1='';
-var ganio2='', gmes2='',gdate='';
-
 $(document).ready(function() {
   // mostrarLoader();
   App.init();
-  jQuery.tablesorter.addParser({
-    id: "FancyNumber",
-    is: function(s) {
-      return /^[0-9]?[0-9,\.]*$/.test(s);
-    },
-    format: function(s) {
-      return jQuery.tablesorter.formatFloat( s.replace(/,/g,'') );
-    },
-    type: "numeric"
-  });
-  $('.carousel').carousel({
-    pause: true,
-    interval: false
-  });
-  $(".datepicker-default").datepicker({
-    format: "yyyy",
-    startView: "years",
-    minViewMode: "years",
-    autoclose: "true"
-  })
-  var hoy =f.getDate() + "/" + pad((f.getMonth() +1),2,0) + "/" + f.getFullYear();
-  $('[data-toggle="tooltip"]').tooltip();
-  iniciarControles();
 });
-
-
 </script>
 <div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
   <div class='dialog-normal modal-dialog'>
@@ -514,14 +357,14 @@ $(document).ready(function() {
         <h4 class='modal-title text-white'>Detalles Especialidades</h4>
       </div>
       <div class='modal-body'>
-        <div id ='tabla_det' class="table-responsive">
+        <div id ='ra_tabla_det' class="table-responsive">
         </div>
       </div>
       <div class='modal-footer'>
-
       </div>
     </div>
   </div>
 </div>
+
 </body>
 </html>
