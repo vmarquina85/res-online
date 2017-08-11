@@ -1,11 +1,9 @@
 <?php
-// session_start();
-// if (!isset($_SESSION["resonlinepermitido"])) {
-//   header("location:../index.php");
-//   exit();
-// };
-//
- require '../class/config/inicializar_cls.php';
+session_start();
+if (!isset($_SESSION["resonlinepermitido"])) {
+  header("location:../index.php");
+  exit();
+};
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
