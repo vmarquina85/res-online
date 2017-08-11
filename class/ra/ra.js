@@ -7,28 +7,32 @@ function ra_cambio_label() {
   }
 }
 function ra_obtenerReporte() {
-  if (window.XMLHttpRequest) {
-    var http=getXMLHTTPRequest();
-  }
-  //datos-----------------------------------------------------------------------
-var tipo=document.getElementById('ra_tipo_consulta').value;
-var parametro=document.getElementById('ra_razon_nombre').value;
-var especialidad=document.getElementById('ra_especialidad').value;
-var annio=document.getElementById('ra_annio').value;
-var mes=document.getElementById('ra_mes').value;
-
-
-  //datos-----------------------------------------------------------------------
-  var modurl = "../get/get_ra_reporte.php?anio="+anio+"&mes="+mes+"&parametro="+parametro+"&especialidad="+especialidad+"&tipo="+tipo;
-  http.open("GET", modurl, true);
-  http.addEventListener('readystatechange', function() {
-    if (http.readyState == 4) {
-      if(http.status == 200) {
-        var resultado = http.responseText;
-        document.getElementById('ra_table_reporte').innerHTML=(resultado);
-      }
+var elemento=document.getElementById('ra_form');
+  if (validarVaciosIN(elemento)) {
+    if (window.XMLHttpRequest) {
+      var http=getXMLHTTPRequest();
     }
-  });
+    //datos-----------------------------------------------------------------------
+  var tipo=document.getElementById('ra_tipo_consulta').value;
+  var parametro=document.getElementById('ra_razon_nombre').value;
+  var especialidad=document.getElementById('ra_especialidad').value;
+  var anio=document.getElementById('ra_annio').value;
+  var mes=document.getElementById('ra_mes').value;
+
+
+    //datos-----------------------------------------------------------------------
+    var modurl = "../get/get_ra_reporte.php?anio="+anio+"&mes="+mes+"&parametro="+parametro+"&especialidad="+especialidad+"&tipo="+tipo;
+    http.open("GET", modurl, true);
+    http.addEventListener('readystatechange', function() {
+      if (http.readyState == 4) {
+        if(http.status == 200) {
+          var resultado = http.responseText;
+          document.getElementById('ra_table_reporte').innerHTML=(resultado);
+        }
+      }
+    });
+      http.send(null);
+  }
 }
 function startLoading(panel){
   if (!$(panel).hasClass('panel-loading')) {

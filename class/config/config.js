@@ -53,6 +53,56 @@ function cambiarPass(){
     alert('Debe llenar todos los datos para continuar') ;
   };
 }
+function validarVaciosIN(elemento){
+  //elemento -> este es el div del cual se quiere recorrer
+  // EI.- VERIFICAR VACIOS-----------------------
+  var Children=elemento.children;
+  for (var i=0; i<Children.length; i++) {
+    if (Children[i].classList.contains('has-error')) {
+      Children[i].classList.remove('has-error');
+    }
+    if (Children[i].children[1].value=="") {
+      alert("Llene el Campo - "+ Children[i].children[0].innerHTML);
+      Children[i].className += " has-error";
+      Children[i].children[1].focus();
+      return false;
+    }
+  }
+  return true;
+}
+function LimpiarbyDIV(elemento){
+  var Children=elemento.children;
+  for (var i = 0; i < Children.length; i++) {
+    if (Children[i].classList.contains('has-error')) {
+      Children[i].classList.remove('has-error');
+    }
+Children[i].children[1].value="";
+  }
+}
+function validarPasw(elemento){
+  //elemento -> este es el div del cual se quiere recorrer
+  // EI.- VERIFICAR passwords-----------------------
+  var Children=elemento.children;
+  var contieneClass=false;
+  for (var i=0; i<Children.length; i++) {
+    if (Children[i].children[1].classList.contains('password')) {
+      contieneClass=true;
+      var psw1 =Children[i].children[1].value;
+      var psw2 =Children[i+1].children[1].value;
+      if (psw1!=psw2) {
+        alert("Las contraseñas no coinciden Revisar.")
+        Children[i].children[1].focus();
+        return false;
+      }else{
+        return true;
+      }
+    }
+  }
+  if (contieneClass==false) {
+    alert("no se han encontrado campos contraseña (class='password')");
+    return false;
+  }
+}
 function startTimeAndDate() {
   var today = new Date();
   var h = today.getHours();

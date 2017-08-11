@@ -205,109 +205,115 @@ include ("../class/config/inicializar_cls.php");
         <div class="panel-heading">
           <h4 class="panel-title">PARAMETROS PARA REPORTE</h4>
         </div>
-        <div class="panel-body" id='prueba'>
-          <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Tipo de consulta</span>
-            <select id='ra_tipo_consulta' onchange="ra_cambio_label()" class='form-control input-sm'>
-              <option value=""  disabled selected >--SELECCIONAR--</option>
-              <option value="1">RAZÓN SOCIAL</option>
-              <option value="2">NOMBRE ASOCIADO</option>
-            </select>
-          </div>
-          <div class="input-group m-b-5">
-            <span id='ra_label_razon_nombre' class="input-group-addon input-sm">Razon Social</span>
-            <input id='ra_razon_nombre' type="text"  class='form-control input-sm'>
-          </div>
-          <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Especialidad</span>
-            <select class='default-select2 select form-control input-sm' id="ra_especialidad">
-              <option value="" disabled selected>--SELECCIONAR--</option>
-              <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
-                <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_decode($rs_esp[$i]['n_esp']); ?></option>
+        <div class="panel-body">
+          <div id="ra_form">
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Tipo de consulta</span>
+              <select id='ra_tipo_consulta' onchange="ra_cambio_label()" class='form-control input-sm'>
+                <option value="1" selected>RAZÓN SOCIAL</option>
+                <option value="2">NOMBRE ASOCIADO</option>
+              </select>
+            </div>
+
+
+            <div class="input-group m-b-5">
+              <span id='ra_label_razon_nombre' class="input-group-addon input-sm">Razon Social</span>
+              <input id='ra_razon_nombre' type="text"  class='form-control input-sm'>
+            </div>
+
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Especialidad</span>
+              <select class='default-select2 select form-control input-sm' id="ra_especialidad">
+                <option value="*"  selected>--TODAS--</option>
+                <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
+                  <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_decode($rs_esp[$i]['n_esp']); ?></option>
                 <?php  }?>
               </select>
             </div>
-            <div class="form-inline">
-              <div class="input-group m-b-5">
-                <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-                <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
-                <select  onchange="" id="ra_annio" class='form-control input-sm'>
-                  <option value="" disabled selected>--SELECCIONAR--</option>
-                  <option value="2012">2012</option>
-                  <option value="2013">2013</option>
-                  <option value="2014">2014</option>
-                  <option value="2015">2015</option>
-                  <option value="2016">2016</option>
-                  <option value="2017">2017</option>
-                </select>
-              </div>
-              <div class="input-group m-b-5 ">
-                <span class="input-group-addon  input-sm" >Mes</span>
-                <select id="ra_mes" class='form-control input-sm'>
-                  <option value="*">--TODOS--</option>
-                  <option value="01">ENERO</option>
-                  <option value="02">FEBRERO</option>
-                  <option value="03">MARZO</option>
-                  <option value="04">ABRIL</option>
-                  <option value="05">MAYO</option>
-                  <option value="06">JUNIO</option>
-                  <option value="07">JULIO</option>
-                  <option value="08">AGOSTO</option>
-                  <option value="09">SEPTIEMBRE</option>
-                  <option value="10">OCTUBRE</option>
-                  <option value="11">NOVIEMBRE</option>
-                  <option value="12">DICIEMBRE</option>
-                </select>
-              </div>
-              <div class="input-group m-b-5 pull-right">
-                <button class="btn btn-warning">Generar Reporte</button>
-              </div>
+
+            <div class="input-group m-b-5">
+              <span class="input-group-addon  input-sm" >Año</span>
+              <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
+              <select  onchange="" id="ra_annio" class='form-control input-sm'>
+                <option value="" selected>--SELECCIONAR--</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+              </select>
             </div>
-          </div>
-        </div>
-        <div id='ra_panel_resultado' class="panel panel-inverse">
-          <div class="panel-heading">
-            <h4 class="panel-title">RESULTADOS</h4>
-          </div>
-          <div class="panel-body">
-            <table class='table table-bordered table-condensed' id='ra_table_reporte'>
-
-            </table>
-          </div>
-        </div>
-        <!-- fin  contenido -->
-        <div id='disclamer' class="modal fade" aria-hidden='true'>
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header bg-orange">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-white">Acerca</h4>
-              </div>
-              <div class="modal-body">
-                <div class="text-center">
-                  <img src="../assets/img/logo_big.png" alt="">
-                  <h4>Res-online</h4>
-                  <h4>V2.5</h4>
-                  <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
-                  <P>SISOL - 2017</P>
-                  <button class="btn btn-warning" data-dismiss="modal">OK</button>
-                </div>
-
-
-              </div>
+            <div class="input-group m-b-5 ">
+              <span class="input-group-addon  input-sm" >Mes</span>
+              <select id="ra_mes" class='form-control input-sm'>
+                <option value="*">--TODOS--</option>
+                <option value="01">ENERO</option>
+                <option value="02">FEBRERO</option>
+                <option value="03">MARZO</option>
+                <option value="04">ABRIL</option>
+                <option value="05">MAYO</option>
+                <option value="06">JUNIO</option>
+                <option value="07">JULIO</option>
+                <option value="08">AGOSTO</option>
+                <option value="09">SEPTIEMBRE</option>
+                <option value="10">OCTUBRE</option>
+                <option value="11">NOVIEMBRE</option>
+                <option value="12">DICIEMBRE</option>
+              </select>
             </div>
+
+          </div>
+          <div class="input-group m-b-5 pull-right">
+            <button onclick="ra_obtenerReporte()"  class="btn btn-warning">Generar Reporte</button>
           </div>
         </div>
-
-        <!-- <div id='loading' class="modal fade" aria-hidden='true'>
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-body">
-        <div class="progress progress-striped active">
-        <div class="progress-bar" style="width: 100%">Cargando</div>
       </div>
+      <div id='ra_panel_resultado' class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">RESULTADOS</h4>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class='table table-bordered table-condensed' id='ra_table_reporte'>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <!-- fin  contenido -->
+      <div id='disclamer' class="modal fade" aria-hidden='true'>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-orange">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title text-white">Acerca</h4>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <img src="../assets/img/logo_big.png" alt="">
+                <h4>Res-online</h4>
+                <h4>V2.5</h4>
+                <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+                <P>SISOL - 2017</P>
+                <button class="btn btn-warning" data-dismiss="modal">OK</button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div id='loading' class="modal fade" aria-hidden='true'>
+      <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-body">
+      <div class="progress progress-striped active">
+      <div class="progress-bar" style="width: 100%">Cargando</div>
     </div>
   </div>
+</div>
 </div>
 </div> -->
 
@@ -357,8 +363,11 @@ $(document).ready(function() {
         <h4 class='modal-title text-white'>Detalles Especialidades</h4>
       </div>
       <div class='modal-body'>
-        <div id ='ra_tabla_det' class="table-responsive">
-        </div>
+
+          <div id ='ra_tabla_det' class="table-responsive">
+          </div>
+
+
       </div>
       <div class='modal-footer'>
       </div>
