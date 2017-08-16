@@ -161,38 +161,8 @@ echo "<script>
           </ul>
           <!-- end sidebar user -->
           <!-- begin sidebar nav -->
-          <ul class="nav">
-            <li class="nav-header">MENÚ PRINCIPAL</li>
-            <li class="has-sub active" data-toggle="tooltip" title='REDO' data-placement="right">
-              <a href="../pages/p_redo1.php">
-                <i class="ion-arrow-graph-up-right" aria-hidden="true"></i>
-                <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
-              </a>
-            </li>
-            <li class="has-sub" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
-              <a href="../pages/p_bdupdateState.php">
-                <i class="fa fa-database fa-2x" aria-hidden="true"></i>
-                <span>ESTADO DE DATOS</span>
-              </a>
-            </li>
-            <li class="has-sub" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
-              <a href="../pages/p_produccionEmpresas.php">
-                <i class="ion-person-stalker" aria-hidden="true"></i>
-                <span>REPORTE ASOCIADOS</span>
-              </a>
-            </li>
-            <li class="has-sub mobile">
-              <a href="javascript:;">
-                <b class="caret pull-right"></b>
-                <i class="ion-android-contact"></i>
-                <span>USUARIO</span>
-              </a>
-              <ul class="sub-menu">
-                <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
-                <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
-              </ul>
-            </li>
-            <!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
+          <ul id='top-menu' class="nav">
+
           </ul>
           <!-- end sidebar nav -->
         </div>
@@ -211,7 +181,7 @@ echo "<script>
       <div class="alert alert-info fade in m-b-15">
         <strong>Fecha de Actualizacion:</strong>
         Datos Actualizados hasta el <?php echo $fechAct;?>
-        <a href='p_bdupdateState.php' class='btn btn-info btn-xs pull-right'>Ver Detalles</a>
+        <a href='p_bdupdateState.php' class='btn btn-info btn-xs'>Ver Detalles</a>
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -406,14 +376,15 @@ echo "<script>
         <div class="modal-body">
           <div class="text-center">
             <img src="../assets/img/logo_big.png" alt="">
+            <!-- title -->
             <h4>Res-online</h4>
-            <h4>V2.5</h4>
+            <!-- version -->
+            <h4>V2.5.1</h4>
             <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+           <!-- año de version -->
             <P>SISOL - 2017</P>
             <button class="btn btn-warning" data-dismiss="modal">OK</button>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -462,6 +433,7 @@ echo "<script>
 <!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
 
 <script src="../class/config/config.js"></script>
+<script src="../class/menu/menu.js"></script>
 <script src="../class/redo1/redo1.js"></script>
 <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
 <!-- <script src="../assets/js/dataloader.js"></script> -->
@@ -475,10 +447,12 @@ var f= new Date();
 // var activado=false;
 var ganio1='', gmes1='';
 var ganio2='', gmes2='',gdate='';
-
+construirMenu();
+  document.getElementById('item0').className += " active";
 $(document).ready(function() {
   // mostrarLoader();
   App.init();
+
   jQuery.tablesorter.addParser({
     id: "FancyNumber",
     is: function(s) {

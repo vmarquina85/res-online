@@ -121,7 +121,7 @@ function compCentrosIngresos1(anio,mes){
           }
         });
         endLoading('#pnl_Ingresos1');
-        $("[data-toggle='tooltip']").tooltip();
+
       }
     }
   });
@@ -233,7 +233,7 @@ function compCentrosIngresos2(anio,mes){
           }
         });
         endLoading('#pnl_Ingresos2');
-        $("[data-toggle='tooltip']").tooltip();
+  
       }
     }
   });

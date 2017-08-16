@@ -153,37 +153,8 @@ include ("../class/config/inicializar_cls.php");
           </ul>
           <!-- end sidebar user -->
           <!-- begin sidebar nav -->
-          <ul class="nav">
-            <li class="nav-header">MENÚ PRINCIPAL</li>
-            <li class="has-sub" data-toggle="tooltip" title='REDO' data-placement="right">
-              <a href="../pages/p_redo1.php">
-                <i class="ion-arrow-graph-up-right" aria-hidden="true"></i>
-                <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
-              </a>
-            </li>
-            <li class="has-sub" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
-              <a href="../pages/p_bdupdateState.php">
-                <i class="fa fa-database fa-2x" aria-hidden="true"></i>
-                <span>ESTADO DE DATOS</span>
-              </a>
-            </li>
-            <li class="has-sub active" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
-              <a href="../pages/p_produccionEmpresas.php">
-                <i class="ion-person-stalker" aria-hidden="true"></i>
-                <span>REPORTE ASOCIADOS</span>
-              </a>
-            </li>
-            <li class="has-sub mobile">
-              <a href="javascript:;">
-                <b class="caret pull-right"></b>
-                <i class="ion-android-contact"></i>
-                <span>USUARIO</span>
-              </a>
-              <ul class="sub-menu">
-                <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
-                <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
-              </ul>
-            </li>
+          <ul  id='top-menu' class="nav">
+
             <!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
           </ul>
           <!-- end sidebar nav -->
@@ -293,7 +264,7 @@ include ("../class/config/inicializar_cls.php");
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                <h4>V2.5</h4>
+                  <h4>V2.5.1</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2017</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
@@ -345,11 +316,14 @@ include ("../class/config/inicializar_cls.php");
 <script src="../class/ra/ra.js"></script>
 <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
 <!-- <script src="../assets/js/dataloader.js"></script> -->
+<script src="../class/menu/menu.js"></script>
 <script src="../assets/js/apps.min.js"></script>
 <script src="../assets/js/ajax.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
 //globals
+construirMenu();
+  document.getElementById('item2').className += " active";
 $(document).ready(function() {
   // mostrarLoader();
   App.init();

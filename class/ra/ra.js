@@ -7,8 +7,10 @@ function ra_cambio_label() {
   }
 }
 function ra_obtenerReporte() {
+
 var elemento=document.getElementById('ra_form');
   if (validarVaciosIN(elemento)) {
+      startLoading('#ra_panel_resultado');
     if (window.XMLHttpRequest) {
       var http=getXMLHTTPRequest();
     }
@@ -28,6 +30,7 @@ var elemento=document.getElementById('ra_form');
         if(http.status == 200) {
           var resultado = http.responseText;
           document.getElementById('ra_table_reporte').innerHTML=(resultado);
+            endLoading('#ra_panel_resultado');
         }
       }
     });
