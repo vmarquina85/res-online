@@ -195,7 +195,9 @@ if (!isset($_SESSION["resonlinepermitido"])) {
           <span class='badge badge-warning badge-square p-t-5'> </span>
               <span>Parcial: Mayor de 2 días y Menor de 30 días </span> <br>
           <span class='badge badge-danger badge-square p-t-5'> </span>
-              <span>No Actualizado: Mayor de 30 días</span>
+              <span>No Actualizado: Mayor de 30 días</span> <br>
+              <span class='badge badge-default badge-square p-t-5'> </span>
+                  <span>Centro no Activo</span>
         </div>
       </div>
       <div id='disclamer' class="modal fade">

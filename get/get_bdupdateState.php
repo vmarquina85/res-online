@@ -10,7 +10,12 @@ if (sizeof($resultado)>0) {
     if ($resultado[$i]['dif']>2 && $resultado[$i]['dif']<30){
       echo  " class='warning'";
     }else if($resultado[$i]['dif']>30){
-      echo  " class='danger'";
+      if ($resultado[$i]['actividad']=="NO ACTIVO") {
+        echo  " class='active'";
+      }else{
+        echo  " class='danger'";
+      }
+
     }else if($resultado[$i]['dif']<=2){
       echo  " class='success'";
     }
@@ -23,8 +28,12 @@ if (sizeof($resultado)>0) {
       }else if ($resultado[$i]['dif']>2 && $resultado[$i]['dif']<30) {
         echo "<span class='badge badge-warning'>PARCIAL</span>";
       }else if ($resultado[$i]['dif']>30) {
+if ($resultado[$i]['actividad']=="NO ACTIVO") {
+  echo "<span class='badge badge-default'>NO ACTIVO</span>";
+}else{
         echo "<span class='badge badge-danger'>NO ACTUALIZADO</span>";
       }
+    }
     echo "</td>
 
  </tr>

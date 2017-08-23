@@ -105,7 +105,7 @@ class consultas extends conectar
 		return $this->t;
 	}
 	function bdupdateState_gMaxFechas(){
-		$sql="select operativo,to_char(max(fecha),'dd/mm/yyyy') as actualizacion,(current_date-max(fecha)) as dif from summary.redo group by operativo";
+		$sql="select operativo,to_char(max(fecha),'dd/mm/yyyy') as actualizacion,(current_date-max(fecha)) as dif , case when (select state from summary.oper where descripcion = operativo)='1' then 'ACTIVO' else 'NO ACTIVO' end as actividad from summary.redo group by operativo";
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
