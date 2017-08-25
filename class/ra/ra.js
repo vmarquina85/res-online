@@ -6,7 +6,7 @@ function ra_cambio_label() {
  document.getElementById('ra_label_razon_nombre').innerHTML='Nombre de Asociado';
   }
 }
-function ra_obtenerReporte() {
+function ra_obtenerReporte1() {
 
 var elemento=document.getElementById('ra_form');
   if (validarVaciosIN(elemento)) {
@@ -17,13 +17,12 @@ var elemento=document.getElementById('ra_form');
     //datos-----------------------------------------------------------------------
   var tipo=document.getElementById('ra_tipo_consulta').value;
   var parametro=document.getElementById('ra_razon_nombre').value;
-  var especialidad=document.getElementById('ra_especialidad').value;
+  // var especialidad=document.getElementById('ra_especialidad').value;
   var anio=document.getElementById('ra_annio').value;
-  var mes=document.getElementById('ra_mes').value;
-
+  // var mes=document.getElementById('ra_mes').value;
 
     //datos-----------------------------------------------------------------------
-    var modurl = "../get/get_ra_reporte.php?anio="+anio+"&mes="+mes+"&parametro="+parametro+"&especialidad="+especialidad+"&tipo="+tipo;
+    var modurl = "../get/get_ra_reporte1.php?anio="+anio+"&parametro="+parametro+"&tipo="+tipo;
     http.open("GET", modurl, true);
     http.addEventListener('readystatechange', function() {
       if (http.readyState == 4) {

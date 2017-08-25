@@ -379,7 +379,7 @@ echo "<script>
             <!-- title -->
             <h4>Res-online</h4>
             <!-- version -->
-            <h4>V2.5.1</h4>
+            <h4>V2.6</h4>
             <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
            <!-- año de version -->
             <P>SISOL - 2017</P>

@@ -3,10 +3,10 @@ require '../class/consultas/consultas_cls.php';
 $ra_class= new consultas;
 $tipo=$_REQUEST['tipo'];
 $parametro=$_REQUEST['parametro'];
-$especialidad=$_REQUEST['especialidad'];
+
 $annio=$_REQUEST['anio'];
-$mes=$_REQUEST['mes'];
-$ra_rs_reporte=$ra_class->getReporteAsociados($mes,$annio,$especialidad,$parametro,$tipo);
+
+$ra_rs_reporte=$ra_class->getReporteAsociados1($annio,$parametro,$tipo);
   echo "<thead>
         <tr>
           <th class='text-center bg-silver'>Año</th>

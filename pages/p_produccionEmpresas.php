@@ -177,69 +177,63 @@ include ("../class/config/inicializar_cls.php");
           <h4 class="panel-title">PARAMETROS PARA REPORTE</h4>
         </div>
         <div class="panel-body">
-          <div id="ra_form">
-            <div class="input-group m-b-5">
-              <span class="input-group-addon input-sm">Tipo de consulta</span>
-              <select id='ra_tipo_consulta' onchange="ra_cambio_label()" class='form-control input-sm'>
-                <option value="1" selected>RAZÓN SOCIAL</option>
-                <option value="2">NOMBRE ASOCIADO</option>
-              </select>
-            </div>
+          <ul class="nav nav-tabs">
+                                      <li class="active"><a href="#default-tab-1" data-toggle="tab" aria-expanded="true"><strong>RAA (Resumen Anual de Asociado)</strong></a></li>
+                                      <li class=""><a href="#default-tab-2" data-toggle="tab" aria-expanded="false">Default Tab 2</a></li>
+                                      <li class=""><a href="#default-tab-3" data-toggle="tab" aria-expanded="false">Default Tab 3</a></li>
+                                  </ul>
+                                  <div class="tab-content">
+                            <div class="tab-pane fade active in" id="default-tab-1">
+                              <div id="ra_form">
+                                <div class="input-group m-b-5">
+                                  <span class="input-group-addon input-sm">Tipo de consulta</span>
+                                  <select id='ra_tipo_consulta' onchange="ra_cambio_label()" class='form-control input-sm'>
+                                    <option value="1" selected>RAZÓN SOCIAL</option>
+                                    <option value="2">NOMBRE ASOCIADO</option>
+                                  </select>
+                                </div>
 
 
-            <div class="input-group m-b-5">
-              <span id='ra_label_razon_nombre' class="input-group-addon input-sm">Razon Social</span>
-              <input id='ra_razon_nombre' type="text"  class='form-control input-sm'>
-            </div>
+                                <div class="input-group m-b-5">
+                                  <span id='ra_label_razon_nombre' class="input-group-addon input-sm">Razon Social</span>
+                                  <input id='ra_razon_nombre' type="text"  class='form-control input-sm'>
+                                </div>
 
-            <div class="input-group m-b-5">
-              <span class="input-group-addon input-sm">Especialidad</span>
-              <select class='default-select2 select form-control input-sm' id="ra_especialidad">
-                <option value="*"  selected>--TODAS--</option>
-                <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
-                  <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_decode($rs_esp[$i]['n_esp']); ?></option>
-                <?php  }?>
-              </select>
-            </div>
+                                <div class="input-group m-b-5">
+                                  <span class="input-group-addon  input-sm" >Año</span>
+                                  <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
+                                  <select  onchange="" id="ra_annio" class='form-control input-sm'>
+                                    <option value="" selected>--SELECCIONAR--</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                  </select>
+                                </div>
 
-            <div class="input-group m-b-5">
-              <span class="input-group-addon  input-sm" >Año</span>
-              <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
-              <select  onchange="" id="ra_annio" class='form-control input-sm'>
-                <option value="" selected>--SELECCIONAR--</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-              </select>
-            </div>
-            <div class="input-group m-b-5 ">
-              <span class="input-group-addon  input-sm" >Mes</span>
-              <select id="ra_mes" class='form-control input-sm'>
-                <option value="*">--TODOS--</option>
-                <option value="01">ENERO</option>
-                <option value="02">FEBRERO</option>
-                <option value="03">MARZO</option>
-                <option value="04">ABRIL</option>
-                <option value="05">MAYO</option>
-                <option value="06">JUNIO</option>
-                <option value="07">JULIO</option>
-                <option value="08">AGOSTO</option>
-                <option value="09">SEPTIEMBRE</option>
-                <option value="10">OCTUBRE</option>
-                <option value="11">NOVIEMBRE</option>
-                <option value="12">DICIEMBRE</option>
-              </select>
-            </div>
+                              </div>
+                              <div class="input-group m-b-5 pull-right">
+                                <button onclick="ra_obtenerReporte1()"  class="btn btn-warning">Generar Reporte</button>
+                              </div>
+                            </div>
+                            <div class="tab-pane fade" id="default-tab-2">
+        B
+                            </div>
+                            <div class="tab-pane fade" id="default-tab-3">
+                          C
+                            </div>
+                        </div>
 
-          </div>
-          <div class="input-group m-b-5 pull-right">
-            <button onclick="ra_obtenerReporte()"  class="btn btn-warning">Generar Reporte</button>
-          </div>
+
+
+
+
+
         </div>
       </div>
+
       <div id='ra_panel_resultado' class="panel panel-inverse">
         <div class="panel-heading">
           <h4 class="panel-title">RESULTADOS</h4>
@@ -264,7 +258,7 @@ include ("../class/config/inicializar_cls.php");
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                  <h4>V2.5.1</h4>
+                  <h4>V2.6</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2017</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
