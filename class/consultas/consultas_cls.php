@@ -122,11 +122,15 @@ class consultas extends conectar
 	}
 	function getReporteAsociados1($anio,$parametro,$tipo){
 		if ($tipo=='1') {
-			$sql="Select SubString(p_atr,1,4)año,to_char(date('01-'||SubString(p_atr,5,2)||'-16'),'TMMonth')mes,n_esp,trim(n_ras) as denominacion,trim(n_ruc) as ruc,Sum(c_ate)atenciones,Sum(v_pag)importe
-		From summary.res_pro_ven_ate where n_con!='' and trim(n_ras) like '%".strtoupper($parametro)."%' and SubString(p_atr,1,4)='".$anio."' ";
+		// 	$sql="Select SubString(p_atr,1,4)año,to_char(date('01-'||SubString(p_atr,5,2)||'-16'),'TMMonth')mes,n_esp,trim(n_ras) as denominacion,trim(n_ruc) as ruc,Sum(c_ate)atenciones,Sum(v_pag)importe
+		// From summary.res_pro_ven_ate where n_con!='' and trim(n_ras) like '%".strtoupper($parametro)."%' and SubString(p_atr,1,4)='".$anio."' ";
+			$sql="select * from summary.crosstab('Select trim(n_ras) as denominacion,to_char(date(''01-''||SubString(p_atr,5,2)||''-16''),''TMMonth'')mes,sum(v_pag)importe
+		From summary.res_pro_ven_ate where n_con!='''' and trim(n_ras) like ''%".strtoupper($parametro)."%'' and SubString(p_atr,1,4)=''".$anio."''";
+
+
 		}else if ($tipo=='2') {
-			$sql="Select SubString(p_atr,1,4)año,to_char(date('01-'||SubString(p_atr,5,2)||'-16'),'TMMonth')mes,n_esp,trim(n_per) as denominacion,trim(n_ruc) as ruc,Sum(c_ate)atenciones,Sum(v_pag)importe
-		From summary.res_pro_ven_ate where n_con!='' and trim(n_per) like '%".strtoupper($parametro)."%' and SubString(p_atr,1,4)='".$anio."' ";
+			$sql="select * from summary.crosstab('Select trim(n_per) as denominacion,to_char(date(''01-''||SubString(p_atr,5,2)||''-16''),''TMMonth'')mes,sum(v_pag)importe
+		From summary.res_pro_ven_ate where n_con!='''' and trim(n_per) like ''%".strtoupper($parametro)."%'' and SubString(p_atr,1,4)=''".$anio."''";
 		}
 // if ($mes!='*'){
 // 	$sql=$sql."and SubString(p_atr,5,2)='".$mes."' ";
@@ -135,11 +139,11 @@ class consultas extends conectar
 // 	$sql=$sql. "and n_esp ='".strtoupper($especialidad)."' ";
 // }
 if ($tipo=='1') {
-	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),n_esp,trim(n_ras),n_ruc
-	order by SubString(p_atr,5,2)";
+	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),trim(n_ras)
+order by 1,SubString(p_atr,5,2)') as ct(centro text, enero numeric(11,2), febrero numeric(11,2),marzo numeric(11,2),abril numeric(11,2),mayo numeric(11,2),junio numeric(11,2),julio numeric(11,2),agosto numeric(11,2),septiembre numeric(11,2),octubre numeric(11,2),noviembre numeric(11,2),diciembre numeric(11,2))";
 }else if ($tipo=='2') {
-	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),n_esp,trim(n_per),n_ruc
-	order by SubString(p_atr,5,2)";
+	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),trim(n_per)
+order by 1,SubString(p_atr,5,2)') as ct(centro text, enero numeric(11,2), febrero numeric(11,2),marzo numeric(11,2),abril numeric(11,2),mayo numeric(11,2),junio numeric(11,2),julio numeric(11,2),agosto numeric(11,2),septiembre numeric(11,2),octubre numeric(11,2),noviembre numeric(11,2),diciembre numeric(11,2))";
 }
 
 		$res=pg_query(parent::conexion_resumen(),$sql);

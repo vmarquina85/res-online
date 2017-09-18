@@ -179,8 +179,8 @@ include ("../class/config/inicializar_cls.php");
         <div class="panel-body">
           <ul class="nav nav-tabs">
                                       <li class="active"><a href="#default-tab-1" data-toggle="tab" aria-expanded="true"><strong>RAA (Resumen Anual de Asociado)</strong></a></li>
-                                      <li class=""><a href="#default-tab-2" data-toggle="tab" aria-expanded="false">Default Tab 2</a></li>
-                                      <li class=""><a href="#default-tab-3" data-toggle="tab" aria-expanded="false">Default Tab 3</a></li>
+                                      <!-- <li class=""><a href="#default-tab-2" data-toggle="tab" aria-expanded="false">Default Tab 2</a></li>
+                                      <li class=""><a href="#default-tab-3" data-toggle="tab" aria-expanded="false">Default Tab 3</a></li> -->
                                   </ul>
                                   <div class="tab-content">
                             <div class="tab-pane fade active in" id="default-tab-1">
@@ -218,19 +218,7 @@ include ("../class/config/inicializar_cls.php");
                                 <button onclick="ra_obtenerReporte1()"  class="btn btn-warning">Generar Reporte</button>
                               </div>
                             </div>
-                            <div class="tab-pane fade" id="default-tab-2">
-        B
-                            </div>
-                            <div class="tab-pane fade" id="default-tab-3">
-                          C
-                            </div>
-                        </div>
-
-
-
-
-
-
+                          </div>
         </div>
       </div>
 
@@ -240,7 +228,7 @@ include ("../class/config/inicializar_cls.php");
         </div>
         <div class="panel-body">
           <div class="table-responsive">
-            <table class='table table-bordered table-condensed' id='ra_table_reporte'>
+            <table class='table table-bordered table-hover clickable table-condensed' id='ra_table_reporte'>
             </table>
 
           </div>
