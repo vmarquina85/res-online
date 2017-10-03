@@ -12,7 +12,7 @@ $result = pg_query($conexion2, $consulta);
 $query = pg_fetch_array($result, 0);
 $fechAct = $query["fechact"];
 echo "<script>
-  var gfecphp='".$fechAct."'
+var gfecphp='".$fechAct."'
 </script>"
 ?>
 <!DOCTYPE html>
@@ -184,25 +184,46 @@ echo "<script>
         <a href='p_bdupdateState.php' class='btn btn-info btn-xs'>Ver Detalles</a>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="wrapper bg-silver-lighter m-b-15">
-            <form class="form-inline text-center" action="javascript:;">
-              <div class="input-group m-b-5">
-                <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-                <select onchange="mostrarResultados1();disableMes()" id="sl_anio1" class='form-control'>
-                  <option value="" disabled selected>--SELECCIONAR--</option>
-                  <option value="2012">2012</option>
-                  <option value="2013">2013</option>
-                  <option value="2014">2014</option>
-                  <option value="2015">2015</option>
-                  <option value="2016">2016</option>
-                  <option value="2017">2017</option>
-                </select>
+            <form  action="javascript:;">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group m-b-5">
+                    <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
+                    <select onchange="getResultados()" id="sl_anio1" class='form-control'>
+                      <option value="" disabled selected>--SELECCIONAR--</option>
+                      <option value="2012">2012</option>
+                      <option value="2013">2013</option>
+                      <option value="2014">2014</option>
+                      <option value="2015">2015</option>
+                      <option value="2016">2016</option>
+                      <option value="2017">2017</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group m-b-5">
+                    <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
+                    <select  onchange="getResultados()" id="sl_anio2" class='form-control'>
+                      <option value="" disabled selected>--SELECCIONAR--</option>
+                      <option value="2012">2012</option>
+                      <option value="2013">2013</option>
+                      <option value="2014">2014</option>
+                      <option value="2015">2015</option>
+                      <option value="2016">2016</option>
+                      <option value="2017">2017</option>
+                    </select>
+                  </div>
+
+                </div>
               </div>
+
+
               <div class="input-group m-b-5 ">
                 <span class="input-group-addon  input-sm" >Mes</span>
-                <select  onchange="mostrarResultados1()" id="sl_mes1" class='form-control'>
-                  <option value="*">--TODOS--</option>
+                <select  onchange="getResultados()" id="sl_mes1" class='form-control'>
+                  <option value="*">--FECHA DE ACTUALIZACIÓN--</option>
                   <option value="01">ENERO</option>
                   <option value="02">FEBRERO</option>
                   <option value="03">MARZO</option>
@@ -217,12 +238,10 @@ echo "<script>
                   <option value="12">DICIEMBRE</option>
                 </select>
               </div>
-              <!-- <button  onclick ='mostrarResultados()' class="btn btn-primary m-b-5">Mostrar</button> -->
-
             </form>
             <br>
             <div class="row">
-              <div class="col-md-7">
+              <div class="col-md-6">
                 <div class="widget widget-stats bg-green">
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
@@ -231,23 +250,25 @@ echo "<script>
                   </div>
                 </div>
               </div>
-              <div class="col-md-5">
-                <div class="widget widget-stats  bg-blue">
-                  <div class="stats-icon"><img src="../assets/img/atenciones.png" alt=""></div>
+              <div class="col-md-6">
+                <div class="widget widget-stats bg-green">
+                  <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
-                    <h4>TOTAL ATENCIONES</h4>
-                    <span></span><p id='data_atenciones1' class="odometer">0</p>
+                    <h4>TOTAL INGRESOS</h4>
+                    <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
                   </div>
                 </div>
               </div>
+
             </div>
             <div id='pnl_Ingresos1' class="panel panel-inverse">
               <div class="panel-heading">
-                <!-- <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
-              </div> -->
-              <h4 class="panel-title">Tabla Comparativa</h4>
-            </div>
+                <div class="panel-heading-btn">
+                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title">Tabla Comparativa</h4>
+
+              </div>
             <div class="panel-body" id='prueba'>
               <div class="pLoader"></div>
               <div class="carousel slide" data-ride="carousel" id=resultados_I>
@@ -271,147 +292,57 @@ echo "<script>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="wrapper bg-silver-lighter m-b-15">
-          <form class="form-inline text-center" action="javascript:;">
-            <div class="input-group m-b-5">
-              <span class="input-group-addon  input-sm" ><img src="" alt="">Año</span>
-              <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
-              <select  onchange="mostrarResultados2()" id="sl_anio2" class='form-control'>
-                <option value="" disabled selected>--SELECCIONAR--</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-              </select>
-            </div>
-            <div class="input-group m-b-5 ">
-              <span class="input-group-addon  input-sm" >Mes</span>
-              <select onchange="mostrarResultados2()"  id="sl_mes2" class='form-control'>
-                <option value="*">--TODOS--</option>
-                <option value="01">ENERO</option>
-                <option value="02">FEBRERO</option>
-                <option value="03">MARZO</option>
-                <option value="04">ABRIL</option>
-                <option value="05">MAYO</option>
-                <option value="06">JUNIO</option>
-                <option value="07">JULIO</option>
-                <option value="08">AGOSTO</option>
-                <option value="09">SEPTIEMBRE</option>
-                <option value="10">OCTUBRE</option>
-                <option value="11">NOVIEMBRE</option>
-                <option value="12">DICIEMBRE</option>
-              </select>
-            </div>
-<!-- <div class="input-group m-b-5">
-  <button class='btn btn-default' title='Fecha Equivalente' data-toggle='tooltip'><img src="../assets/img/date.png" alt=""> </button>
-</div> -->
 
-          </form>
-          <br>
-          <div class="row">
-            <div class="col-md-7">
-              <div class="widget widget-stats bg-green">
-                <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
-                <div class="stats-info">
-                  <h4>TOTAL INGRESOS</h4>
-                  <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="widget widget-stats  bg-blue">
-                <!-- <div class="stats-icon"><i class="fa fa-plus-circle"></i></div> -->
-                <div class="stats-icon"><img src="../assets/img/atenciones.png" alt=""></div>
+    </div>
 
-                <div class="stats-info">
-                  <h4>TOTAL ATENCIONES</h4>
-                  <span></span><p id='data_atenciones2' class="odometer">0</p>
-                </div>
-              </div>
-            </div>
+
+
+    <div id='disclamer' class="modal fade" aria-hidden='true'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-orange">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-white">Acerca</h4>
           </div>
-          <div id='pnl_Ingresos2' class="panel panel-inverse" >
-            <div class="panel-heading">
-              <!-- <div class="panel-heading-btn">
-              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
-            </div> -->
-            <h4 class="panel-title">Tabla Comparativa</h4>
-          </div>
-          <div class="panel-body">
-            <div class="carousel slide" data-ride="carousel" id=resultados_II>
-              <!-- begin carousel-inner -->
-              <div class="carousel-inner">
-                <!-- begin item -->
-                <div class="item active">
-                  <div id='tb_comp_I12' class="table-responsive"></div>
-                </div>
-                <!-- end item -->
-                <!-- begin item -->
-                <div class="item">
-                  <div id='tb_comp_I22' class="table-responsive"></div>
-                </div>
-                <div class="item">
-                  <div id='tb_comp_I32' class="table-responsive"></div>
-                </div>
-              </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <img src="../assets/img/logo_big.png" alt="">
+              <!-- title -->
+              <h4>Res-online</h4>
+              <!-- version -->
+              <h4>V2.6</h4>
+              <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+              <!-- año de version -->
+              <P>SISOL - 2017</P>
+              <button class="btn btn-warning" data-dismiss="modal">OK</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-
-  <div id='disclamer' class="modal fade" aria-hidden='true'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-orange">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-white">Acerca</h4>
-        </div>
-        <div class="modal-body">
-          <div class="text-center">
-            <img src="../assets/img/logo_big.png" alt="">
-            <!-- title -->
-            <h4>Res-online</h4>
-            <!-- version -->
-            <h4>V2.6</h4>
-            <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
-           <!-- año de version -->
-            <P>SISOL - 2017</P>
-            <button class="btn btn-warning" data-dismiss="modal">OK</button>
+    <div id='loading' class="modal fade" aria-hidden='true'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="progress progress-striped active">
+              <div class="progress-bar" style="width: 100%">Cargando</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id='loading' class="modal fade" aria-hidden='true'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="progress progress-striped active">
-            <div class="progress-bar" style="width: 100%">Cargando</div>
-          </div>
-        </div>
+    <div id="header" class="navbar-fixed-bottom text-center">
+      <div class="btn-group">
+        <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
+        <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
+        <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
       </div>
     </div>
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up p-t-5"></i></a>
+    <!-- end scroll to top btn -->
   </div>
-
-  <div id="header" class="navbar-fixed-bottom text-center">
-    <div class="btn-group">
-      <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
-      <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
-      <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
-    </div>
-  </div>
-  <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-  <!-- end scroll to top btn -->
-</div>
 </div>
 <!-- end page container -->
 <!-- ================== BEGIN BASE JS ================== -->
@@ -448,7 +379,7 @@ var f= new Date();
 var ganio1='', gmes1='';
 var ganio2='', gmes2='',gdate='';
 construirMenu();
-  document.getElementById('item0').className += " active";
+document.getElementById('item0').className += " active";
 $(document).ready(function() {
   // mostrarLoader();
   App.init();

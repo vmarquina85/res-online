@@ -8,11 +8,34 @@ class consultas extends conectar
 	{
 		$this->t=array();
 	}
+	function ComparativoIngresos($anio1,$anio2,$mes,$dia){
+		$sql="select * from summary.crosstab('select operativo,date_part(''year'' ,fecha) as annio,sum(ingresos) as ingresos from summary.redo where  date_part(''year'' ,fecha) in (".$anio1.",".$anio2.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part(''month'' ,fecha)=''".$mes."''";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and date_part(''month'' ,fecha)<=''".$nmes."'' and date_part(''day'' ,fecha)<=''".$nday."''";
+		}
+		$sql=$sql." group by operativo, date_part(''year'' ,fecha)";
 
-	function totalIngresosAtenciones($anio,$mes){
-		$sql="select sum(atenciones)as atenciones,sum(ingresos) as ingresos from summary.redo where  date_part('year' ,fecha)=".$anio;
+		$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(operativo character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+
+	function totalIngresosAtenciones($anio,$mes,$dia){
+		$sql="select sum(ingresos) as ingresos from summary.redo where  date_part('year' ,fecha)=".$anio;
 		if ($mes!='*') {
 			$sql=$sql." and date_part('month' ,fecha)='".$mes."'";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and date_part('month' ,fecha)<='".$nmes."' and date_part('day' ,fecha)<='".$nday."'";
 		}
 		$sql=$sql." group by date_part('year' ,fecha)";
 		if ($mes!='*') {
@@ -25,47 +48,55 @@ class consultas extends conectar
 		}
 		return $this->t;
 	}
-	function compCentros_ingresos($anio,$mes){
-		$sql="select operativo,sum(ingresos) as ingresos , sum(atenciones) as atenciones from summary.redo where  date_part('year' ,fecha)=".$anio;
+	// function compCentros_ingresos($anio,$mes){
+	// 	$sql="select operativo,sum(ingresos) as ingresos , sum(atenciones) as atenciones from summary.redo where  date_part('year' ,fecha)=".$anio;
+	// 	if ($mes!='*') {
+	// 		$sql=$sql." and date_part('month' ,fecha)=".$mes;
+	// 	}
+	// 	$sql=$sql." group by operativo,date_part('year' ,fecha)";
+	// 	if ($mes!='*') {
+	// 		$sql=$sql.",date_part('month' ,fecha)";
+	// 	}
+	// 	$sql=$sql." order by 3 desc";
+	// 	$res=pg_query(parent::conexion_resumen(),$sql);
+	// 	while($reg=pg_fetch_assoc($res)){
+	// 		$this->t[]=$reg;
+	// 	}
+	// 	return $this->t;
+	// }
+	function compMeses_ingresos($anio1,$anio2,$mes,$dia){
+		$sql="select * from summary.crosstab('select date_part(''month'' ,fecha),date_part(''year'' ,fecha) as annio,sum(ingresos) as ingresos from summary.redo where  date_part(''year'' ,fecha) in (".$anio1.",".$anio2.")";
 		if ($mes!='*') {
-			$sql=$sql." and date_part('month' ,fecha)=".$mes;
+			$sql=$sql." and date_part(''month'' ,fecha)=''".$mes."''";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and date_part(''month'' ,fecha)<=''".$nmes."'' and date_part(''day'' ,fecha)<=''".$nday."''";
 		}
-		$sql=$sql." group by operativo,date_part('year' ,fecha)";
-		if ($mes!='*') {
-			$sql=$sql.",date_part('month' ,fecha)";
-		}
-		$sql=$sql." order by 3 desc";
+		$sql=$sql." group by date_part(''month'' ,fecha), date_part(''year'' ,fecha)";
+
+		$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(mes character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+		// echo $sql;
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
 		}
 		return $this->t;
 	}
-	function compMeses_ingresos($anio,$mes){
-		$sql="select date_part('month' ,fecha) as mes,sum(ingresos) as ingresos,sum(atenciones) as atenciones from summary.redo where  date_part('year' ,fecha)=".$anio;
-		if ($mes!='*') {
-			$sql=$sql." and date_part('month' ,fecha)=".$mes;
-		}
-		$sql=$sql." group by date_part('year' ,fecha),date_part('month' ,fecha) ";
 
-		$sql=$sql." order by 2 desc";
-		$res=pg_query(parent::conexion_resumen(),$sql);
-		while($reg=pg_fetch_assoc($res)){
-			$this->t[]=$reg;
+	function compEspecialidades_ingresos($anio1,$anio2,$mes,$dia){
+		$sql="select * from summary.crosstab('select especialidad,date_part(''year'' ,fecha) as annio,sum(ingresos) as ingresos from summary.redo where  date_part(''year'' ,fecha) in (".$anio1.",".$anio2.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part(''month'' ,fecha)=''".$mes."''";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and date_part(''month'' ,fecha)<=''".$nmes."'' and date_part(''day'' ,fecha)<=''".$nday."''";
 		}
-		return $this->t;
-	}
+		$sql=$sql." group by especialidad, date_part(''year'' ,fecha)";
 
-	function compEspecialidades_ingresos($anio,$mes){
-		$sql="select especialidad,date_part('year' ,fecha) as annio,sum(ingresos) as ingresos, sum(atenciones) as atenciones from summary.redo where  date_part('year' ,fecha)=".$anio;
-		if ($mes!='*') {
-			$sql=$sql." and date_part('month' ,fecha)=".$mes;
-		}
-		$sql=$sql." group by especialidad,date_part('year' ,fecha)";
-		if ($mes!='*') {
-			$sql=$sql.",date_part('month' ,fecha)";
-		}
-		$sql=$sql." order by 2 desc";
+		$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(especialidad character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+		// echo $sql;
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;

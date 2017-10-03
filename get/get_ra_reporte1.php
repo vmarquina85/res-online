@@ -35,19 +35,19 @@ $ra_rs_reporte=$ra_class->getReporteAsociados1($annio,$parametro,$tipo);
      +$ra_rs_reporte[$i]['diciembre'];
      echo   "<tr>
             <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['centro']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['enero']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['febrero']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['marzo']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['abril']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['mayo']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['junio']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['julio']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['agosto']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['septiembre']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['octubre']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['noviembre']."</td>
-            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$ra_rs_reporte[$i]['diciembre']."</td>
-            <td class='p-3 f-s-11 bg-silver text-center m-r-10 m-l-10'><strong>".(double)$total."</strong></td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['enero'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['febrero'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['marzo'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['abril'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['mayo'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['junio'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['julio'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['agosto'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['septiembre'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['octubre'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['noviembre'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".number_format($ra_rs_reporte[$i]['diciembre'],2,'.',',')."</td>
+            <td class='p-3 f-s-11 bg-silver text-center m-r-10 m-l-10'><strong>".number_format((double)$total,2,'.',',')."</strong></td>
 
             </tr>";
   }
