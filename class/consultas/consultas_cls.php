@@ -151,6 +151,14 @@ class consultas extends conectar
 		}
 		return $this->t;
 	}
+	function getCentros(){
+		$sql="select distinct n_ope from summary.res_pro_ven_ate order by 1";
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
 	function getReporteAsociados1($anio,$parametro,$tipo){
 		if ($tipo=='1') {
 		// 	$sql="Select SubString(p_atr,1,4)año,to_char(date('01-'||SubString(p_atr,5,2)||'-16'),'TMMonth')mes,n_esp,trim(n_ras) as denominacion,trim(n_ruc) as ruc,Sum(c_ate)atenciones,Sum(v_pag)importe

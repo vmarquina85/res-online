@@ -6,7 +6,7 @@ function ra_cambio_label() {
  document.getElementById('ra_label_razon_nombre').innerHTML='Nombre de Asociado';
   }
 }
-function ra_obtenerReporte1() {
+function ra_obtenerReporte1(){
 
 var elemento=document.getElementById('ra_form');
   if (validarVaciosIN(elemento)) {

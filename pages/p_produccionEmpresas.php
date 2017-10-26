@@ -172,53 +172,53 @@ include ("../class/config/inicializar_cls.php");
       <h3 class="page-header">Reporte de Asociados</h3>
       <!-- inicio contenido -->
 
-      <div id='pnl_Ingresos1' class="panel panel-default">
+      <div id='pnl_Ingresos1' class="panel panel-default panel-with-tabs">
         <div class="panel-heading">
+
           <h4 class="panel-title">PARAMETROS PARA REPORTE</h4>
         </div>
         <div class="panel-body">
-          <ul class="nav nav-tabs">
-                                      <li class="active"><a href="#default-tab-1" data-toggle="tab" aria-expanded="true"><strong>RAA (Resumen Anual de Asociado)</strong></a></li>
-                                      <!-- <li class=""><a href="#default-tab-2" data-toggle="tab" aria-expanded="false">Default Tab 2</a></li>
-                                      <li class=""><a href="#default-tab-3" data-toggle="tab" aria-expanded="false">Default Tab 3</a></li> -->
-                                  </ul>
-                                  <div class="tab-content">
-                            <div class="tab-pane fade active in" id="default-tab-1">
-                              <div id="ra_form">
-                                <div class="input-group m-b-5">
-                                  <span class="input-group-addon input-sm">Tipo de consulta</span>
-                                  <select id='ra_tipo_consulta' onchange="ra_cambio_label()" class='form-control input-sm'>
-                                    <option value="1" selected>RAZÓN SOCIAL</option>
-                                    <option value="2">NOMBRE ASOCIADO</option>
-                                  </select>
-                                </div>
+<div class="row">
+  <div class="col-md-10">
+    <form action='' id="ra_form">
+          <div class="input-group m-b-5">
+            <span id='ra_label_tipoReporte' class="input-group-addon input-sm">Tipo Reporte</span>
+            <select class="form-control input-sm" name="">
+              <option value="*">--TODOS--</option>
+              <option value="1">ACUMULADO</option>
+              <option value="2">ANUAL</option>
+            </select>
+          </div>
+          <div class="input-group m-b-5">
+            <span class="input-group-addon input-sm">Centro</span>
+            <select id='ra_select_centro'  class="form-control input-sm" name="">
+              <option value="*">--TODOS--</option>
+              <?php for ($i=0; $i < sizeof($rs_cent) ; $i++) {  ?>
+                <option value="<?php echo utf8_encode($rs_cent[$i]['n_ope']);?>"><?php echo utf8_encode($rs_cent[$i]['n_ope']); ?></option>
+              <?php  }?>
+            </select>
+          </div>
 
+          <div class="input-group m-b-5">
+            <span class="input-group-addon input-sm">Especialidad</span>
+            <select id='ra_select_especialidad' class="form-control input-sm" name="">
+              <option value="*">--TODOS--</option>
+              <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
+                <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_encode($rs_esp[$i]['n_esp']); ?></option>
+              <?php  }?>
+            </select>
+          </div>
+          <div class="input-group m-b-5">
+            <span  class="input-group-addon input-sm">Asociado</span>
+            <input  id='ra_input_centro' type="text" class='form-control input-sm'>
+          </div>
+          </form>
+            </div>
+  <div class="col-md-2">
+      <button onclick="ra_obtenerReporte1()" class="btn btn-block btn-lg btn-warning">Generar Reporte</button>
+  </div>
 
-                                <div class="input-group m-b-5">
-                                  <span id='ra_label_razon_nombre' class="input-group-addon input-sm">Razon Social</span>
-                                  <input id='ra_razon_nombre' type="text"  class='form-control input-sm'>
-                                </div>
-
-                                <div class="input-group m-b-5">
-                                  <span class="input-group-addon  input-sm" >Año</span>
-                                  <!-- <input id="sl_anio2"  onchange="mostrarResultados2()" type="text" class='datepicker-default form-control'> -->
-                                  <select  onchange="" id="ra_annio" class='form-control input-sm'>
-                                    <option value="" selected>--SELECCIONAR--</option>
-                                    <option value="2012">2012</option>
-                                    <option value="2013">2013</option>
-                                    <option value="2014">2014</option>
-                                    <option value="2015">2015</option>
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                  </select>
-                                </div>
-
-                              </div>
-                              <div class="input-group m-b-5 pull-right">
-                                <button onclick="ra_obtenerReporte1()"  class="btn btn-warning">Generar Reporte</button>
-                              </div>
-                            </div>
-                          </div>
+</div>
         </div>
       </div>
 
@@ -246,7 +246,7 @@ include ("../class/config/inicializar_cls.php");
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                  <h4>V2.6</h4>
+                <h4>V2.6</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2017</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
@@ -305,7 +305,7 @@ include ("../class/config/inicializar_cls.php");
 <script>
 //globals
 construirMenu();
-  document.getElementById('item2').className += " active";
+document.getElementById('item2').className += " active";
 $(document).ready(function() {
   // mostrarLoader();
   App.init();
@@ -320,8 +320,8 @@ $(document).ready(function() {
       </div>
       <div class='modal-body'>
 
-          <div id ='ra_tabla_det' class="table-responsive">
-          </div>
+        <div id ='ra_tabla_det' class="table-responsive">
+        </div>
 
 
       </div>

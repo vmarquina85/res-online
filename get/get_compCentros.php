@@ -37,8 +37,8 @@ if (sizeof($resultado)>0 ){
  for ($i=0; $i <sizeof($resultado) ; $i++) {
    echo   "<tr>
           <td class='p-3 f-s-11 text-left m-r-10 m-l-10'> ".$resultado[$i]['operativo']."</td>
-          <td title='Click para ver Detalle' data-toggle='tooltip' class='p-3 f-s-11 text-center m-r-10 m-l-10 clickable' onclick='get_details_2(this,0)'>".number_format($resultado[$i][$anio1],2,'.',',')."</td>
-          <td title='Click para ver Detalle' data-toggle='tooltip' class='p-3 f-s-11 text-center m-r-10 m-l-10 clickable' onclick='get_details_2(this,0)'>".number_format($resultado[$i][$anio2],2,'.',',')."</td>
+          <td title='Click para ver Detalle' data-toggle='tooltip' class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i][$anio1],2,'.',',')."</td>
+          <td title='Click para ver Detalle' data-toggle='tooltip' class='p-3 f-s-11 text-center m-r-10 m-l-10'>".number_format($resultado[$i][$anio2],2,'.',',')."</td>
           </tr>";
 }
 for ($i=0; $i <sizeof($resultado) ; $i++) {
