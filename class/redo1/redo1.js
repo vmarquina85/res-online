@@ -65,26 +65,31 @@ function iniciarControles(){
 //parametro: 1 o 2 quien activo el evento
 function getResultados(){
    if (document.getElementById('sl_anio1').value!="" && document.getElementById('sl_anio2').value!="") {
-  var panio1=document.getElementById('sl_anio1').value;
-  var pmes1=document.getElementById('sl_mes1').value;
-  var panio2=document.getElementById('sl_anio2').value;
-  ganio1=document.getElementById('sl_anio1').value;
-  ganio2=document.getElementById('sl_anio2').value;
-  gmes1=document.getElementById('sl_mes1').value;
-  var url = "../get/get_redo1_totales.php?anio="+panio1+"&mes="+pmes1+"&fact="+gfecphp;
-  $.getJSON (url, function (datatable) {
-    var data = datatable;
-    $('#data_ingresos1').text(data[0]['ingresos']);
-  });
-  var url2 = "../get/get_redo1_totales.php?anio="+panio2+"&mes="+pmes1+"&fact="+gfecphp;
-  $.getJSON (url2, function (datatable) {
-    var data = datatable;
-    $('#data_ingresos2').text(data[0]['ingresos']);
-  });
-compCentrosIngresos1(panio1,panio2,pmes1,gfecphp);
-compMesIngresos1(panio1,panio2,pmes1,gfecphp);
-compEspIngresos1(panio1,panio2,pmes1,gfecphp);
-   }
+     if (document.getElementById('sl_anio1').value!=document.getElementById('sl_anio2').value) {
+       var panio1=document.getElementById('sl_anio1').value;
+       var pmes1=document.getElementById('sl_mes1').value;
+       var panio2=document.getElementById('sl_anio2').value;
+       ganio1=document.getElementById('sl_anio1').value;
+       ganio2=document.getElementById('sl_anio2').value;
+       gmes1=document.getElementById('sl_mes1').value;
+       var url = "../get/get_redo1_totales.php?anio="+panio1+"&mes="+pmes1+"&fact="+gfecphp;
+       $.getJSON (url, function (datatable) {
+         var data = datatable;
+         $('#data_ingresos1').text(data[0]['ingresos']);
+       });
+       var url2 = "../get/get_redo1_totales.php?anio="+panio2+"&mes="+pmes1+"&fact="+gfecphp;
+       $.getJSON (url2, function (datatable) {
+         var data = datatable;
+         $('#data_ingresos2').text(data[0]['ingresos']);
+       });
+       compCentrosIngresos1(panio1,panio2,pmes1,gfecphp);
+       compMesIngresos1(panio1,panio2,pmes1,gfecphp);
+       compEspIngresos1(panio1,panio2,pmes1,gfecphp);
+
+     }else{
+         alert("Los años seleccionados para reporte no pueden ser iguales");
+     }
+}
 
 }
 

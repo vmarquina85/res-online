@@ -12,6 +12,11 @@ function getPasswordModal(){
     $(formulario)[0].reset();
   }
 }
+function ValidaSoloNumeros() {
+  if ((event.keyCode < 48) || (event.keyCode > 57)) {
+    event.returnValue = false;
+  }
+}
 function iniciarPasswordMeter(){
   $("#new_contrasena").passwordStrength(), $("#repetir_contrasena").passwordStrength({
     targetDiv: "#passwordStrengthDiv2"
