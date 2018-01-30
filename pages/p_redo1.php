@@ -199,6 +199,7 @@ var gfecphp='".$fechAct."'
                       <option value="2015">2015</option>
                       <option value="2016">2016</option>
                       <option value="2017">2017</option>
+                    <option value="2018">2018</option>
                     </select>
                   </div>
                 </div>
@@ -213,6 +214,7 @@ var gfecphp='".$fechAct."'
                       <option value="2015">2015</option>
                       <option value="2016">2016</option>
                       <option value="2017">2017</option>
+                          <option value="2018">2018</option>
                     </select>
                   </div>
 
@@ -245,7 +247,7 @@ var gfecphp='".$fechAct."'
                 <div class="widget widget-stats bg-green">
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
-                    <h4>TOTAL INGRESOS</h4>
+                    <h4 id='titleA'>TOTAL INGRESOS</h4>
                     <span>S/. </span><p id='data_ingresos1' class="odometer">0</p>
                   </div>
                 </div>
@@ -254,7 +256,7 @@ var gfecphp='".$fechAct."'
                 <div class="widget widget-stats bg-green">
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
-                    <h4>TOTAL INGRESOS</h4>
+                    <h4 id='titleB'>TOTAL INGRESOS</h4>
                     <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
                   </div>
                 </div>
