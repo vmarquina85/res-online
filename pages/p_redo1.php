@@ -43,7 +43,7 @@ var gfecphp='".$fechAct."'
   <link href="../assets/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/css/datepicker3.css" rel="stylesheet"/>
   <link href="../assets/css/password-indicator.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="../assets/plugins//odometer/themes/odometer-theme-default.css"/>
+  <!-- <link rel="stylesheet" href="../assets/plugins/odometer/themes/odometer-theme-minimal.css"/> -->
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- <link href="../assets/css/data-table.css" rel="stylesheet" /> -->
   <!-- <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" /> -->
@@ -351,11 +351,11 @@ var gfecphp='".$fechAct."'
 <script src="../assets/js/jquery-1.9.1.min.js"></script>
 <script src="../assets/js/jquery-migrate-1.1.0.min.js"></script>
 <script src="../assets/js/jquery-ui.min.js"></script>
+<!-- <script src="../assets/plugins/odometer/odometer.min.js"></script> -->
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/jquery.cookie.js"></script>
 <script src="../assets/js/highcharts.js"></script>
-<script src="../assets/plugins/odometer/odometer.js"></script>
 <!-- ================== END BASE JS ========================== -->
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="../assets/js/bootstrap-datepicker.js"></script>
