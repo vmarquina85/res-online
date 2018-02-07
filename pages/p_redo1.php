@@ -46,7 +46,7 @@ var gfecphp='".$fechAct."'
   <!-- <link rel="stylesheet" href="../assets/plugins/odometer/themes/odometer-theme-minimal.css"/> -->
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- <link href="../assets/css/data-table.css" rel="stylesheet" /> -->
-  <!-- <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" /> -->
+  <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/js/pace.min.js"></script>
   <!-- ================== END BASE JS ================== -->
@@ -179,7 +179,7 @@ var gfecphp='".$fechAct."'
       <h3 class="page-header">Resumen de Operaciones</h3>
 
       <div class="alert alert-info fade in m-b-15">
-        <strong>Fecha de Actualizacion:</strong>
+        <strong>Fecha de Actualización:</strong>
         Datos Actualizados hasta el <?php echo $fechAct;?>
         <a href='p_bdupdateState.php' class='btn btn-info btn-xs'>Ver Detalles</a>
       </div>
@@ -191,7 +191,7 @@ var gfecphp='".$fechAct."'
                 <div class="col-md-6">
                   <div class="input-group m-b-5">
                     <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
-                    <select onchange="getResultados()" id="sl_anio1" class='form-control'>
+                    <select  id="sl_anio1" class='selectpicker form-control'>
                       <option value="" disabled selected>--SELECCIONAR--</option>
                       <option value="2012">2012</option>
                       <option value="2013">2013</option>
@@ -206,7 +206,7 @@ var gfecphp='".$fechAct."'
                 <div class="col-md-6">
                   <div class="input-group m-b-5">
                     <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
-                    <select  onchange="getResultados()" id="sl_anio2" class='form-control'>
+                    <select   id="sl_anio2" class='selectpicker form-control'>
                       <option value="" disabled selected>--SELECCIONAR--</option>
                       <option value="2012">2012</option>
                       <option value="2013">2013</option>
@@ -222,25 +222,37 @@ var gfecphp='".$fechAct."'
               </div>
 
 
-              <div class="input-group m-b-5 ">
-                <span class="input-group-addon  input-sm" >Mes</span>
-                <select  onchange="getResultados()" id="sl_mes1" class='form-control'>
-                  <option value="*">--FECHA DE ACTUALIZACIÓN--</option>
-                  <option value="01">ENERO</option>
-                  <option value="02">FEBRERO</option>
-                  <option value="03">MARZO</option>
-                  <option value="04">ABRIL</option>
-                  <option value="05">MAYO</option>
-                  <option value="06">JUNIO</option>
-                  <option value="07">JULIO</option>
-                  <option value="08">AGOSTO</option>
-                  <option value="09">SEPTIEMBRE</option>
-                  <option value="10">OCTUBRE</option>
-                  <option value="11">NOVIEMBRE</option>
-                  <option value="12">DICIEMBRE</option>
-                </select>
-              </div>
+  <div class="input-group m-b-5 ">
+    <span class="input-group-addon  input-sm" >Mes</span>
+    <span class="input-group-addon">
+        <input type="checkbox" id="cb_fact" title='Hasta Fecha de Actualización'>
+      </span>
+    <select id="sl_mes1" class='selectpicker form-control' multiple title="SELECCIONAR MES(ES)" data-actions-box="true">
+      <option value="*" disabled>FECHA DE ACTUALIZACIÓN</option>
+      <option value="01">ENERO</option>
+      <option value="02">FEBRERO</option>
+      <option value="03">MARZO</option>
+      <option value="04">ABRIL</option>
+      <option value="05">MAYO</option>
+      <option value="06">JUNIO</option>
+      <option value="07">JULIO</option>
+      <option value="08">AGOSTO</option>
+      <option value="09">SEPTIEMBRE</option>
+      <option value="10">OCTUBRE</option>
+      <option value="11">NOVIEMBRE</option>
+      <option value="12">DICIEMBRE</option>
+    </select>
+  </div>
+
+
+
+
+
+
             </form>
+            <div class="text-center m-b-10">
+              <button onclick="getResultados()" type="button" class="btn btn-primary btn-block ">Consultar</button>
+            </div>
             <br>
             <div class="row">
               <div class="col-md-6">
@@ -248,7 +260,7 @@ var gfecphp='".$fechAct."'
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
                     <h4 id='titleA'>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos1' class="odometer">0</p>
+                    <p id='data_ingresos1' class="odometer">0</p>
                   </div>
                 </div>
               </div>
@@ -257,7 +269,7 @@ var gfecphp='".$fechAct."'
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
                     <h4 id='titleB'>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
+                    <p id='data_ingresos2' class="odometer">0</p>
                   </div>
                 </div>
               </div>
@@ -312,7 +324,7 @@ var gfecphp='".$fechAct."'
               <!-- title -->
               <h4>Res-online</h4>
               <!-- version -->
-              <h4>V2.6</h4>
+              <h4>V2.6.1</h4>
               <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
               <!-- año de version -->
               <P>SISOL - 2017</P>
@@ -363,7 +375,7 @@ var gfecphp='".$fechAct."'
 <!-- <script src="../assets/js/dataTables.fixedColumns.js"></script>
 <script src="../assets/js/table-manage-fixed-columns.demo.min.js"></script> -->
 <script src="../assets/js/password-indicator.js"></script>
-<!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
+<script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 
 <script src="../class/config/config.js"></script>
 <script src="../class/menu/menu.js"></script>
@@ -376,8 +388,6 @@ var gfecphp='".$fechAct."'
 <script>
 //globals
 var f= new Date();
-// var ultimoAnnioSelect=false;
-// var activado=false;
 var ganio1='', gmes1='';
 var ganio2='', gmes2='',gdate='';
 construirMenu();
@@ -408,9 +418,15 @@ $(document).ready(function() {
   })
   var hoy =f.getDate() + "/" + pad((f.getMonth() +1),2,0) + "/" + f.getFullYear();
   $('[data-toggle="tooltip"]').tooltip();
-  iniciarControles();
+  // iniciarControles();
 });
-
+$("#cb_fact").click( function(){
+   if( $(this).is(':checked') ) {
+       iniciarControles();
+   }else{
+       $('#sl_mes1').selectpicker('val', '');
+   }
+});
 
 </script>
 <div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>

@@ -8,9 +8,14 @@ function getPasswordModal(){
     limpiarFormulario("#formPass");
     $("#modalPass").modal();
   }
-  function limpiarFormulario(formulario){
-    $(formulario)[0].reset();
-  }
+}
+function limpiarFormulario(formulario){
+  $(formulario)[0].reset();
+}
+function format1(n, currency) {
+    return currency + " " + n.toFixed(2).replace(/./g, function(c, i, a) {
+        return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+    });
 }
 function iniciarPasswordMeter(){
   $("#new_contrasena").passwordStrength(), $("#repetir_contrasena").passwordStrength({

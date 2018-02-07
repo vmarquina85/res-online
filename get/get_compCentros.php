@@ -1,8 +1,7 @@
 <?php
 require '../class/consultas/consultas_cls.php';
 $claseConsulta1= new consultas;
-$fechaActualuzacion=$_REQUEST['fact'];
-
+$fechaActualizacion=$_REQUEST['fact'];
 $total1=0;
 $total2=0;
 $anio1=$_REQUEST['anio1'];
@@ -13,13 +12,10 @@ if ($mes!='*') {
 }else{
   $index=0;
 }
-$mesnombre=array('Al '.substr($fechaActualuzacion,0,3).substr($fechaActualuzacion,3,2),'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
+$mesnombre=array('Al '.substr($fechaActualizacion,0,3).substr($fechaActualizacion,3,2),'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
 //llamar a funcion clase consultas
 //{
-$resultado=$claseConsulta1->ComparativoIngresos($anio1,$anio2,$mes,$fechaActualuzacion);
-//}
-//convertir los datos del anio a texto para mostrar dentro de la tabla de respuesta
-//{
+$resultado=$claseConsulta1->ComparativoIngresos($anio1,$anio2,$mes,$fechaActualizacion);
 $anio1=(string)$anio1;
 $anio2=(string)$anio2;
 //}
@@ -29,8 +25,8 @@ if (sizeof($resultado)>0 ){
     <thead>
       <tr>
         <th class='bg-silver f-s-12 text-center'>E.E.S.S.</th>
-        <th class='bg-silver f-s-12 text-center'>".$anio1." <br> ".$mesnombre[$index]."</th>
-        <th class='bg-silver f-s-12 text-center'>".$anio2." <br> ".$mesnombre[$index]."</th>
+        <th class='bg-silver f-s-12 text-center'>".$anio1."</th>
+        <th class='bg-silver f-s-12 text-center'>".$anio2."</th>
       </tr>
     </thead>
     <tbody>";

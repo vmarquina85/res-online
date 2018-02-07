@@ -15,14 +15,16 @@ if ($mes!='*') {
 }
 $mesnombre=array('Al '.substr($fechaActualuzacion,0,3).substr($fechaActualuzacion,3,2),'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
 $resultado=$claseConsulta5->compMeses_ingresos($anio1,$anio2,$mes,$fechaActualuzacion);
+
+
 if (sizeof($resultado)>0 ){
   echo  "<table id='tb_response_mes_I' class='table tablesorter table-bordered'>
     <thead>
       <tr>
         <th class='bg-silver f-s-12 text-center'>Mes</th>
-        <th class='bg-silver f-s-12 text-center'>".$anio1." <br> ".$mesnombre[$index]."</th>
-        <th class='bg-silver f-s-12 text-center'>".$anio2." <br> ".$mesnombre[$index]."</th>
-      </tr>
+        <th class='bg-silver f-s-12 text-center'>".$anio1." </th>
+        <th class='bg-silver f-s-12 text-center'>".$anio2." </th>
+        </tr>
     </thead>
     <tbody>";
  for ($i=0; $i <sizeof($resultado) ; $i++) {
