@@ -46,7 +46,7 @@ var gfecphp='".$fechAct."'
   <!-- <link rel="stylesheet" href="../assets/plugins/odometer/themes/odometer-theme-minimal.css"/> -->
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- <link href="../assets/css/data-table.css" rel="stylesheet" /> -->
-  <!-- <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" /> -->
+  <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/js/pace.min.js"></script>
   <!-- ================== END BASE JS ================== -->
@@ -179,7 +179,7 @@ var gfecphp='".$fechAct."'
       <h3 class="page-header">Resumen de Operaciones</h3>
 
       <div class="alert alert-info fade in m-b-15">
-        <strong>Fecha de Actualizacion:</strong>
+        <strong>Fecha de Actualización:</strong>
         Datos Actualizados hasta el <?php echo $fechAct;?>
         <a href='p_bdupdateState.php' class='btn btn-info btn-xs'>Ver Detalles</a>
       </div>
@@ -191,7 +191,7 @@ var gfecphp='".$fechAct."'
                 <div class="col-md-6">
                   <div class="input-group m-b-5">
                     <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
-                    <select onchange="getResultados()" id="sl_anio1" class='form-control'>
+                    <select  id="sl_anio1" class='selectpicker form-control'>
                       <option value="" disabled selected>--SELECCIONAR--</option>
                       <option value="2012">2012</option>
                       <option value="2013">2013</option>
@@ -199,14 +199,14 @@ var gfecphp='".$fechAct."'
                       <option value="2015">2015</option>
                       <option value="2016">2016</option>
                       <option value="2017">2017</option>
-                    <option value="2018">2018</option>
+                      <option value="2018">2018</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="input-group m-b-5">
                     <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
-                    <select  onchange="getResultados()" id="sl_anio2" class='form-control'>
+                    <select id="sl_anio2" class='selectpicker form-control'>
                       <option value="" disabled selected>--SELECCIONAR--</option>
                       <option value="2012">2012</option>
                       <option value="2013">2013</option>
@@ -214,18 +214,18 @@ var gfecphp='".$fechAct."'
                       <option value="2015">2015</option>
                       <option value="2016">2016</option>
                       <option value="2017">2017</option>
-                          <option value="2018">2018</option>
+                      <option value="2018">2018</option>
                     </select>
                   </div>
-
                 </div>
               </div>
-
-
               <div class="input-group m-b-5 ">
                 <span class="input-group-addon  input-sm" >Mes</span>
-                <select  onchange="getResultados()" id="sl_mes1" class='form-control'>
-                  <option value="*">--FECHA DE ACTUALIZACIÓN--</option>
+                <span class="input-group-addon">
+                  <input type="checkbox" id="cb_fact" title='Hasta Fecha de Actualización'>
+                </span>
+                <select id="sl_mes1" class='selectpicker form-control' multiple title="SELECCIONAR MES(ES)" data-actions-box="true">
+                  <option value="*" disabled>FECHA DE ACTUALIZACIÓN</option>
                   <option value="01">ENERO</option>
                   <option value="02">FEBRERO</option>
                   <option value="03">MARZO</option>
@@ -241,6 +241,9 @@ var gfecphp='".$fechAct."'
                 </select>
               </div>
             </form>
+            <div class="text-center m-b-10">
+              <button onclick="getResultados()" type="button" class="btn btn-primary btn-block ">Consultar</button>
+            </div>
             <br>
             <div class="row">
               <div class="col-md-6">
@@ -248,7 +251,7 @@ var gfecphp='".$fechAct."'
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
                     <h4 id='titleA'>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos1' class="odometer">0</p>
+                    <p id='data_ingresos1' class="odometer">0</p>
                   </div>
                 </div>
               </div>
@@ -257,7 +260,7 @@ var gfecphp='".$fechAct."'
                   <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
                   <div class="stats-info">
                     <h4 id='titleB'>TOTAL INGRESOS</h4>
-                    <span>S/. </span><p id='data_ingresos2' class="odometer">0</p>
+                    <p id='data_ingresos2' class="odometer">0</p>
                   </div>
                 </div>
               </div>
@@ -271,146 +274,150 @@ var gfecphp='".$fechAct."'
                 <h4 class="panel-title">Tabla Comparativa</h4>
 
               </div>
-            <div class="panel-body" id='prueba'>
-              <div class="pLoader"></div>
-              <div class="carousel slide" data-ride="carousel" id=resultados_I>
-                <!-- begin carousel-inner -->
-                <div class="carousel-inner">
-                  <!-- begin item -->
-                  <div class="item active">
-                    <div id='tb_comp_I11' class="table-responsive"></div>
-                  </div>
-                  <!-- end item -->
-                  <!-- begin item -->
-                  <div class="item">
-                    <div id='tb_comp_I21' class="table-responsive"></div>
-                  </div>
-                  <div class="item">
-                    <div id='tb_comp_I31' class="table-responsive"></div>
+              <div class="panel-body" id='prueba'>
+                <div class="pLoader"></div>
+                <div class="carousel slide" data-ride="carousel" id=resultados_I>
+                  <!-- begin carousel-inner -->
+                  <div class="carousel-inner">
+                    <!-- begin item -->
+                    <div class="item active">
+                      <div id='tb_comp_I11' class="table-responsive"></div>
+                    </div>
+                    <!-- end item -->
+                    <!-- begin item -->
+                    <div class="item">
+                      <div id='tb_comp_I21' class="table-responsive"></div>
+                    </div>
+                    <div class="item">
+                      <div id='tb_comp_I31' class="table-responsive"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
-    </div>
 
 
-
-    <div id='disclamer' class="modal fade" aria-hidden='true'>
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header bg-orange">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title text-white">Acerca</h4>
-          </div>
-          <div class="modal-body">
-            <div class="text-center">
-              <img src="../assets/img/logo_big.png" alt="">
-              <!-- title -->
-              <h4>Res-online</h4>
-              <!-- version -->
-              <h4>V2.6</h4>
-              <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
-              <!-- año de version -->
-              <P>SISOL - 2017</P>
-              <button class="btn btn-warning" data-dismiss="modal">OK</button>
+      <div id='disclamer' class="modal fade" aria-hidden='true'>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-orange">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title text-white">Acerca</h4>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <img src="../assets/img/logo_big.png" alt="">
+                <!-- title -->
+                <h4>Res-online</h4>
+                <!-- version -->
+                <h4>V2.6.1</h4>
+                <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+                <!-- año de version -->
+                <P>SISOL - 2017</P>
+                <button class="btn btn-warning" data-dismiss="modal">OK</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id='loading' class="modal fade" aria-hidden='true'>
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="progress progress-striped active">
-              <div class="progress-bar" style="width: 100%">Cargando</div>
+      <div id='loading' class="modal fade" aria-hidden='true'>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="progress progress-striped active">
+                <div class="progress-bar" style="width: 100%">Cargando</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="header" class="navbar-fixed-bottom text-center">
-      <div class="btn-group">
-        <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
-        <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
-        <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
+      <div id="header" class="navbar-fixed-bottom text-center">
+        <div class="btn-group">
+          <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
+          <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
+          <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
+        </div>
       </div>
+      <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up p-t-5"></i></a>
+      <!-- end scroll to top btn -->
     </div>
-    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up p-t-5"></i></a>
-    <!-- end scroll to top btn -->
   </div>
-</div>
-<!-- end page container -->
-<!-- ================== BEGIN BASE JS ================== -->
-<script src="../assets/js/jquery-1.9.1.min.js"></script>
-<script src="../assets/js/jquery-migrate-1.1.0.min.js"></script>
-<script src="../assets/js/jquery-ui.min.js"></script>
-<!-- <script src="../assets/plugins/odometer/odometer.min.js"></script> -->
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/jquery.slimscroll.min.js"></script>
-<script src="../assets/js/jquery.cookie.js"></script>
-<script src="../assets/js/highcharts.js"></script>
-<!-- ================== END BASE JS ========================== -->
-<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-<script src="../assets/js/bootstrap-datepicker.js"></script>
-<!-- <script src="../assets/js/jquery.dataTables.js"></script> -->
-<!-- <script src="../assets/js/dataTables.fixedColumns.js"></script>
-<script src="../assets/js/table-manage-fixed-columns.demo.min.js"></script> -->
-<script src="../assets/js/password-indicator.js"></script>
-<!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
+  <!-- end page container -->
+  <!-- ================== BEGIN BASE JS ================== -->
+  <script src="../assets/js/jquery-1.9.1.min.js"></script>
+  <script src="../assets/js/jquery-migrate-1.1.0.min.js"></script>
+  <script src="../assets/js/jquery-ui.min.js"></script>
+  <!-- <script src="../assets/plugins/odometer/odometer.min.js"></script> -->
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/jquery.slimscroll.min.js"></script>
+  <script src="../assets/js/jquery.cookie.js"></script>
+  <script src="../assets/js/highcharts.js"></script>
+  <!-- ================== END BASE JS ========================== -->
+  <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+  <script src="../assets/js/bootstrap-datepicker.js"></script>
+  <!-- <script src="../assets/js/jquery.dataTables.js"></script> -->
+  <!-- <script src="../assets/js/dataTables.fixedColumns.js"></script>
+  <script src="../assets/js/table-manage-fixed-columns.demo.min.js"></script> -->
+  <script src="../assets/js/password-indicator.js"></script>
+  <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 
-<script src="../class/config/config.js"></script>
-<script src="../class/menu/menu.js"></script>
-<script src="../class/redo1/redo1.js"></script>
-<script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
-<!-- <script src="../assets/js/dataloader.js"></script> -->
-<script src="../assets/js/apps.min.js"></script>
-<script src="../assets/js/ajax.js"></script>
-<!-- ================== END PAGE LEVEL JS ================== -->
-<script>
-//globals
-var f= new Date();
-// var ultimoAnnioSelect=false;
-// var activado=false;
-var ganio1='', gmes1='';
-var ganio2='', gmes2='',gdate='';
-construirMenu();
-document.getElementById('item0').className += " active";
-$(document).ready(function() {
-  // mostrarLoader();
-  App.init();
+  <script src="../class/config/config.js"></script>
+  <script src="../class/menu/menu.js"></script>
+  <script src="../class/redo1/redo1.js"></script>
+  <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
+  <!-- <script src="../assets/js/dataloader.js"></script> -->
+  <script src="../assets/js/apps.min.js"></script>
+  <script src="../assets/js/ajax.js"></script>
+  <!-- ================== END PAGE LEVEL JS ================== -->
+  <script>
+  //globals
+  var f= new Date();
+  var ganio1='', gmes1='';
+  var ganio2='', gmes2='',gdate='';
+  construirMenu();
+  document.getElementById('item0').className += " active";
+  $(document).ready(function() {
+    // mostrarLoader();
+    App.init();
 
-  jQuery.tablesorter.addParser({
-    id: "FancyNumber",
-    is: function(s) {
-      return /^[0-9]?[0-9,\.]*$/.test(s);
-    },
-    format: function(s) {
-      return jQuery.tablesorter.formatFloat( s.replace(/,/g,'') );
-    },
-    type: "numeric"
+    jQuery.tablesorter.addParser({
+      id: "FancyNumber",
+      is: function(s) {
+        return /^[0-9]?[0-9,\.]*$/.test(s);
+      },
+      format: function(s) {
+        return jQuery.tablesorter.formatFloat( s.replace(/,/g,'') );
+      },
+      type: "numeric"
+    });
+    $('.carousel').carousel({
+      pause: true,
+      interval: false
+    });
+    $(".datepicker-default").datepicker({
+      format: "yyyy",
+      startView: "years",
+      minViewMode: "years",
+      autoclose: "true"
+    })
+    var hoy =f.getDate() + "/" + pad((f.getMonth() +1),2,0) + "/" + f.getFullYear();
+    $('[data-toggle="tooltip"]').tooltip();
+    // iniciarControles();
   });
-  $('.carousel').carousel({
-    pause: true,
-    interval: false
+  $("#cb_fact").click( function(){
+    if( $(this).is(':checked') ) {
+      iniciarControles();
+    }else{
+      $('#sl_mes1').selectpicker('val', '');
+    }
   });
-  $(".datepicker-default").datepicker({
-    format: "yyyy",
-    startView: "years",
-    minViewMode: "years",
-    autoclose: "true"
-  })
-  var hoy =f.getDate() + "/" + pad((f.getMonth() +1),2,0) + "/" + f.getFullYear();
-  $('[data-toggle="tooltip"]').tooltip();
-  iniciarControles();
-});
-
 
 </script>
 <div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>

@@ -60,32 +60,51 @@ function controlValidar(){
   }
 }
 function iniciarControles(){
-  document.getElementById('sl_mes1').selectedIndex='0';
+  // document.getElementById('sl_mes1').selectedIndex='0';
+  $('#sl_mes1').selectpicker('val', '*');
 }
+
 //parametro: 1 o 2 quien activo el evento
 function getResultados(){
-   if (document.getElementById('sl_anio1').value!="" && document.getElementById('sl_anio2').value!="") {
-  var panio1=document.getElementById('sl_anio1').value;
-  var pmes1=document.getElementById('sl_mes1').value;
-  var panio2=document.getElementById('sl_anio2').value;
-  ganio1=document.getElementById('sl_anio1').value;
-  ganio2=document.getElementById('sl_anio2').value;
-  gmes1=document.getElementById('sl_mes1').value;
-  var url = "../get/get_redo1_totales.php?anio="+panio1+"&mes="+pmes1+"&fact="+gfecphp;
-  $.getJSON (url, function (datatable) {
-    var data = datatable;
-    $('#data_ingresos1').text(data[0]['ingresos']);
-  });
-  var url2 = "../get/get_redo1_totales.php?anio="+panio2+"&mes="+pmes1+"&fact="+gfecphp;
-  $.getJSON (url2, function (datatable) {
-    var data = datatable;
-    $('#data_ingresos2').text(data[0]['ingresos']);
-  });
-compCentrosIngresos1(panio1,panio2,pmes1,gfecphp);
-compMesIngresos1(panio1,panio2,pmes1,gfecphp);
-compEspIngresos1(panio1,panio2,pmes1,gfecphp);
-   }
+  if (document.getElementById('sl_anio1').value!="" && document.getElementById('sl_anio2').value!="" && document.getElementById('sl_mes1').value!="") {
+    if (document.getElementById('sl_anio1').value!=document.getElementById('sl_anio2').value) {
+      var panio1=document.getElementById('sl_anio1').value;
+      if( $('#cb_fact').is(':checked') ) {
+        var pmes1="*";
+        gmes1="*";
+      }else{
+        var pmes1=$('#sl_mes1').val();
+        gmes1=$('#sl_mes1').val();
+      }
 
+      var panio2=document.getElementById('sl_anio2').value;
+      ganio1=document.getElementById('sl_anio1').value;
+      ganio2=document.getElementById('sl_anio2').value;
+      // gmes1=document.getElementById('sl_mes1').value;
+
+
+      // alert($('#sl_mes1').val());
+      var url = "../get/get_redo1_totales.php?anio="+panio1+"&mes="+pmes1+"&fact="+gfecphp;
+      $.getJSON (url, function (datatable) {
+        var data = datatable;
+        $('#data_ingresos1').text(0);
+        $('#data_ingresos1').text(format1(Number(data[0]['ingresos']),"S/."));
+      });
+      var url2 = "../get/get_redo1_totales.php?anio="+panio2+"&mes="+pmes1+"&fact="+gfecphp;
+      $.getJSON (url2, function (datatable) {
+        var data = datatable;
+        $('#data_ingresos2').text(0);
+        $('#data_ingresos2').text(format1(Number(data[0]['ingresos']),"S/."));
+      });
+      compCentrosIngresos1(panio1,panio2,pmes1,gfecphp);
+      compMesIngresos1(panio1,panio2,pmes1,gfecphp);
+      compEspIngresos1(panio1,panio2,pmes1,gfecphp);
+    }else{
+      alert("Seleccionar Años Distintos")
+    }
+  }else{
+    alert("Completar Datos");
+  }
 }
 
 function compCentrosIngresos1(anio1,anio2,mes,feact){
