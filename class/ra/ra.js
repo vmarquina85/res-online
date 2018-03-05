@@ -11,31 +11,64 @@ function ra_obtenerReporte1(){
 var elemento=document.getElementById('ra_form');
   if (validarVaciosIN(elemento)) {
       startLoading('#ra_panel_resultado');
-    if (window.XMLHttpRequest) {
-      var http=getXMLHTTPRequest();
-    }
-    //datos-----------------------------------------------------------------------
-  var tipo=document.getElementById('ra_tipo_consulta').value;
-  var parametro=document.getElementById('ra_razon_nombre').value;
-  // var especialidad=document.getElementById('ra_especialidad').value;
-  var anio=document.getElementById('ra_annio').value;
-  // var mes=document.getElementById('ra_mes').value;
-
-    //datos-----------------------------------------------------------------------
-    var modurl = "../get/get_ra_reporte1.php?anio="+anio+"&parametro="+parametro+"&tipo="+tipo;
-    http.open("GET", modurl, true);
-    http.addEventListener('readystatechange', function() {
-      if (http.readyState == 4) {
-        if(http.status == 200) {
-          var resultado = http.responseText;
-          document.getElementById('ra_table_reporte').innerHTML=(resultado);
-            endLoading('#ra_panel_resultado');
-        }
-      }
-    });
-      http.send(null);
-  }
+      ra_empresas();
+      ra_per_natural();
+  endLoading('#ra_panel_resultado');
 }
+}
+
+function ra_empresas(){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  //datos-----------------------------------------------------------------------
+var oper=document.getElementById('ra_select_centros').value;
+var annio=$('#ra_select_anio').val();
+// var especialidad=document.getElementById('ra_especialidad').value;
+var especialidad=document.getElementById('ra_select_especialidad').value;
+// var mes=document.getElementById('ra_mes').value;
+
+  //datos-----------------------------------------------------------------------
+  var modurl = "../get/get_ra_reporte1.php?anio="+annio+"&oper="+oper+"&esp="+especialidad;
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('ra_table_reporte').innerHTML=(resultado);
+
+      }
+    }
+  });
+    http.send(null);
+}
+
+function ra_per_natural(){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  //datos-----------------------------------------------------------------------
+var oper=document.getElementById('ra_select_centros').value;
+var annio=$('#ra_select_anio').val();
+// var especialidad=document.getElementById('ra_especialidad').value;
+var especialidad=document.getElementById('ra_select_especialidad').value;
+// var mes=document.getElementById('ra_mes').value;
+
+  //datos-----------------------------------------------------------------------
+  var modurl = "../get/get_ra_reporte2.php?anio="+annio+"&oper="+oper+"&esp="+especialidad;
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('ra_table_reporte2').innerHTML=(resultado);
+
+      }
+    }
+  });
+    http.send(null);
+}
+
 function startLoading(panel){
   if (!$(panel).hasClass('panel-loading')) {
     var targetBody = $(panel).find('.panel-body');

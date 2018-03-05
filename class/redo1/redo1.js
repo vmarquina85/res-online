@@ -75,6 +75,7 @@ function getResultados(){
       }else{
         var pmes1=$('#sl_mes1').val();
         gmes1=$('#sl_mes1').val();
+        alert(gmes1);
       }
 
       var panio2=document.getElementById('sl_anio2').value;

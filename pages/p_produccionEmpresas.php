@@ -35,7 +35,8 @@ include ("../class/config/inicializar_cls.php");
   <link href="../assets/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/css/datepicker3.css" rel="stylesheet"/>
   <link href="../assets/css/password-indicator.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="../assets/plugins//odometer/themes/odometer-theme-default.css"/>
+  <!-- <link href="../assets/plugins/bootstrap-select/bootstrap-select.css" rel="stylesheet" /> -->
+  <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- <link href="../assets/css/data-table.css" rel="stylesheet" /> -->
   <!-- <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" /> -->
@@ -173,99 +174,102 @@ include ("../class/config/inicializar_cls.php");
       <!-- inicio contenido -->
 
       <div id='pnl_Ingresos1' class="panel panel-default panel-with-tabs">
-        <div class="panel-heading">
-
-          <h4 class="panel-title">PARAMETROS PARA REPORTE</h4>
-        </div>
-        <div class="panel-body">
-<div class="row">
-  <div class="col-md-10">
-    <form action='' id="ra_form">
-          <div class="input-group m-b-5">
-            <span id='ra_label_tipoReporte' class="input-group-addon input-sm">Tipo Reporte</span>
-            <select class="form-control input-sm" name="">
-              <option value="*">--TODOS--</option>
-              <option value="1">ACUMULADO</option>
-              <option value="2">ANUAL</option>
+        <!-- <div class="panel-heading">
+        <h4 class="panel-title">PARAMETROS</h4>
+      </div> -->
+      <div class="panel-body">
+        <form action='' id="ra_form">
+          <!-- <div class="input-group m-b-5">
+            <span class="input-group-addon input-sm">Tipo de Reporte</span>
+            <select title="sel" id='ra_select_especialidad' class="selectpicker form-control input-sm"  >
+              <option value="1">EMPRESA (RAZÓN SOCIAL)</option>
+              <option value="2">PERSONA NATURAL (NOMBRE)</option>
             </select>
-          </div>
+          </div> -->
           <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Centro</span>
-            <select id='ra_select_centro'  class="form-control input-sm" name="">
-              <option value="*">--TODOS--</option>
-              <?php for ($i=0; $i < sizeof($rs_cent) ; $i++) {  ?>
+            <span class="input-group-addon input-sm">Centros</span>
+            <select id='ra_select_centros' class="selectpicker form-control input-sm" title="SELECCIONAR CENTRO" data-live-search="true" >
+              <option value="*">TODOS</option>
+              <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
                 <option value="<?php echo utf8_encode($rs_cent[$i]['n_ope']);?>"><?php echo utf8_encode($rs_cent[$i]['n_ope']); ?></option>
               <?php  }?>
             </select>
           </div>
-
           <div class="input-group m-b-5">
             <span class="input-group-addon input-sm">Especialidad</span>
-            <select id='ra_select_especialidad' class="form-control input-sm" name="">
-              <option value="*">--TODOS--</option>
+            <select id='ra_select_especialidad' class="selectpicker form-control input-sm" title="SELECCIONAR ESPECIALIDAD" data-live-search="true"  >
+              <option value="*">TODOS</option>
               <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
                 <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_encode($rs_esp[$i]['n_esp']); ?></option>
               <?php  }?>
             </select>
           </div>
           <div class="input-group m-b-5">
-            <span  class="input-group-addon input-sm">Asociado</span>
-            <input  id='ra_input_centro' type="text" class='form-control input-sm'>
+            <span class="input-group-addon input-sm">Año</span>
+            <select id='ra_select_anio'  class="selectpicker form-control input-sm" name="" title="SELECCIONAR AÑO(S)" data-actions-box="true" multiple>
+
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+
+            </select>
           </div>
-          </form>
-            </div>
-  <div class="col-md-2">
-      <button onclick="ra_obtenerReporte1()" class="btn btn-block btn-lg btn-warning">Generar Reporte</button>
-  </div>
-
-</div>
-        </div>
-      </div>
-
-      <div id='ra_panel_resultado' class="panel panel-inverse">
-        <div class="panel-heading">
-          <h4 class="panel-title">RESULTADOS</h4>
-        </div>
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class='table table-bordered table-hover clickable table-condensed' id='ra_table_reporte'>
-            </table>
-
-          </div>
-        </div>
-      </div>
-      <!-- fin  contenido -->
-      <div id='disclamer' class="modal fade" aria-hidden='true'>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header bg-orange">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title text-white">Acerca</h4>
-            </div>
-            <div class="modal-body">
-              <div class="text-center">
-                <img src="../assets/img/logo_big.png" alt="">
-                <h4>Res-online</h4>
-                <h4>V2.6.1</h4>
-                <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
-                <P>SISOL - 2017</P>
-                <button class="btn btn-warning" data-dismiss="modal">OK</button>
-              </div>
 
 
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div id='loading' class="modal fade" aria-hidden='true'>
-      <div class="modal-dialog">
-      <div class="modal-content">
-      <div class="modal-body">
-      <div class="progress progress-striped active">
-      <div class="progress-bar" style="width: 100%">Cargando</div>
+          <!-- <div class="input-group m-b-5">
+          <span  class="input-group-addon input-sm">Asociado</span>
+          <input  id='ra_input_centro' type="text" class='form-control input-sm'>
+        </div> -->
+      </form>
+      <button onclick="ra_obtenerReporte1()" class="btn btn-block btn-primary">Generar Reporte</button>
     </div>
   </div>
+  <div id='ra_panel_resultado' class="panel panel-inverse">
+    <div class="panel-heading">
+      <h4 class="panel-title">RESULTADOS</h4>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class='table table-bordered table-hover clickable table-condensed' id='ra_table_reporte'>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <!-- fin  contenido -->
+  <div id='disclamer' class="modal fade" aria-hidden='true'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-orange">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-white">Acerca</h4>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <img src="../assets/img/logo_big.png" alt="">
+            <h4>Res-online</h4>
+            <h4>V2.7</h4>
+            <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+            <P>SISOL - 2017</P>
+            <button class="btn btn-warning" data-dismiss="modal">OK</button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div id='loading' class="modal fade" aria-hidden='true'>
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-body">
+  <div class="progress progress-striped active">
+  <div class="progress-bar" style="width: 100%">Cargando</div>
+</div>
+</div>
 </div>
 </div>
 </div> -->
@@ -292,7 +296,8 @@ include ("../class/config/inicializar_cls.php");
 <!-- <script src="../assets/js/dataTables.fixedColumns.js"></script>
 <script src="../assets/js/table-manage-fixed-columns.demo.min.js"></script> -->
 <script src="../assets/js/password-indicator.js"></script>
-<!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
+<!-- <script src="../assets/plugins/bootstrap-select/bootstrap-select.js"></script> -->
+<script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 
 <script src="../class/config/config.js"></script>
 <script src="../class/ra/ra.js"></script>
@@ -311,25 +316,6 @@ $(document).ready(function() {
   App.init();
 });
 </script>
-<div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
-  <div class='dialog-normal modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header bg-orange'>
-        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-        <h4 class='modal-title text-white'>Detalles Especialidades</h4>
-      </div>
-      <div class='modal-body'>
-
-        <div id ='ra_tabla_det' class="table-responsive">
-        </div>
-
-
-      </div>
-      <div class='modal-footer'>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>

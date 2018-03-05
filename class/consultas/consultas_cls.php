@@ -18,11 +18,11 @@ class consultas extends conectar
 			$sql=$sql." and ((fecha >=''01/01/".$anio1."'' and fecha <=''".$nday."/".$nmes."/".$anio1."'') or(fecha >=''01/01/".$anio2."'' and fecha <=''".$nday."/".$nmes."/".$anio2."''))";
 		}
 		$sql=$sql." group by operativo, date_part(''year'' ,fecha)";
-if ($anio1>$anio2) {
-$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(operativo character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
-}else {
-	$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(operativo character varying(100), \"".$anio2."\" numeric(11,2), \"".$anio1."\" numeric(11,2))";
-}
+		if ($anio1>$anio2) {
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(operativo character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+		}else {
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(operativo character varying(100), \"".$anio2."\" numeric(11,2), \"".$anio1."\" numeric(11,2))";
+		}
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
@@ -57,11 +57,11 @@ $sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) orde
 		}else{
 			$nmes=substr($dia,3,2);
 			$nday=substr($dia,0,2);
-		  $sql=$sql." and ((fecha >=''01/01/".$anio1."'' and fecha <=''".$nday."/".$nmes."/".$anio1."'') or(fecha >=''01/01/".$anio2."'' and fecha <=''".$nday."/".$nmes."/".$anio2."''))";
+			$sql=$sql." and ((fecha >=''01/01/".$anio1."'' and fecha <=''".$nday."/".$nmes."/".$anio1."'') or(fecha >=''01/01/".$anio2."'' and fecha <=''".$nday."/".$nmes."/".$anio2."''))";
 		}
 		$sql=$sql." group by date_part(''month'' ,fecha), date_part(''year'' ,fecha)";
 		if ($anio1>$anio2) {
-		$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(mes character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(mes character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
 		}else {
 			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(mes character varying(100), \"".$anio2."\" numeric(11,2), \"".$anio1."\" numeric(11,2))";
 		}
@@ -83,7 +83,7 @@ $sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) orde
 		}
 		$sql=$sql." group by especialidad, date_part(''year'' ,fecha)";
 		if ($anio1>$anio2) {
-		$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(especialidad character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(especialidad character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
 		}else {
 			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(especialidad character varying(100), \"".$anio2."\" numeric(11,2), \"".$anio1."\" numeric(11,2))";
 		}
@@ -150,27 +150,83 @@ $sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) orde
 		}
 		return $this->t;
 	}
-	function getReporteAsociados1($anio,$parametro,$tipo){
-		if ($tipo=='1') {
-					$sql="select * from summary.crosstab('Select trim(n_ras) as denominacion,to_char(date(''01-''||SubString(p_atr,5,2)||''-16''),''TMMonth'')mes,sum(v_pag)importe
-		From summary.res_pro_ven_ate where n_con!='''' and trim(n_ras) like ''%".strtoupper($parametro)."%'' and SubString(p_atr,1,4)=''".$anio."''";
-		}else if ($tipo=='2') {
-			$sql="select * from summary.crosstab('Select trim(n_per) as denominacion,to_char(date(''01-''||SubString(p_atr,5,2)||''-16''),''TMMonth'')mes,sum(v_pag)importe
-		From summary.res_pro_ven_ate where n_con!='''' and trim(n_per) like ''%".strtoupper($parametro)."%'' and SubString(p_atr,1,4)=''".$anio."''";
+	function getReporteAsociados1($anio,$ope,$especialidad){
+		//convertir años a un array
+		$arrayAnio= explode(",",$anio);
+		$sql="select * from summary.crosstab('select trim(n_ras) as raz_soc, substring(p_vem,1,4) as anio,sum(v_ing)importe From summary.res_pro_ven_ate where  trim(n_ras)!=''''  AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
+		if ($especialidad!="*") {
+			$sql=$sql." and n_esp=''".$especialidad."''";
 		}
-if ($tipo=='1') {
-	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),trim(n_ras)
-order by 1,SubString(p_atr,5,2)') as ct(centro text, enero numeric(11,2), febrero numeric(11,2),marzo numeric(11,2),abril numeric(11,2),mayo numeric(11,2),junio numeric(11,2),julio numeric(11,2),agosto numeric(11,2),septiembre numeric(11,2),octubre numeric(11,2),noviembre numeric(11,2),diciembre numeric(11,2))";
-}else if ($tipo=='2') {
-	$sql=$sql."Group By SubString(p_atr,1,4),SubString(p_atr,5,2),trim(n_per)
-order by 1,SubString(p_atr,5,2)') as ct(centro text, enero numeric(11,2), febrero numeric(11,2),marzo numeric(11,2),abril numeric(11,2),mayo numeric(11,2),junio numeric(11,2),julio numeric(11,2),agosto numeric(11,2),septiembre numeric(11,2),octubre numeric(11,2),noviembre numeric(11,2),diciembre numeric(11,2))";
-}
-
+		if ($ope!="*") {
+			$sql=$sql." and n_ope=''".$ope."''";
+		}
+		$sql=$sql." group by trim(n_ras),substring(p_vem,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100),";
+		if (sizeof($arrayAnio)>1) {
+			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+			for ($i=1; $i < sizeof($arrayAnio) ; $i++) {
+				$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
+			}
+		}else{
+			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+		}
+		$sql=$sql.")";
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
 		}
 		return $this->t;
 	}
+	function getReporteAsociados2($anio,$ope,$especialidad){
+		//convertir años a un array
+		$arrayAnio= explode(",",$anio);
+		$sql="select * from summary.crosstab('select trim(n_per) as raz_soc, substring(p_vem,1,4) as anio,sum(v_ing)importe From summary.res_pro_ven_ate where  trim(n_ras)!='''' and (trim(n_per)!='''' or trim(n_per) is not null)   AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
+		if ($especialidad!="*") {
+			$sql=$sql." and n_esp=''".$especialidad."''";
+		}
+		if ($ope!="*") {
+			$sql=$sql." and n_ope=''".$ope."''";
+		}
+		$sql=$sql." group by trim(n_per),substring(p_vem,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100),";
+		if (sizeof($arrayAnio)>1) {
+			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+			for ($i=1; $i < sizeof($arrayAnio) ; $i++) {
+				$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
+			}
+		}else{
+			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+		}
+		$sql=$sql.")";
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+	// function getReporteAsociados3($anio,$ope,$especialidad){
+	// 	//convertir años a un array
+	// 	$arrayAnio= explode(",",$anio);
+	// 	$sql="select * from summary.crosstab('select trim(n_ras) as raz_soc, substring(p_vem,1,4) as anio,sum(v_ing)importe From summary.res_pro_ven_ate where  trim(n_ras)!=''''  AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
+	// 	if ($especialidad!="*") {
+	// 		$sql=$sql." and n_esp=''".$especialidad."''";
+	// 	}
+	// 	if ($ope!="*") {
+	// 		$sql=$sql." and n_ope=''".$ope."''";
+	// 	}
+	// 	$sql=$sql." group by trim(n_ras),substring(p_vem,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100),";
+	// 	if (sizeof($arrayAnio)>1) {
+	// 		$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+	// 		for ($i=1; $i < sizeof($arrayAnio) ; $i++) {
+	// 			$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
+	// 		}
+	// 	}else{
+	// 		$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+	// 	}
+	// 	$sql=$sql.")";
+	// 	$res=pg_query(parent::conexion_resumen(),$sql);
+	// 	while($reg=pg_fetch_assoc($res)){
+	// 		$this->t[]=$reg;
+	// 	}
+	// 	return $this->t;
+	// }
 }
-	?>
+?>

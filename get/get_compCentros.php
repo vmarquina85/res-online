@@ -25,8 +25,8 @@ if (sizeof($resultado)>0 ){
     <thead>
       <tr>
         <th class='bg-silver f-s-12 text-center'>E.E.S.S.</th>
-        <th class='bg-silver f-s-12 text-center'>".$anio1."</th>
-        <th class='bg-silver f-s-12 text-center'>".$anio2."</th>
+        <th class='bg-silver f-s-12 text-center'>".$anio1."<br>(Soles)</th>
+        <th class='bg-silver f-s-12 text-center'>".$anio2."<br>(Soles)</th>
       </tr>
     </thead>
     <tbody>";

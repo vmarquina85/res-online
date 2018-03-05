@@ -248,7 +248,7 @@ var gfecphp='".$fechAct."'
             <div class="row">
               <div class="col-md-6">
                 <div class="widget widget-stats bg-green">
-                  <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
+                  <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
                   <div class="stats-info">
                     <h4 id='titleA'>TOTAL INGRESOS</h4>
                     <p id='data_ingresos1' class="odometer">0</p>
@@ -257,7 +257,7 @@ var gfecphp='".$fechAct."'
               </div>
               <div class="col-md-6">
                 <div class="widget widget-stats bg-green">
-                  <div class="stats-icon"><img src="../assets/img/ingresos.png" alt=""></div>
+                  <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
                   <div class="stats-info">
                     <h4 id='titleB'>TOTAL INGRESOS</h4>
                     <p id='data_ingresos2' class="odometer">0</p>
@@ -315,7 +315,7 @@ var gfecphp='".$fechAct."'
                 <!-- title -->
                 <h4>Res-online</h4>
                 <!-- version -->
-                <h4>V2.6.1</h4>
+                <h4>V2.7</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <!-- año de version -->
                 <P>SISOL - 2017</P>

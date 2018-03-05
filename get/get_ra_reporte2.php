@@ -5,10 +5,10 @@ $oper=$_REQUEST['oper'];
 $esp=$_REQUEST['esp'];
 $annio=$_REQUEST['anio'];
 $ArrayAnnio=explode(",",$annio);
-$ra_rs_reporte=$ra_class->getReporteAsociados1($annio,$oper,$esp);
+$ra_rs_reporte=$ra_class->getReporteAsociados2($annio,$oper,$esp);
 echo "<thead>
 <tr>
-<th class='text-center bg-silver'>Razon Social</th>";
+<th class='text-center bg-silver'>Nombre</th>";
 for ($i=0; $i < sizeof($ArrayAnnio); $i++) {
   echo  "<th class='text-center bg-silver'>".$ArrayAnnio[$i]."</th>";
 }
