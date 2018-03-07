@@ -174,18 +174,8 @@ include ("../class/config/inicializar_cls.php");
       <!-- inicio contenido -->
 
       <div id='pnl_Ingresos1' class="panel panel-default panel-with-tabs">
-        <!-- <div class="panel-heading">
-        <h4 class="panel-title">PARAMETROS</h4>
-      </div> -->
       <div class="panel-body">
-        <form action='' id="ra_form">
-          <!-- <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Tipo de Reporte</span>
-            <select title="sel" id='ra_select_especialidad' class="selectpicker form-control input-sm"  >
-              <option value="1">EMPRESA (RAZÓN SOCIAL)</option>
-              <option value="2">PERSONA NATURAL (NOMBRE)</option>
-            </select>
-          </div> -->
+              <form action='' id="ra_form">
           <div class="input-group m-b-5">
             <span class="input-group-addon input-sm">Centros</span>
             <select id='ra_select_centros' class="selectpicker form-control input-sm" title="SELECCIONAR CENTRO" data-live-search="true" >
@@ -216,26 +206,39 @@ include ("../class/config/inicializar_cls.php");
 
             </select>
           </div>
-
-
-          <!-- <div class="input-group m-b-5">
-          <span  class="input-group-addon input-sm">Asociado</span>
-          <input  id='ra_input_centro' type="text" class='form-control input-sm'>
-        </div> -->
       </form>
+
       <button onclick="ra_obtenerReporte1()" class="btn btn-block btn-primary">Generar Reporte</button>
     </div>
   </div>
+
   <div id='ra_panel_resultado' class="panel panel-inverse">
     <div class="panel-heading">
       <h4 class="panel-title">RESULTADOS</h4>
     </div>
     <div class="panel-body">
-      <div class="table-responsive">
-        <table class='table table-bordered table-hover clickable table-condensed' id='ra_table_reporte'>
-        </table>
-
-      </div>
+<ul class="nav nav-tabs">
+  <li class='active'>
+    <a href="#razonsoc" data-toggle="tab" aria-expanded="true">Reporte I</a>
+  </li>
+  <li>
+    <a href="#person" data-toggle="tab" aria-expanded="true">Reporte II</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade active in" id="razonsoc">
+    <div class="table-responsive">
+      <table class='table table-bordered table-hover  table-condensed' id='ra_table_reporte'>
+      </table>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="person">
+    <div class="table-responsive">
+      <table class='table table-bordered table-hover  table-condensed' id='ra_table_reporte2'>
+      </table>
+    </div>
+  </div>
+</div>
     </div>
   </div>
   <!-- fin  contenido -->
