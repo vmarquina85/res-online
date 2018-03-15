@@ -153,22 +153,18 @@ class consultas extends conectar
 	function getReporteAsociados1($anio,$ope,$especialidad){
 		//convertir años a un array
 		$arrayAnio= explode(",",$anio);
-		$sql="select * from summary.crosstab('select trim(n_ras) as raz_soc, substring(p_vem,1,4) as anio,sum(v_ing)importe From summary.res_pro_ven_ate where  trim(n_ras)!=''''  AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
+		$sql="select * from summary.crosstab('select trim(n_ras) as raz_soc, substring(p_atr,1,4) as anio,sum(v_pag)importe From summary.res_pro_ven_ate where  trim(n_ras)!=''''  AND cast(substring(p_atr,1,4) as integer) in (".$anio.")";
 		if ($especialidad!="*") {
 			$sql=$sql." and n_esp=''".$especialidad."''";
 		}
 		if ($ope!="*") {
 			$sql=$sql." and n_ope=''".$ope."''";
 		}
-		$sql=$sql." group by trim(n_ras),substring(p_vem,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100),";
-		if (sizeof($arrayAnio)>1) {
-			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
-			for ($i=1; $i < sizeof($arrayAnio) ; $i++) {
-				$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
-			}
-		}else{
-			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+		$sql=$sql." group by trim(n_ras),substring(p_atr,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100)";
+		for ($i=sizeof($arrayAnio)-1; $i >=0 ; $i--) {
+			$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
 		}
+
 		$sql=$sql.")";
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
@@ -179,22 +175,19 @@ class consultas extends conectar
 	function getReporteAsociados2($anio,$ope,$especialidad){
 		//convertir años a un array
 		$arrayAnio= explode(",",$anio);
-		$sql="select * from summary.crosstab('select trim(n_per) as raz_soc, substring(p_vem,1,4) as anio,sum(v_ing)importe From summary.res_pro_ven_ate where  trim(n_ras)!='''' and (trim(n_per)!='''' or trim(n_per) is not null)   AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
+		$sql="select * from summary.crosstab('select trim(n_per) as raz_soc, substring(p_atr,1,4) as anio,sum(v_pag)importe From summary.res_pro_ven_ate where  trim(n_ras)='''' and (trim(n_per)!='''' or trim(n_per) is not null)   AND cast(substring(p_atr,1,4) as integer) in (".$anio.")";
 		if ($especialidad!="*") {
 			$sql=$sql." and n_esp=''".$especialidad."''";
 		}
 		if ($ope!="*") {
 			$sql=$sql." and n_ope=''".$ope."''";
 		}
-		$sql=$sql." group by trim(n_per),substring(p_vem,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100),";
-		if (sizeof($arrayAnio)>1) {
-			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
-			for ($i=1; $i < sizeof($arrayAnio) ; $i++) {
-				$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
-			}
-		}else{
-			$sql=$sql."\"".$arrayAnio[0]."\" numeric(11,2)";
+		$sql=$sql." group by trim(n_per),substring(p_atr,1,4) order by 1','select * from unnest(array[".$anio."]) order by 1 desc')as ct(r_social character varying(100)";
+
+		for ($i=sizeof($arrayAnio)-1; $i >=0 ; $i--) {
+			$sql=$sql.",\"".$arrayAnio[$i]."\" numeric(11,2)";
 		}
+
 		$sql=$sql.")";
 		$res=pg_query(parent::conexion_resumen(),$sql);
 		while($reg=pg_fetch_assoc($res)){
@@ -205,7 +198,7 @@ class consultas extends conectar
 	// function getReporteAsociados3($anio,$ope,$especialidad){
 	// 	//convertir años a un array
 	// 	$arrayAnio= explode(",",$anio);
-	// 	$sql="select * from summary.crosstab('select trim(n_ras) as raz_soc, substring(p_vem,1,4) as anio,sum(v_ing)importe From summary.res_pro_ven_ate where  trim(n_ras)!=''''  AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
+	// 	$sql="select * from summary.crosstab('select trim(n_ras) as raz_soc, substring(p_vem,1,4) as anio,sum(v_pag)importe From summary.res_pro_ven_ate where  trim(n_ras)!=''''  AND cast(substring(p_vem,1,4) as integer) in (".$anio.")";
 	// 	if ($especialidad!="*") {
 	// 		$sql=$sql." and n_esp=''".$especialidad."''";
 	// 	}
