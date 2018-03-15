@@ -54,7 +54,7 @@ include ("../class/config/inicializar_cls.php");
     height:100%
   }
   .table-responsive{
-    height:300px;
+    height:150px;
     overflow-y: auto;
   }
 
@@ -174,105 +174,105 @@ include ("../class/config/inicializar_cls.php");
       <!-- inicio contenido -->
 
       <div id='pnl_Ingresos1' class="panel panel-default panel-with-tabs">
-      <div class="panel-body">
-              <form action='' id="ra_form">
-          <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Centros</span>
-            <select id='ra_select_centros' class="selectpicker form-control input-sm" title="SELECCIONAR CENTRO" data-live-search="true" >
-              <option value="*">TODOS</option>
-              <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
-                <option value="<?php echo utf8_encode($rs_cent[$i]['n_ope']);?>"><?php echo utf8_encode($rs_cent[$i]['n_ope']); ?></option>
-              <?php  }?>
-            </select>
-          </div>
-          <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Especialidad</span>
-            <select id='ra_select_especialidad' class="selectpicker form-control input-sm" title="SELECCIONAR ESPECIALIDAD" data-live-search="true"  >
-              <option value="*">TODOS</option>
-              <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
-                <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_encode($rs_esp[$i]['n_esp']); ?></option>
-              <?php  }?>
-            </select>
-          </div>
-          <div class="input-group m-b-5">
-            <span class="input-group-addon input-sm">Año</span>
-            <select id='ra_select_anio'  class="selectpicker form-control input-sm" name="" title="SELECCIONAR AÑO(S)" data-actions-box="true" multiple>
+        <div class="panel-body">
+          <form action='' id="ra_form">
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Centros</span>
+              <select id='ra_select_centros' class="selectpicker form-control input-sm" title="SELECCIONAR CENTRO" data-live-search="true" >
+                <option value="*">TODOS</option>
+                <?php for ($i=0; $i < sizeof($rs_cent) ; $i++) {  ?>
+                  <option value="<?php echo $rs_cent[$i]['n_ope'];?>"><?php echo $rs_cent[$i]['n_ope']; ?></option>
+                <?php  }?>
+              </select>
+            </div>
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Especialidad</span>
+              <select id='ra_select_especialidad' class="selectpicker form-control input-sm" title="SELECCIONAR ESPECIALIDAD" data-live-search="true"  >
+                <option value="*">TODOS</option>
+                <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
+                  <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_encode($rs_esp[$i]['n_esp']); ?></option>
+                <?php  }?>
+              </select>
+            </div>
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Año</span>
+              <select id='ra_select_anio'  class="selectpicker form-control input-sm" name="" title="SELECCIONAR AÑO(S)" data-actions-box="true" multiple>
 
-              <option value="2014">2014</option>
-              <option value="2015">2015</option>
-              <option value="2016">2016</option>
-              <option value="2017">2017</option>
-              <option value="2018">2018</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
 
-            </select>
-          </div>
-      </form>
+              </select>
+            </div>
+          </form>
 
-      <button onclick="ra_obtenerReporte1()" class="btn btn-block btn-primary">Generar Reporte</button>
-    </div>
-  </div>
-
-  <div id='ra_panel_resultado' class="panel panel-inverse">
-    <div class="panel-heading">
-      <h4 class="panel-title">RESULTADOS</h4>
-    </div>
-    <div class="panel-body">
-<ul class="nav nav-tabs">
-  <li class='active'>
-    <a href="#razonsoc" data-toggle="tab" aria-expanded="true">Reporte I</a>
-  </li>
-  <li>
-    <a href="#person" data-toggle="tab" aria-expanded="true">Reporte II</a>
-  </li>
-</ul>
-<div class="tab-content">
-  <div class="tab-pane fade active in" id="razonsoc">
-    <div class="table-responsive">
-      <table class='table table-bordered table-hover  table-condensed' id='ra_table_reporte'>
-      </table>
-    </div>
-  </div>
-  <div class="tab-pane fade" id="person">
-    <div class="table-responsive">
-      <table class='table table-bordered table-hover  table-condensed' id='ra_table_reporte2'>
-      </table>
-    </div>
-  </div>
-</div>
-    </div>
-  </div>
-  <!-- fin  contenido -->
-  <div id='disclamer' class="modal fade" aria-hidden='true'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-orange">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-white">Acerca</h4>
-        </div>
-        <div class="modal-body">
-          <div class="text-center">
-            <img src="../assets/img/logo_big.png" alt="">
-            <h4>Res-online</h4>
-            <h4>V2.7</h4>
-            <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
-            <P>SISOL - 2017</P>
-            <button class="btn btn-warning" data-dismiss="modal">OK</button>
-          </div>
-
-
+          <button onclick="ra_obtenerReporte1()" class="btn btn-block btn-primary">Generar Reporte</button>
         </div>
       </div>
+
+      <div id='ra_panel_resultado' class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">RESULTADOS</h4>
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-tabs">
+            <li class='active'>
+              <a href="#razonsoc" data-toggle="tab" aria-expanded="true">Reporte I</a>
+            </li>
+            <li>
+              <a href="#person" data-toggle="tab" aria-expanded="true">Reporte II</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade active in" id="razonsoc">
+              <div class="table-responsive">
+                <div id='ra_table_reporte' class='text-center'>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="person">
+              <div class="table-responsive">
+                <div id='ra_table_reporte2' class='text-center'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fin  contenido -->
+      <div id='disclamer' class="modal fade" aria-hidden='true'>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-orange">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title text-white">Acerca</h4>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <img src="../assets/img/logo_big.png" alt="">
+                <h4>Res-online</h4>
+                <h4>V2.7</h4>
+                <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
+                <P>SISOL - 2017</P>
+                <button class="btn btn-warning" data-dismiss="modal">OK</button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div id='loading' class="modal fade" aria-hidden='true'>
+      <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-body">
+      <div class="progress progress-striped active">
+      <div class="progress-bar" style="width: 100%">Cargando</div>
     </div>
   </div>
-
-  <!-- <div id='loading' class="modal fade" aria-hidden='true'>
-  <div class="modal-dialog">
-  <div class="modal-content">
-  <div class="modal-body">
-  <div class="progress progress-striped active">
-  <div class="progress-bar" style="width: 100%">Cargando</div>
-</div>
-</div>
 </div>
 </div>
 </div> -->
