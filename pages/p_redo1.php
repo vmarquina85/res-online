@@ -220,7 +220,7 @@ var gfecphp='".$fechAct."'
                 </div>
               </div>
               <div class="input-group m-b-5 ">
-                <span class="input-group-addon  input-sm" >Mes</span>
+                <span class="input-group-addon  input-sm" >Por Fecha de Actualización</span>
                 <span class="input-group-addon">
                   <input type="checkbox" id="cb_fact" title='Hasta Fecha de Actualización'>
                 </span>
