@@ -7,6 +7,10 @@ Repotes de Operaciones
 
 ![IMAGEN DETALLE](assets/img/README/1.png "imagen")
 
+<<<<<<< HEAD
 * SE CAMBIO EL LABEL DEL CHECKBOX DE *"MES" a *"POR FECHA DE ACTUALIZACION"*
 
 ![IMAGEN DETALLE](assets/img/README/2.png "imagen")
+=======
+* SE CAMBIO EL LABEL DEL CHECKBOX DE *"MES" a *"POR FECHA DE ACTUALIZACION"
+>>>>>>> 340e9db6f7922c8a12859efb12f7b9d124fa9c35
