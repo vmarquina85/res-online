@@ -157,6 +157,52 @@ class consultas extends conectar
 		}
 		return $this->t;
 	}
+	function compFechas_atenciones($anio1,$anio2,$mes,$dia){
+		$sql="select * from summary.crosstab('select to_char(fecha,''DD/MM'') as fecha ,date_part(''year'' ,fecha) as annio,sum(atenciones) as atenciones from summary.redo where  date_part(''year'' ,fecha) in (".$anio1.",".$anio2.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part(''month'' ,fecha) in (".$mes.")";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and ((fecha >=''01/01/".$anio1."'' and fecha <=''".$nday."/".$nmes."/".$anio1."'') or(fecha >=''01/01/".$anio2."'' and fecha <=''".$nday."/".$nmes."/".$anio2."''))";
+		}
+		$sql=$sql." group by  to_char(fecha,''DD/MM''), date_part(''year'' ,fecha)";
+		if ($anio1>$anio2) {
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(fecha character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+		}else {
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(fecha character varying(100), \"".$anio2."\" numeric(11,2), \"".$anio1."\" numeric(11,2))";
+		}
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+	function compFechas_ingresos($anio1,$anio2,$mes,$dia){
+		$sql="select * from summary.crosstab('select to_char(fecha,''DD/MM'') as fecha,date_part(''year'' ,fecha) as annio,sum(ingresos) as ingresos from summary.redo where  date_part(''year'' ,fecha) in (".$anio1.",".$anio2.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part(''month'' ,fecha) in (".$mes.")";
+
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and ((fecha >=''01/01/".$anio1."'' and fecha <=''".$nday."/".$nmes."/".$anio1."'') or(fecha >=''01/01/".$anio2."'' and fecha <=''".$nday."/".$nmes."/".$anio2."''))";
+		}
+		$sql=$sql." group by to_char(fecha,''DD/MM''), date_part(''year'' ,fecha)";
+		if ($anio1>$anio2) {
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(fecha character varying(100), \"".$anio1."\" numeric(11,2), \"".$anio2."\" numeric(11,2))";
+		}else {
+			$sql=$sql." order by 1','select * from unnest(array[".$anio1.",".$anio2."]) order by 1 desc')as ct(fecha character varying(100), \"".$anio2."\" numeric(11,2), \"".$anio1."\" numeric(11,2))";
+		}
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+
+
+
 	function esp_aten($anio,$mes,$centro){
 		$sql="select especialidad,sum(atenciones) as atenciones from summary.redo where operativo='".trim($centro)."'  and date_part('year' ,fecha)=".$anio;
 		if ($mes!='*') {

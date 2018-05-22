@@ -291,6 +291,10 @@ var gfecphp='".$fechAct."'
                     <div class="item">
                       <div id='tb_comp_I31' class="table-responsive"></div>
                     </div>
+                    <div class="item">
+                      <div id='tb_comp_I41' class="table-responsive"></div>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -343,6 +347,7 @@ var gfecphp='".$fechAct."'
           <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
           <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
           <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
+            <button onclick='show_fechas()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Fecha</button>
         </div>
       </div>
       <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up p-t-5"></i></a>
