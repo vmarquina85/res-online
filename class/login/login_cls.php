@@ -26,9 +26,9 @@ if (pg_num_rows($result) > 0) {
   $lres_online = $query["lres_online"];
   if(md5($contraseña)==$us_log)
   {
-    $ale ="resonline";
+    // $ale ="resonline";
     session_start();
-    session_name($ale);
+    // session_name($ale);
     $_SESSION['key_pas'] = $key_pass;
     // $_SESSION['fechact']=$query3["fechact"];
     $_SESSION['resonline_id_usr']= $id_usr;

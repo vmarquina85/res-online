@@ -1,12 +1,9 @@
 <?php
 session_start();
-echo $_SESSION["fechAct"];
 if (!isset($_SESSION["resonlinepermitido"])) {
   header("location:../index.php");
   exit();
 };
-//require '../class/consultas/consultas_cls.php';
-// require '../class/config/inicializar_cls.php';
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -21,10 +18,12 @@ if (!isset($_SESSION["resonlinepermitido"])) {
   <meta content="" name="author" />
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
   <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/logo.png">
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/css/jquery-ui.min.css" rel="stylesheet" />
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
@@ -78,7 +77,9 @@ if (!isset($_SESSION["resonlinepermitido"])) {
 </head>
 <body>
   <!-- begin #page-loader -->
-  <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+  <div id="page-loader" class="fade in">
+    <span class="spinner"></span>
+  </div>
   <!-- end #page-loader -->
   <!-- begin #page-container -->
   <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
@@ -143,32 +144,9 @@ if (!isset($_SESSION["resonlinepermitido"])) {
         </ul>
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
-        <ul class="nav">
-          <li class="nav-header">MENÚ PRINCIPAL</li>
-          <li class="has-sub" data-toggle="tooltip" title='REDO' data-placement="right">
-            <a href="../pages/p_redo1.php">
-              <i class="fa fa-book fa-2x" aria-hidden="true"></i>
-              <span>RESUMEN DIARIO  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DE OPERACIONES</span>
-            </a>
-          </li>
-          <li class="has-sub active" data-toggle="tooltip" title='Estados de Datos' data-placement="right" >
-            <a href="../pages/p_bdupdateState.php">
-              <i class="fa fa-database fa-2x" aria-hidden="true"></i>
-              <span>ESTADO DE DATOS</span>
-            </a>
-          </li>
-          <li class="has-sub mobile">
-            <a href="javascript:;">
-              <b class="caret pull-right"></b>
-              <i class="fa fa-key"></i>
-              <span>USUARIO</span>
-            </a>
-            <ul class="sub-menu">
-              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
-              <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
-            </ul>
-          </li>
-          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+        <ul id='top-menu' class="nav">
+
+          <!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
         </ul>
         <!-- end sidebar nav -->
       </div>
@@ -185,7 +163,11 @@ if (!isset($_SESSION["resonlinepermitido"])) {
     <h3 class="page-header">Estado de datos </h3>
     <div class="panel panel-info">
       <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+        </div>
         <h4 class="panel-title">ESTADO DE ACTUALIZACIÓN DE BASE DE DATOS</h4>
+
       </div>
       <div class="panel-body">
         <div class="table-responsive m-b-5">
@@ -215,7 +197,9 @@ if (!isset($_SESSION["resonlinepermitido"])) {
           <span class='badge badge-warning badge-square p-t-5'> </span>
               <span>Parcial: Mayor de 2 días y Menor de 30 días </span> <br>
           <span class='badge badge-danger badge-square p-t-5'> </span>
-              <span>No Actualizado: Mayor de 30 días</span>
+              <span>No Actualizado: Mayor de 30 días</span> <br>
+              <span class='badge badge-default badge-square p-t-5'> </span>
+                  <span>Centro no Activo</span>
         </div>
       </div>
       <div id='disclamer' class="modal fade">
@@ -229,13 +213,11 @@ if (!isset($_SESSION["resonlinepermitido"])) {
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                <h4>V0.4</h4>
+                <h4>V2.7</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2017</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -243,6 +225,7 @@ if (!isset($_SESSION["resonlinepermitido"])) {
       <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
       <!-- end scroll to top btn -->
     </div>
+  </div>
     <!-- end page container -->
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="../assets/js/jquery-1.9.1.min.js"></script>
@@ -262,12 +245,15 @@ if (!isset($_SESSION["resonlinepermitido"])) {
     <script src="../assets/js/password-indicator.js"></script>
 
     <script src="../class/config/config.js"></script>
+    <script src="../class/menu/menu.js"></script>
     <script src="../class/bdupdateState/bdupdateState.js"></script>
     <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
     <script src="../assets/js/apps.min.js"></script>
     <script src="../assets/js/ajax.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
     <script>
+    construirMenu();
+      document.getElementById('item1').className += " active";
     $(document).ready(function() {
       bdupdateState_gMaxFechas();
       $('[data-toggle="tooltip"]').tooltip();
