@@ -18,7 +18,7 @@ if ($mes!='*') {
 }
 $mesnombre=array('Al '.substr($fechaActualuzacion,0,3).substr($fechaActualuzacion,3,2),'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
 $resultado=$claseConsulta5->compMeses_ingresos($anio1,$anio2,$mes,$fechaActualuzacion);
-$resultado2=$claseConsulta5->compMeses_atenciones($anio1,$anio2,$mes,$fechaActualuzacion);
+$resultado2=$claseConsulta6->compMeses_atenciones($anio1,$anio2,$mes,$fechaActualuzacion);
 
 
 if (sizeof($resultado)>0 ){
