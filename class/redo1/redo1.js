@@ -89,18 +89,8 @@ function compCentrosIngresos1(anio1,anio2,mes,feact){
 
         document.getElementById('tb_comp_I11').innerHTML=(resultado);
         // initDatatable("#tb_response_Centro_I");
-        $('#tb_response_Centro_I').tablesorter({
-          headers: {
-            1: {
-              sorter:'FancyNumber'
-            },
-            2: {
-              sorter:'FancyNumber'
-            }
-          }
-        });
+        initTablesorter('#tb_response_Centro_I');
         endLoading('#pnl_Ingresos1');
-
       }
     }
   });
@@ -119,16 +109,7 @@ function compMesIngresos1(anio1,anio2,mes,feact){
         var resultado = http.responseText;
         document.getElementById('tb_comp_I21').innerHTML=(resultado);
         //initDatatable("#tb_response_mes_I");
-        $('#tb_response_mes_I').tablesorter({
-          headers: {
-            1: {
-              sorter:'FancyNumber'
-            },
-            2: {
-              sorter:'FancyNumber'
-            }
-          }
-        });
+        initTablesorter('#tb_response_mes_I');
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -148,16 +129,7 @@ function compFechaIngresos1(anio1,anio2,mes,feact){
         var resultado = http.responseText;
         document.getElementById('tb_comp_I41').innerHTML=(resultado);
         //initDatatable("#tb_response_mes_I");
-        $('#tb_response_fecha_I').tablesorter({
-          headers: {
-            1: {
-              sorter:'FancyNumber'
-            },
-            2: {
-              sorter:'FancyNumber'
-            }
-          }
-        });
+          initTablesorter('#tb_response_fecha_I');
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -177,16 +149,7 @@ function compEspIngresos1(anio1,anio2,mes,feact){
         var resultado = http.responseText;
         document.getElementById('tb_comp_I31').innerHTML=(resultado);
         // initDatatable("#tb_response_esp_I");
-        $('#tb_response_esp_I').tablesorter({
-          headers: {
-            1: {
-              sorter:'FancyNumber'
-            },
-            2: {
-              sorter:'FancyNumber'
-            }
-          }
-        });
+        initTablesorter('#tb_response_esp_I');
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -294,4 +257,16 @@ function get_details_2(objeto,tipanio){
       }
     });
   }
+}
+function initTablesorter(jqueryId){
+  $(jqueryId).tablesorter({
+    headers: {
+      1: {
+        sorter:'FancyNumber'
+      },
+      2: {
+        sorter:'FancyNumber'
+      }
+    }
+  });
 }

@@ -4,8 +4,9 @@ $ra_class= new consultas;
 $oper=$_REQUEST['oper'];
 $esp=$_REQUEST['esp'];
 $annio=$_REQUEST['anio'];
+$mes=$_REQUEST['mes'];
 $ArrayAnnio=explode(",",$annio);
-$ra_rs_reporte=$ra_class->getReporteAsociados1($annio,$oper,$esp);
+$ra_rs_reporte=$ra_class->getReporteAsociados1($annio,$oper,$esp,$mes);
 if (sizeof($ra_rs_reporte)>0) {
   echo "<table class='table table-bordered table-hover  table-condensed'>
   <thead>

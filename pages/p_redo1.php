@@ -11,6 +11,7 @@ $consulta ="select to_char(max(fecha),'dd/mm/yyyy') as fechact from summary.redo
 $result = pg_query($conexion2, $consulta);
 $query = pg_fetch_array($result, 0);
 $fechAct = $query["fechact"];
+$anioAct=substr($fechAct, 6, 4);
 echo "<script>
 var gfecphp='".$fechAct."'
 </script>"
@@ -95,12 +96,12 @@ var gfecphp='".$fechAct."'
 </head>
 <body>
   <!-- begin #page-loader -->
-  <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+  <div id="page-loader" class="hidden-print fade in"><span class="spinner"></span></div>
   <!-- end #page-loader -->
   <!-- begin #page-container -->
   <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
     <!-- begin #header -->
-    <div id="header" class="header navbar navbar-default navbar-fixed-top">
+    <div id="header" class="header hidden-print navbar navbar-default navbar-fixed-top">
       <!-- inicio container-fluid   -->
       <div class="container-fluid bg-orange">
         <div class="navbar-header">
@@ -136,7 +137,7 @@ var gfecphp='".$fechAct."'
     </div><!-- Fin Cabecera   -->
     <!-- end #header -->
     <!-- begin #sidebar -->
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar hidden-print">
       <!-- begin sidebar scrollbar -->
       <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
         <div data-scrollbar="true" data-height="100%" style="overflow: hidden; width: auto; height: 100%;">
@@ -172,13 +173,13 @@ var gfecphp='".$fechAct."'
       </div>
     </div>
     <div id="content" class="content">
-      <ol class="breadcrumb pull-right">
+      <ol class="breadcrumb hidden-print pull-right">
         <li>Menu Principal</li>
         <li class="active" >Redo</li>
       </ol>
-      <h3 class="page-header">Resumen de Operaciones</h3>
+      <h3 class=" page-header">Resumen de Operaciones</h3>
 
-      <div class="alert alert-info fade in m-b-15">
+      <div class="alert alert-info fade in m-b-15 hidden-print">
         <strong>Fecha de Actualización:</strong>
         Datos Actualizados hasta el <?php echo $fechAct;?>
         <a href='p_bdupdateState.php' class='btn btn-info btn-xs'>Ver Detalles</a>
@@ -189,39 +190,29 @@ var gfecphp='".$fechAct."'
             <form  action="javascript:;">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="input-group m-b-5">
+                  <div class="input-group m-b-5 hidden-print">
                     <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
                     <select  id="sl_anio1" class='selectpicker form-control'>
                       <option value="" disabled selected>--SELECCIONAR--</option>
-                      <option value="2012">2012</option>
-                      <option value="2013">2013</option>
-                      <option value="2014">2014</option>
-                      <option value="2015">2015</option>
-                      <option value="2016">2016</option>
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
-                    </select>
+                      <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
+                        echo "<option value='$i'>$i</option>";
+                      } ?>
+                          </select>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="input-group m-b-5">
+                  <div class="input-group m-b-5 hidden-print ">
                     <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
                     <select id="sl_anio2" class='selectpicker form-control'>
                       <option value="" disabled selected>--SELECCIONAR--</option>
-                      <option value="2012">2012</option>
-                      <option value="2013">2013</option>
-                      <option value="2014">2014</option>
-                      <option value="2015">2015</option>
-                      <option value="2016">2016</option>
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
+                      <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
+                        echo "<option value='$i'>$i</option>";
+                      } ?>
                     </select>
                   </div>
                 </div>
               </div>
-              <div class="input-group m-b-5 ">
+              <div class="input-group m-b-5 hidden-print ">
                 <span class="input-group-addon  input-sm" >Por Fecha de Actualización</span>
                 <span class="input-group-addon">
                   <input type="checkbox" id="cb_fact" title='Hasta Fecha de Actualización'>
@@ -244,10 +235,10 @@ var gfecphp='".$fechAct."'
               </div>
             </form>
             <div class="text-center m-b-10">
-              <button onclick="getResultados()" type="button" class="btn btn-primary btn-block ">Consultar</button>
+              <button onclick="getResultados()" type="button" class="hidden-print btn btn-primary btn-block ">Consultar</button>
             </div>
             <br>
-            <div class="row">
+            <div class="row hidden-print">
               <div class="col-md-6">
                 <div class="widget widget-stats bg-green">
                   <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
@@ -271,9 +262,10 @@ var gfecphp='".$fechAct."'
             <div id='pnl_Ingresos1' class="panel panel-inverse">
               <div class="panel-heading">
                 <div class="panel-heading-btn">
+                  <button onclick='javascript:window.print();' type="button" class='btn btn-default btn-xs' name="button">imprimir</button>
                   <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
                 </div>
-                <h4 class="panel-title">Tabla Comparativa</h4>
+                <h4 class="panel-title"><strong>REPORTE DE OPERACIONES</strong></h4>
 
               </div>
               <div class="panel-body" id='prueba'>
@@ -308,7 +300,7 @@ var gfecphp='".$fechAct."'
 
 
 
-      <div id='disclamer' class="modal fade" aria-hidden='true'>
+      <div id='disclamer' class="hidden-print modal fade" aria-hidden='true'>
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header bg-orange">
@@ -344,12 +336,12 @@ var gfecphp='".$fechAct."'
         </div>
       </div>
 
-      <div id="header" class="navbar-fixed-bottom text-center">
+      <div id="header" class=" hidden-print navbar-fixed-bottom text-center">
         <div class="btn-group">
           <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
           <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
           <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
-            <button onclick='show_fechas()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Fecha</button>
+          <button onclick='show_fechas()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Fecha</button>
         </div>
       </div>
       <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up p-t-5"></i></a>

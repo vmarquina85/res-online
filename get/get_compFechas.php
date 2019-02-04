@@ -25,27 +25,27 @@ if (sizeof($resultado)>0 ){
   echo  "<table id='tb_response_fecha_I' class='table tablesorter table-bordered'>
     <thead>
     <tr>
-      <th rowspan='2'class='bg-silver f-s-12 text-center'>DÍA</th>
-      <th rowspan='2'class='bg-silver f-s-12 text-center'>MES</th>
-      <th colspan='2' class='bg-silver f-s-12 text-center'>".$anio1."</th>
-      <th colspan='2' class='bg-silver f-s-12 text-center'>".$anio2."</th>
+      <th rowspan='2'class='bg-silver f-s-16 text-center'>DÍA</th>
+      <th rowspan='2'class='bg-silver f-s-16 text-center'>MES</th>
+      <th colspan='2' class='bg-silver f-s-16 text-center'>".$anio1."</th>
+      <th colspan='2' class='bg-silver f-s-16 text-center'>".$anio2."</th>
     </tr>
     <tr>
-    <th class='bg-silver f-s-12 text-center'>Ingresos</th>
-<th class='bg-silver f-s-12 text-center'>Atenciones</th>
-  <th class='bg-silver f-s-12 text-center'>Ingresos</th>
-    <th class='bg-silver f-s-12 text-center'>Atenciones</th>
+    <th class='bg-silver f-s-16 text-center'>Atenciones</th>
+    <th class='bg-silver f-s-16 text-center'>Ingresos</th>
+    <th class='bg-silver f-s-16 text-center'>Atenciones</th>
+  <th class='bg-silver f-s-16 text-center'>Ingresos</th>
     </tr>
     </thead>
     <tbody>";
  for ($i=0; $i <sizeof($resultado) ; $i++) {
    echo   "<tr>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".substr($resultado[$i]['fecha'],0,2)."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".substr($resultado[$i]['fecha'],3,2)."</td>
-          <td class='p-3 f-s-11 text-right m-r-10 m-l-10'>".number_format($resultado[$i][$anio1],2,'.',',')."</td>
-          <td class='p-3 f-s-11 text-right m-r-10 m-l-10'>".number_format($resultado2[$i][$anio1],2,'.',',')."</td>
-          <td class='p-3 f-s-11 text-right m-r-10 m-l-10'>".number_format($resultado[$i][$anio2],2,'.',',')."</td>
-          <td class='p-3 f-s-11 text-right m-r-10 m-l-10'>".number_format($resultado2[$i][$anio2],2,'.',',')."</td>
+          <td class='p-3 f-s-14 text-center m-r-10 m-l-10'> ".substr($resultado[$i]['fecha'],0,2)."</td>
+          <td class='p-3 f-s-14 text-center m-r-10 m-l-10'> ".substr($resultado[$i]['fecha'],3,2)."</td>
+          <td class='p-3 f-s-14 text-right m-r-10 m-l-10'>".number_format($resultado2[$i][$anio1],2,'.',',')."</td>
+          <td class='p-3 f-s-14 text-right m-r-10 m-l-10'>".number_format($resultado[$i][$anio1],2,'.',',')."</td>
+          <td class='p-3 f-s-14 text-right m-r-10 m-l-10'>".number_format($resultado2[$i][$anio2],2,'.',',')."</td>
+          <td class='p-3 f-s-14 text-right m-r-10 m-l-10'>".number_format($resultado[$i][$anio2],2,'.',',')."</td>
           </tr>";
 }
 for ($i=0; $i <sizeof($resultado) ; $i++) {
@@ -57,11 +57,11 @@ for ($i=0; $i <sizeof($resultado2) ; $i++) {
   $total4+=$resultado2[$i][$anio2];
 }
 echo "<tr>
-<td colspan='2' class='bg-silver p-3 f-s-11 text-left m-r-10 m-l-10'><strong>TOTAL</strong></td>
-<td class='bg-silver p-3 f-s-11 text-right m-r-10 m-l-10'><strong>".number_format($total1,2,'.',',')."</strong></td>
-<td class='bg-silver p-3 f-s-11 text-right m-r-10 m-l-10'><strong>".number_format($total3,2,'.',',')."</strong></td>
-<td class='bg-silver p-3 f-s-11 text-right m-r-10 m-l-10'><strong>".number_format($total2,2,'.',',')."</strong></td>
-<td class='bg-silver p-3 f-s-11 text-right m-r-10 m-l-10'><strong>".number_format($total4,2,'.',',')."</strong></td>
+<td colspan='2' class='bg-silver p-3 f-s-14 text-left m-r-10 m-l-10'><strong>TOTAL</strong></td>
+<td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total3,2,'.',',')."</strong></td>
+<td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total1,2,'.',',')."</strong></td>
+<td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total4,2,'.',',')."</strong></td>
+<td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total2,2,'.',',')."</strong></td>
        </tr>";
 echo "</tbody>";
 echo "</table>";
