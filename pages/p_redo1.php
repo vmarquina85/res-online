@@ -313,10 +313,10 @@ var gfecphp='".$fechAct."'
                 <!-- title -->
                 <h4>Res-online</h4>
                 <!-- version -->
-                <h4>V2.7</h4>
+                <h4>V2.8</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <!-- año de version -->
-                <P>SISOL - 2017</P>
+                <P>SISOL - 2019</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
               </div>
             </div>
