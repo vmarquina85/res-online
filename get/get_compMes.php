@@ -3,7 +3,6 @@ require '../class/consultas/consultas_cls.php';
 $claseConsulta5= new consultas;
 $claseConsulta6= new consultas;
 $fechaActualuzacion=$_REQUEST['fact'];
-
 $total1=0;
 $total2=0;
 $total3=0;
@@ -19,8 +18,6 @@ if ($mes!='*') {
 $mesnombre=array('Al '.substr($fechaActualuzacion,0,3).substr($fechaActualuzacion,3,2),'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICEMBRE');
 $resultado=$claseConsulta5->compMeses_ingresos($anio1,$anio2,$mes,$fechaActualuzacion);
 $resultado2=$claseConsulta6->compMeses_atenciones($anio1,$anio2,$mes,$fechaActualuzacion);
-
-
 if (sizeof($resultado)>0 ){
   echo  "<table id='tb_response_mes_I' class='table tablesorter table-bordered'>
     <thead>
@@ -60,9 +57,8 @@ echo "<tr>
 <td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total1,2,'.',',')."</strong></td>
 <td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total4,2,'.',',')."</strong></td>
 <td class='bg-silver p-3 f-s-14 text-right m-r-10 m-l-10'><strong>".number_format($total2,2,'.',',')."</strong></td>
-       </tr>";
+</tr>";
 echo "</tbody>";
 echo "</table>";
 }
-
  ?>

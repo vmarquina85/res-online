@@ -10,7 +10,7 @@ include ("../class/config/inicializar_cls.php");
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="es">
 <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
@@ -276,7 +276,7 @@ include ("../class/config/inicializar_cls.php");
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                <h4>V2.8</h4>
+                <h4>V2.9</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2019</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>
@@ -287,19 +287,6 @@ include ("../class/config/inicializar_cls.php");
           </div>
         </div>
       </div>
-
-      <!-- <div id='loading' class="modal fade" aria-hidden='true'>
-      <div class="modal-dialog">
-      <div class="modal-content">
-      <div class="modal-body">
-      <div class="progress progress-striped active">
-      <div class="progress-bar" style="width: 100%">Cargando</div>
-    </div>
-  </div>
-</div>
-</div>
-</div> -->
-
 
 <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 <!-- end scroll to top btn -->
@@ -332,6 +319,7 @@ include ("../class/config/inicializar_cls.php");
 <script src="../class/menu/menu.js"></script>
 <script src="../assets/js/apps.min.js"></script>
 <script src="../assets/js/ajax.js"></script>
+<script src="../class/login/killerSession.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
 //globals

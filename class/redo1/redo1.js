@@ -75,6 +75,8 @@ function getResultados(){
     alert("Completar Datos");
   }
 }
+var printC,printM,printE,printF;
+
 function compCentrosIngresos1(anio1,anio2,mes,feact){
   startLoading('#pnl_Ingresos1');
   if (window.XMLHttpRequest) {
@@ -86,8 +88,9 @@ function compCentrosIngresos1(anio1,anio2,mes,feact){
     if (http.readyState == 4) {
       if(http.status == 200) {
         var resultado = http.responseText;
-
         document.getElementById('tb_comp_I11').innerHTML=(resultado);
+        printC=(resultado);
+        // imprimir(reporteCentro);
         // initDatatable("#tb_response_Centro_I");
         initTablesorter('#tb_response_Centro_I');
         endLoading('#pnl_Ingresos1');
@@ -108,6 +111,8 @@ function compMesIngresos1(anio1,anio2,mes,feact){
       if(http.status == 200) {
         var resultado = http.responseText;
         document.getElementById('tb_comp_I21').innerHTML=(resultado);
+        printM=(resultado);
+        // imprimir(reporteMes);
         //initDatatable("#tb_response_mes_I");
         initTablesorter('#tb_response_mes_I');
         endLoading('#pnl_Ingresos1');
@@ -128,8 +133,10 @@ function compFechaIngresos1(anio1,anio2,mes,feact){
       if(http.status == 200) {
         var resultado = http.responseText;
         document.getElementById('tb_comp_I41').innerHTML=(resultado);
+        printF=(resultado);
+        // imprimir(reporteFecha);
         //initDatatable("#tb_response_mes_I");
-          initTablesorter('#tb_response_fecha_I');
+        initTablesorter('#tb_response_fecha_I');
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -148,6 +155,8 @@ function compEspIngresos1(anio1,anio2,mes,feact){
       if(http.status == 200) {
         var resultado = http.responseText;
         document.getElementById('tb_comp_I31').innerHTML=(resultado);
+        printE=(resultado);
+        // imprimir(reporteEspecialidad);
         // initDatatable("#tb_response_esp_I");
         initTablesorter('#tb_response_esp_I');
         endLoading('#pnl_Ingresos1');
@@ -155,6 +164,7 @@ function compEspIngresos1(anio1,anio2,mes,feact){
     }
   });
   http.send(null);
+
 }
 // PARA EL AÑO A COMPARAR
 // funciones de atenciones
@@ -269,4 +279,29 @@ function initTablesorter(jqueryId){
       }
     }
   });
+}
+function imprimir() {
+  if ($("#resultados_I").find('.active').index()==0) {
+    var reporte = new printReport(reporteCentro);
+      reporte.setContenido();
+  }else if ($("#resultados_I").find('.active').index()==1) {
+    var reporte = new printReport(reporteMes);
+      reporte.setContenido();
+  }else if ($("#resultados_I").find('.active').index()==2){
+    var reporte = new printReport(reporteEspecialidad);
+      reporte.setContenido();
+  }else if ($("#resultados_I").find('.active').index()==3){
+    var reporte = new printReport(reporteFecha);
+      reporte.setContenido();
+  }
+
+  var ventana = window.open('','PRINT','height=400,width=600');
+  ventana.document.write('<html><head><style>table{border: 1px solid gray ;border-collapse:collapse;}td{border: 1px solid gray ;padding:3px;}th{border: 1px solid gray;padding:3px;}</style><head><body><div>')
+  ventana.document.write(reporte.contenido);
+  ventana.document.write('</div></body></html>');
+  ventana.document.close();
+  ventana.focus();
+  ventana.print();
+  ventana.close()
+
 }

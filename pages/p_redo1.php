@@ -12,6 +12,8 @@ $result = pg_query($conexion2, $consulta);
 $query = pg_fetch_array($result, 0);
 $fechAct = $query["fechact"];
 $anioAct=substr($fechAct, 6, 4);
+$diaAct=substr($fechAct, 0, 2);
+$mesAct=substr($fechAct, 3, 2);
 echo "<script>
 var gfecphp='".$fechAct."'
 </script>"
@@ -19,7 +21,7 @@ var gfecphp='".$fechAct."'
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html lang="es">
 <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
@@ -28,9 +30,9 @@ var gfecphp='".$fechAct."'
   <meta content="" name="description" />
   <meta content="" name="author" />
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
-  <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/logo.png">
+  <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/logo.png"/>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
   <link href="../assets/css/jquery-ui.min.css" rel="stylesheet" />
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -39,6 +41,7 @@ var gfecphp='".$fechAct."'
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
   <link href="../assets/plugins/tablesorter/themes/blue/style.css" rel="stylesheet"/>
+  <link href="../assets/plugins/intro-js/introjs.css" rel="stylesheet"/>
   <link href="../assets/css/orange.css" rel="stylesheet" id="theme" />
   <link href="../assets/css/sysinv.css" rel="stylesheet" id="theme" />
   <link href="../assets/css/datepicker.css" rel="stylesheet"/>
@@ -65,7 +68,6 @@ var gfecphp='".$fechAct."'
     height:300px;
     overflow-y: auto;
   }
-
   /*.panel.panel-expand>.panel-body .table-responsive {
   height:90%;
   }*/
@@ -92,7 +94,10 @@ var gfecphp='".$fechAct."'
   svg rect{
     fill: #FF6700;
   }
-  </style>
+  .bbutton{
+    height: 70px;
+  }
+</style>
 </head>
 <body>
   <!-- begin #page-loader -->
@@ -125,9 +130,9 @@ var gfecphp='".$fechAct."'
               }
               ?>
             </a>
-            <ul class="dropdown-menu animated fadeInLeft">
+            <ul data-step='4' data-title='Asimismo si haces clic en el icono de usuario podra ver otras opciones' class="dropdown-menu animated fadeInLeft">
               <li class="arrow"></li>
-              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+              <li><a data-step='5' data-title='Si desea cambiar contraseña puede usar esta opción' href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -178,98 +183,127 @@ var gfecphp='".$fechAct."'
         <li class="active" >Redo</li>
       </ol>
       <h3 class=" page-header">Resumen de Operaciones</h3>
+      <div class="alert alert-info m-b-15">
+        <!-- <div class="note-icon"><i class="fa fa-facebook"></i></div> -->
+        <h4><b>Fecha de Actualización:</b></h4>
+        <span data-toggle="tooltip" title='Ocultar Mensaje' class="close" data-dismiss="alert">×</span>
+        <p>
+          Datos Actualizados hasta el <?php echo $fechAct;?>
+        </p>
+        <a href='p_bdupdateState.php' class='btn btn-info  btn-sm'>Ver Estado Base de Datos</a>
 
-      <div class="alert alert-info fade in m-b-15 hidden-print">
-        <strong>Fecha de Actualización:</strong>
-        Datos Actualizados hasta el <?php echo $fechAct;?>
-        <a href='p_bdupdateState.php' class='btn btn-info btn-xs'>Ver Detalles</a>
+        <!-- <a href='javascript:void(0);' onclick="javascript:introJs().start();" class='btn btn-info btn-sm'>Ver Estado Base de Datos</a> -->
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="wrapper bg-silver-lighter m-b-15">
-            <form  action="javascript:;">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="input-group m-b-5 hidden-print">
-                    <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
-                    <select  id="sl_anio1" class='selectpicker form-control'>
-                      <option value="" disabled selected>--SELECCIONAR--</option>
-                      <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
-                        echo "<option value='$i'>$i</option>";
-                      } ?>
-                          </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group m-b-5 hidden-print ">
-                    <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
-                    <select id="sl_anio2" class='selectpicker form-control'>
-                      <option value="" disabled selected>--SELECCIONAR--</option>
-                      <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
-                        echo "<option value='$i'>$i</option>";
-                      } ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group m-b-5 hidden-print ">
-                <span class="input-group-addon  input-sm" >Por Fecha de Actualización</span>
-                <span class="input-group-addon">
-                  <input type="checkbox" id="cb_fact" title='Hasta Fecha de Actualización'>
-                </span>
-                <select id="sl_mes1" class='selectpicker form-control' multiple title="SELECCIONAR MES(ES)" data-actions-box="true">
-                  <option value="*" disabled>FECHA DE ACTUALIZACIÓN</option>
-                  <option value="01">ENERO</option>
-                  <option value="02">FEBRERO</option>
-                  <option value="03">MARZO</option>
-                  <option value="04">ABRIL</option>
-                  <option value="05">MAYO</option>
-                  <option value="06">JUNIO</option>
-                  <option value="07">JULIO</option>
-                  <option value="08">AGOSTO</option>
-                  <option value="09">SEPTIEMBRE</option>
-                  <option value="10">OCTUBRE</option>
-                  <option value="11">NOVIEMBRE</option>
-                  <option value="12">DICIEMBRE</option>
-                </select>
-              </div>
-            </form>
-            <div class="text-center m-b-10">
-              <button onclick="getResultados()" type="button" class="hidden-print btn btn-primary btn-block ">Consultar</button>
-            </div>
-            <br>
-            <div class="row hidden-print">
-              <div class="col-md-6">
-                <div class="widget widget-stats bg-green">
-                  <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
-                  <div class="stats-info">
-                    <h4 id='titleA'>TOTAL INGRESOS</h4>
-                    <p id='data_ingresos1' class="odometer">0</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="widget widget-stats bg-green">
-                  <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
-                  <div class="stats-info">
-                    <h4 id='titleB'>TOTAL INGRESOS</h4>
-                    <p id='data_ingresos2' class="odometer">0</p>
-                  </div>
-                </div>
-              </div>
+      <!-- <div class="alert alert-info fade in m-b-15 hidden-print">
+      <strong>Fecha de Actualización:</strong>
+      Datos Actualizados hasta el <?php echo $fechAct;?>
 
+      <a href='javascript:void(0);' onclick="javascript:introJs().start();" class='btn btn-info btn-xs'>Ver Detalles</a>
+    </div> -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="wrapper bg-silver-lighter m-b-15">
+          <div class="row">
+            <div class="col-md-10">
+              <form date-step='1' data-intro='Bienvenido al Res Online'  action="javascript:;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-group m-b-5 hidden-print">
+                      <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
+                      <select  id="sl_anio1" class='selectpicker form-control'>
+                        <option value="" disabled selected>--SELECCIONAR--</option>
+                        <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
+                          echo "<option value='$i'>$i</option>";
+                        } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group m-b-5 hidden-print ">
+                      <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
+                      <select id="sl_anio2" class='selectpicker form-control'>
+                        <option value="" disabled selected>--SELECCIONAR--</option>
+                        <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
+                          echo "<option value='$i'>$i</option>";
+                        } ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-10">
+                    <div class="input-group m-b-5 hidden-print ">
+                      <span class="input-group-addon  input-sm" >Mes(es)</span>
+                      <select id="sl_mes1" class='selectpicker form-control' multiple title="SELECCIONAR" data-actions-box="true">
+                        <option value="*" disabled>FECHA DE ACTUALIZACIÓN</option>
+                        <option value="01">ENERO</option>
+                        <option value="02">FEBRERO</option>
+                        <option value="03">MARZO</option>
+                        <option value="04">ABRIL</option>
+                        <option value="05">MAYO</option>
+                        <option value="06">JUNIO</option>
+                        <option value="07">JULIO</option>
+                        <option value="08">AGOSTO</option>
+                        <option value="09">SEPTIEMBRE</option>
+                        <option value="10">OCTUBRE</option>
+                        <option value="11">NOVIEMBRE</option>
+                        <option value="12">DICIEMBRE</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="input-group-addon  input-sm" >Comparar Años a la Fecha</span>
+                    <span class="input-group-addon">
+                      <input  data-toggle="tooltip" title='Desde el 01/01 Hasta el <?php echo $diaAct."/".$mesAct;?>' type="checkbox" id="cb_fact" >
+                    </span>
+                  </div>
+
+                </div>
+
+              </form>
             </div>
-            <div id='pnl_Ingresos1' class="panel panel-inverse">
-              <div class="panel-heading">
-                <div class="panel-heading-btn">
-                  <button onclick='javascript:window.print();' type="button" class='btn btn-default btn-xs' name="button">imprimir</button>
+            <div class="col-md-2">
+              <div class="text-center m-b-10">
+                <button onclick="getResultados()" type="button" class="hidden-print btn btn-primary btn-block bbutton ">Consultar</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <br>
+          <div date-step='2' data-intro='Aquí se muestran los totales de los años consultados '  class="row hidden-print">
+            <div class="col-md-6">
+              <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
+                <div class="stats-info">
+                  <h4 id='titleA'>TOTAL INGRESOS</h4>
+                  <p id='data_ingresos1' class="odometer">0</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
+                <div class="stats-info">
+                  <h4 id='titleB'>TOTAL INGRESOS</h4>
+                  <p id='data_ingresos2' class="odometer">0</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div id='pnl_Ingresos1' date-step='3' data-intro='Este , es el Panel de Resultados en el cual, se mostrarán los resultados de las consultas que ud. Realice' class="panel panel-inverse">
+            <div class="panel-heading">
+              <div class="panel-heading-btn">
+                <a href='javascript:imprimir();' class='btn btn-default btn-xs'>imprimir</button>
                   <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
                 </div>
                 <h4 class="panel-title"><strong>REPORTE DE OPERACIONES</strong></h4>
 
               </div>
               <div class="panel-body" id='prueba'>
-                <div class="pLoader"></div>
+                <!-- <div class="pLoader"></div> -->
                 <div class="carousel slide" data-ride="carousel" id=resultados_I>
                   <!-- begin carousel-inner -->
                   <div class="carousel-inner">
@@ -313,7 +347,7 @@ var gfecphp='".$fechAct."'
                 <!-- title -->
                 <h4>Res-online</h4>
                 <!-- version -->
-                <h4>V2.8</h4>
+                <h4>V2.9</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <!-- año de version -->
                 <P>SISOL - 2019</P>
@@ -369,11 +403,15 @@ var gfecphp='".$fechAct."'
 
   <script src="../class/config/config.js"></script>
   <script src="../class/menu/menu.js"></script>
+  <script src="../class/print/print.js"></script>
   <script src="../class/redo1/redo1.js"></script>
   <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
+  <script src="../assets/plugins/intro-js/intro.js"></script>
+
   <!-- <script src="../assets/js/dataloader.js"></script> -->
   <script src="../assets/js/apps.min.js"></script>
   <script src="../assets/js/ajax.js"></script>
+  <script src="../class/login/killerSession.js"></script>
   <!-- ================== END PAGE LEVEL JS ================== -->
   <script>
   //globals
@@ -413,28 +451,32 @@ var gfecphp='".$fechAct."'
   $("#cb_fact").click( function(){
     if( $(this).is(':checked') ) {
       iniciarControles();
+      $('#sl_mes1').attr('disabled',true);
     }else{
       $('#sl_mes1').selectpicker('val', '');
+      $('#sl_mes1').attr('disabled',false);
     }
   });
 
-</script>
-<div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
-  <div class='dialog-normal modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header bg-orange'>
-        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-        <h4 class='modal-title text-white'>Detalles Especialidades</h4>
-      </div>
-      <div class='modal-body'>
-        <div id ='tabla_det' class="table-responsive">
-        </div>
-      </div>
-      <div class='modal-footer'>
 
+
+  </script>
+  <div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
+    <div class='dialog-normal modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header bg-orange'>
+          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+          <h4 class='modal-title text-white'>Detalles Especialidades</h4>
+        </div>
+        <div class='modal-body'>
+          <div id ='tabla_det' class="table-responsive">
+          </div>
+        </div>
+        <div class='modal-footer'>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 </body>
 </html>
