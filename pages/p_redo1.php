@@ -41,7 +41,7 @@ var gfecphp='".$fechAct."'
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
   <link href="../assets/plugins/tablesorter/themes/blue/style.css" rel="stylesheet"/>
-  <link href="../assets/plugins/intro-js/introjs.css" rel="stylesheet"/>
+  <!-- <link href="../assets/plugins/intro-js/introjs.css" rel="stylesheet"/> -->
   <link href="../assets/css/orange.css" rel="stylesheet" id="theme" />
   <link href="../assets/css/sysinv.css" rel="stylesheet" id="theme" />
   <link href="../assets/css/datepicker.css" rel="stylesheet"/>
@@ -86,10 +86,10 @@ var gfecphp='".$fechAct."'
     bottom: 0;
   }
   /*ploader*/
-  .pLoader{
+  /* .pLoader{
     display: block;
     margin: auto;
-  }
+  } */
   svg path,
   svg rect{
     fill: #FF6700;
@@ -210,7 +210,7 @@ var gfecphp='".$fechAct."'
                   <div class="col-md-6">
                     <div class="input-group m-b-5 hidden-print">
                       <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
-                      <select  id="sl_anio1" class='selectpicker form-control'>
+                      <select  id="sl_anio1"  class='selectpicker form-control'>
                         <option value="" disabled selected>--SELECCIONAR--</option>
                         <?php for ($i=2012; $i < $anioAct+1 ; $i++) {
                           echo "<option value='$i'>$i</option>";
@@ -296,8 +296,9 @@ var gfecphp='".$fechAct."'
           <div id='pnl_Ingresos1' date-step='3' data-intro='Este , es el Panel de Resultados en el cual, se mostrarán los resultados de las consultas que ud. Realice' class="panel panel-inverse">
             <div class="panel-heading">
               <div class="panel-heading-btn">
-                <a href='javascript:imprimir();' class='btn btn-default btn-xs'>imprimir</button>
-                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+                <a href='javascript:imprimir();' class='btn btn-warning btn-xs m-r-5'><i class='fa fa-print'></i> <b>Imprimir<b></button>
+                <!-- <a href='javascript:imprimir();' class='btn btn-success btn-xs m-r-5'><i class='fa fa-file-excel-o'></i> <b>Exportar Excel<b></button> -->
+                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-arrows-alt"></i></a>
                 </div>
                 <h4 class="panel-title"><strong>REPORTE DE OPERACIONES</strong></h4>
 
@@ -406,7 +407,7 @@ var gfecphp='".$fechAct."'
   <script src="../class/print/print.js"></script>
   <script src="../class/redo1/redo1.js"></script>
   <script src="../assets/plugins/tablesorter/jquery.tablesorter.js"></script>
-  <script src="../assets/plugins/intro-js/intro.js"></script>
+  <!-- <script src="../assets/plugins/intro-js/intro.js"></script> -->
 
   <!-- <script src="../assets/js/dataloader.js"></script> -->
   <script src="../assets/js/apps.min.js"></script>

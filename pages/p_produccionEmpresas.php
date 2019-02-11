@@ -207,7 +207,7 @@ include ("../class/config/inicializar_cls.php");
 
               </select>
             </div>
-            <div class="input-group m-b-5">
+            <!-- <div class="input-group m-b-5">
               <span class="input-group-addon input-sm">Mes</span>
               <select id='ra_select_mes'  class="selectpicker form-control input-sm" name="" title="SELECCIONAR Mes(S)" data-actions-box="true" multiple>
                 <option value="01">ENERO</option>
@@ -223,7 +223,7 @@ include ("../class/config/inicializar_cls.php");
                 <option value="11">NOVIEMBRE</option>
                 <option value="12">DICIEMBRE</option>
                 </select>
-            </div>
+            </div> -->
 
 
 

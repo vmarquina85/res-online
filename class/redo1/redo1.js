@@ -41,6 +41,9 @@ function iniciarControles(){
 function getResultados(){
   if (document.getElementById('sl_anio1').value!="" && document.getElementById('sl_anio2').value!="" && document.getElementById('sl_mes1').value!="") {
     if (document.getElementById('sl_anio1').value!=document.getElementById('sl_anio2').value) {
+      $('#data_ingresos1').text(0);
+      $('#data_ingresos2').text(0);
+
       var panio1=document.getElementById('sl_anio1').value;
       if( $('#cb_fact').is(':checked') ) {
         var pmes1="*";
@@ -50,18 +53,20 @@ function getResultados(){
         gmes1=$('#sl_mes1').val();
       }
       var panio2=document.getElementById('sl_anio2').value;
+      document.getElementById('titleA').innerHTML='TOTAL INGRESOS ' + panio1;
+      document.getElementById('titleB').innerHTML='TOTAL INGRESOS ' + panio2;
       ganio1=document.getElementById('sl_anio1').value;
       ganio2=document.getElementById('sl_anio2').value;
       var url = "../get/get_redo1_totales.php?anio="+panio1+"&mes="+pmes1+"&fact="+gfecphp;
       $.getJSON (url, function (datatable) {
         var data = datatable;
-        $('#data_ingresos1').text(0);
+        // $('#data_ingresos1').text(0);
         $('#data_ingresos1').text(format1(Number(data[0]['ingresos']),"S/."));
       });
       var url2 = "../get/get_redo1_totales.php?anio="+panio2+"&mes="+pmes1+"&fact="+gfecphp;
       $.getJSON (url2, function (datatable) {
         var data = datatable;
-        $('#data_ingresos2').text(0);
+        // $('#data_ingresos2').text(0);
         $('#data_ingresos2').text(format1(Number(data[0]['ingresos']),"S/."));
       });
       compCentrosIngresos1(panio1,panio2,pmes1,gfecphp);
@@ -283,16 +288,16 @@ function initTablesorter(jqueryId){
 function imprimir() {
   if ($("#resultados_I").find('.active').index()==0) {
     var reporte = new printReport(reporteCentro);
-      reporte.setContenido();
+    reporte.setContenido();
   }else if ($("#resultados_I").find('.active').index()==1) {
     var reporte = new printReport(reporteMes);
-      reporte.setContenido();
+    reporte.setContenido();
   }else if ($("#resultados_I").find('.active').index()==2){
     var reporte = new printReport(reporteEspecialidad);
-      reporte.setContenido();
+    reporte.setContenido();
   }else if ($("#resultados_I").find('.active').index()==3){
     var reporte = new printReport(reporteFecha);
-      reporte.setContenido();
+    reporte.setContenido();
   }
 
   var ventana = window.open('','PRINT','height=400,width=600');

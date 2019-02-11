@@ -26,10 +26,11 @@ var oper=document.getElementById('ra_select_centros').value;
 var annio=$('#ra_select_anio').val();
 // var especialidad=document.getElementById('ra_especialidad').value;
 var especialidad=document.getElementById('ra_select_especialidad').value;
- var mes=document.getElementById('ra_select_mes').value;
+ // var mes=document.getElementById('ra_select_mes').value;
 
   //datos-----------------------------------------------------------------------
-  var modurl = "../get/get_ra_reporte1.php?anio="+annio+"&oper="+oper+"&esp="+especialidad+"&mes="+mes;
+  // var modurl = "../get/get_ra_reporte1.php?anio="+annio+"&oper="+oper+"&esp="+especialidad+"&mes="+mes;
+  var modurl = "../get/get_ra_reporte1.php?anio="+annio+"&oper="+oper+"&esp="+especialidad;
   http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
@@ -55,7 +56,8 @@ var especialidad=document.getElementById('ra_select_especialidad').value;
 // var mes=document.getElementById('ra_mes').value;
 
   //datos-----------------------------------------------------------------------
-  var modurl = "../get/get_ra_reporte2.php?anio="+annio+"&oper="+oper+"&esp="+especialidad+"&mes="+mes;
+  // var modurl = "../get/get_ra_reporte2.php?anio="+annio+"&oper="+oper+"&esp="+especialidad+"&mes="+mes;
+  var modurl = "../get/get_ra_reporte2.php?anio="+annio+"&oper="+oper+"&esp="+especialidad;
   http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {

@@ -1700,7 +1700,7 @@ height:90%;
 .btn.btn-success {
     color: #fff;
     background: #00acac;
-    border-color: #00acac
+    border-color: #00acac;
 }
 
 .btn.btn-success.active,
@@ -1708,8 +1708,8 @@ height:90%;
 .btn.btn-success:focus,
 .btn.btn-success:hover,
 .open .dropdown-toggle.btn-success {
-    background: #f59c1a;
-    border-color: #d46a2a
+    background: #0c9696;
+    border-color: #0c9696;
 }
 
 .btn-group .btn.btn-success:not(.active)+.btn.btn-success,
@@ -4600,9 +4600,9 @@ ul.tagit.inverse li.tagit-choice .tagit-close:hover .ui-icon-close:before {
 }
 
 .widget-stats .stats-info h4 {
-    font-size: 12px;
+    font-size: 16px;
     margin: 5px 0;
-    color: #fff
+    color: #ffffffba
 }
 
 .widget-stats .stats-icon {
