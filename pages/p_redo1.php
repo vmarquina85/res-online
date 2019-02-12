@@ -231,7 +231,7 @@ var gfecphp='".$fechAct."'
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-10">
+                  <div class="col-md-9">
                     <div class="input-group m-b-5 hidden-print ">
                       <span class="input-group-addon  input-sm" >Mes(es)</span>
                       <select id="sl_mes1" class='selectpicker form-control' multiple title="SELECCIONAR" data-actions-box="true">
