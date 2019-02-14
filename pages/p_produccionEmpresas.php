@@ -276,7 +276,7 @@ include ("../class/config/inicializar_cls.php");
               <div class="text-center">
                 <img src="../assets/img/logo_big.png" alt="">
                 <h4>Res-online</h4>
-                <h4>V2.9</h4>
+                <h4>V2.9.1</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <P>SISOL - 2019</P>
                 <button class="btn btn-warning" data-dismiss="modal">OK</button>

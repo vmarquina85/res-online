@@ -287,26 +287,20 @@ function initTablesorter(jqueryId){
 }
 function imprimir() {
   if ($("#resultados_I").find('.active').index()==0) {
-    var reporte = new printReport(reporteCentro);
-    reporte.setContenido();
+    var reporte1 = new printReport(reporteCentro);
+    reporte1.setContenido();
+    reporte1.printContenido();
   }else if ($("#resultados_I").find('.active').index()==1) {
-    var reporte = new printReport(reporteMes);
-    reporte.setContenido();
+    var reporte2 = new printReport(reporteMes);
+    reporte2.setContenido();
+    reporte2.printContenido();
   }else if ($("#resultados_I").find('.active').index()==2){
-    var reporte = new printReport(reporteEspecialidad);
-    reporte.setContenido();
+    var reporte3 = new printReport(reporteEspecialidad);
+    reporte3.setContenido();
+    reporte3.printContenido();
   }else if ($("#resultados_I").find('.active').index()==3){
-    var reporte = new printReport(reporteFecha);
-    reporte.setContenido();
+    var reporte4 = new printReport(reporteFecha);
+    reporte4.setContenido();
+    reporte4.printContenido();
   }
-
-  var ventana = window.open('','PRINT','height=400,width=600');
-  ventana.document.write('<html><head><style>table{border: 1px solid gray ;border-collapse:collapse;}td{border: 1px solid gray ;padding:3px;}th{border: 1px solid gray;padding:3px;}</style><head><body><div>')
-  ventana.document.write(reporte.contenido);
-  ventana.document.write('</div></body></html>');
-  ventana.document.close();
-  ventana.focus();
-  ventana.print();
-  ventana.close()
-
 }

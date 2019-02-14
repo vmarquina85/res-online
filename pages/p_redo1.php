@@ -202,10 +202,10 @@ var gfecphp='".$fechAct."'
     </div> -->
     <div class="row">
       <div class="col-md-12">
-        <div class="wrapper bg-silver-lighter m-b-15">
+        <div class="wrapper  bg-silver-lighter m-b-15">
           <div class="row">
             <div class="col-md-10">
-              <form date-step='1' data-intro='Bienvenido al Res Online'  action="javascript:;">
+              <form date-step='1' class='hidden-print' data-intro='Bienvenido al Res Online'  action="javascript:;">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group m-b-5 hidden-print">
@@ -252,9 +252,9 @@ var gfecphp='".$fechAct."'
                     </div>
                   </div>
                   <div class="col-md-2">
-                    <span class="input-group-addon  input-sm" >Comparar Años a la Fecha</span>
+                    <span class="input-group-addon   input-sm" >Comparar Años a la Fecha</span>
                     <span class="input-group-addon">
-                      <input  data-toggle="tooltip" title='Desde el 01/01 Hasta el <?php echo $diaAct."/".$mesAct;?>' type="checkbox" id="cb_fact" >
+                      <input  class='clickable' data-toggle="tooltip" title='Desde el 01/01 Hasta el <?php echo $diaAct."/".$mesAct;?>' type="checkbox" id="cb_fact" >
                     </span>
                   </div>
 
@@ -296,7 +296,7 @@ var gfecphp='".$fechAct."'
           <div id='pnl_Ingresos1' date-step='3' data-intro='Este , es el Panel de Resultados en el cual, se mostrarán los resultados de las consultas que ud. Realice' class="panel panel-inverse">
             <div class="panel-heading">
               <div class="panel-heading-btn">
-                <a href='javascript:imprimir();' class='btn btn-warning btn-xs m-r-5'><i class='fa fa-print'></i> <b>Imprimir<b></button>
+                <a href='javascript:imprimir();' class=' hidden-print btn btn-warning h btn-xs m-r-5'><i class='fa fa-print'></i> <b>Imprimir<b></button>
                 <!-- <a href='javascript:imprimir();' class='btn btn-success btn-xs m-r-5'><i class='fa fa-file-excel-o'></i> <b>Exportar Excel<b></button> -->
                   <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-arrows-alt"></i></a>
                 </div>
@@ -348,7 +348,7 @@ var gfecphp='".$fechAct."'
                 <!-- title -->
                 <h4>Res-online</h4>
                 <!-- version -->
-                <h4>V2.9</h4>
+                <h4>V2.9.1</h4>
                 <p>UNIDAD DE SISTEMAS Y PROCESOS</p>
                 <!-- año de version -->
                 <P>SISOL - 2019</P>
