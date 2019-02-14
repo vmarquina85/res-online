@@ -15,3 +15,5 @@ Repotes de Operaciones
 * se agregó el método **printContenido()** en la **clase print** para minimizar el uso de memoria al ejecutar la funcion Imprimir() en **redo1.js**
 * Se agregó los años en el TOTAL DE INGRESOS, ahora el sistema mostrará **TOTAL DE INGRESOS [AÑO 1] y TOTAL DE INGRESOS [AÑO 2]** donde Año1 y Año2 serán los años colocados en la consulta.
 * Se modifico la clase css **.table-responsive** en lo que respecta a height de Auto a 300px;
+* Se obtimizo funcion **KillerSession()** actualmente evalua si el usuario esta más de 19 min en estado inactivo (idle) antes de cerrar la sesión de forma automática
+* Se implemento la comprobación de session activa en los archivos tipo get_ el sistema solicitara IMPERATIVAMENTE que el usuario esté con sesión activa caso contrario mostrará la pantalla de login.
