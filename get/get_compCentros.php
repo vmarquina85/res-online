@@ -1,4 +1,9 @@
 <?php
+// session_start();
+if (!isset($_SESSION["resonlinepermitido"])) {
+  header("location:../index.php");
+  exit();
+};
 require '../class/consultas/consultas_cls.php';
 $claseConsulta1= new consultas;
 $claseConsulta2=new consultas;
