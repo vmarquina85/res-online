@@ -1,9 +1,5 @@
 <?php
-// session_start();
-if (!isset($_SESSION["resonlinepermitido"])) {
-  header("location:../index.php");
-  exit();
-};
+
 require '../class/consultas/consultas_cls.php';
 $ra_class= new consultas;
 $oper=$_REQUEST['oper'];

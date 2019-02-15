@@ -1,9 +1,4 @@
 <?php
-
-if (!isset($_SESSION["resonlinepermitido"])) {
-  header("location:../index.php");
-  exit();
-};
 include ('../class/menu/menu_cls.php');
 $menu= new menu();
 session_start();
