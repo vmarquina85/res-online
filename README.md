@@ -8,7 +8,11 @@ Repotes de Operaciones
 * Se agregó los años en el TOTAL DE INGRESOS, ahora el sistema mostrará **TOTAL DE INGRESOS [AÑO 1] y TOTAL DE INGRESOS [AÑO 2]** donde Año1 y Año2 serán los años colocados en la consulta.
 * Se modifico la clase css **.table-responsive** en lo que respecta a height de Auto a 300px;
 * Se optimizó funcion **KillerSession()** actualmente evalua si el usuario esta más de 19 min en estado inactivo (idle) antes de cerrar la sesión de forma automática
+<<<<<<< HEAD
 * Se revirtió problema de seguridad que impedía que el usuario ingresara al sistema.
+=======
+* Se revirtio problema de seguridad que impedía que el usuario ingresara al sistema.
+>>>>>>> 82f918abd477a11cc5ca05cd95a1f02691a4e71a
 
 >ChangeLog 2.9:
 
