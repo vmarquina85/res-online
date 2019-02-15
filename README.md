@@ -1,5 +1,5 @@
 ## RES-ONLINE V 2.9.1
-Repotes de Operaciones
+Reportes de Operaciones
 
 >ChangeLog 2.9.1
 
