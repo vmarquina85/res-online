@@ -10,7 +10,7 @@ class printReport {
   }
   printContenido(){
     var ventana = window.open('','PRINT','height=400,width=600');
-    ventana.document.write('<html><head><style>table{border: 1px solid gray ;border-collapse:collapse;}td{border: 1px solid gray ;padding:3px;}th{border: 1px solid gray;padding:3px;}</style><head><body><div>')
+    ventana.document.write('<html><head><style>table{border: 1px solid gray ;border-collapse:collapse;margin-right: auto;margin-left: auto;}td{border: 1px solid gray ;padding:3px;}th{border: 1px solid gray;padding:3px;}</style><head><body><div>')
     ventana.document.write(this.contenido);
     ventana.document.write('</div></body></html>');
     ventana.document.close();

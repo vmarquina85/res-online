@@ -97,16 +97,19 @@ var gfecphp='".$fechAct."'
   .bbutton{
     height: 70px;
   }
+  .panel.panel-expand>.panel-body .carousel .table-responsive {
+    height: 90%;
+}
 </style>
 </head>
 <body>
   <!-- begin #page-loader -->
-  <div id="page-loader" class="hidden-print fade in"><span class="spinner"></span></div>
+  <div id="page-loader" class=" fade in"><span class="spinner"></span></div>
   <!-- end #page-loader -->
   <!-- begin #page-container -->
   <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
     <!-- begin #header -->
-    <div id="header" class="header hidden-print navbar navbar-default navbar-fixed-top">
+    <div id="header" class="header  navbar navbar-default navbar-fixed-top">
       <!-- inicio container-fluid   -->
       <div class="container-fluid bg-orange">
         <div class="navbar-header">
@@ -142,7 +145,7 @@ var gfecphp='".$fechAct."'
     </div><!-- Fin Cabecera   -->
     <!-- end #header -->
     <!-- begin #sidebar -->
-    <div id="sidebar" class="sidebar hidden-print">
+    <div id="sidebar" class="sidebar ">
       <!-- begin sidebar scrollbar -->
       <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
         <div data-scrollbar="true" data-height="100%" style="overflow: hidden; width: auto; height: 100%;">
@@ -178,7 +181,7 @@ var gfecphp='".$fechAct."'
       </div>
     </div>
     <div id="content" class="content">
-      <ol class="breadcrumb hidden-print pull-right">
+      <ol class="breadcrumb  pull-right">
         <li>Menu Principal</li>
         <li class="active" >Redo</li>
       </ol>
@@ -194,7 +197,7 @@ var gfecphp='".$fechAct."'
 
         <!-- <a href='javascript:void(0);' onclick="javascript:introJs().start();" class='btn btn-info btn-sm'>Ver Estado Base de Datos</a> -->
       </div>
-      <!-- <div class="alert alert-info fade in m-b-15 hidden-print">
+      <!-- <div class="alert alert-info fade in m-b-15 ">
       <strong>Fecha de Actualización:</strong>
       Datos Actualizados hasta el <?php echo $fechAct;?>
 
@@ -205,10 +208,10 @@ var gfecphp='".$fechAct."'
         <div class="wrapper  bg-silver-lighter m-b-15">
           <div class="row">
             <div class="col-md-10">
-              <form date-step='1' class='hidden-print' data-intro='Bienvenido al Res Online'  action="javascript:;">
+              <form date-step='1' class='' data-intro='Bienvenido al Res Online'  action="javascript:;">
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="input-group m-b-5 hidden-print">
+                    <div class="input-group m-b-5 ">
                       <span class="input-group-addon  input-sm" ><img src="" alt="">Año 1</span>
                       <select  id="sl_anio1"  class='selectpicker form-control'>
                         <option value="" disabled selected>--SELECCIONAR--</option>
@@ -219,7 +222,7 @@ var gfecphp='".$fechAct."'
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="input-group m-b-5 hidden-print ">
+                    <div class="input-group m-b-5  ">
                       <span class="input-group-addon  input-sm" ><img src="" alt="">Año 2</span>
                       <select id="sl_anio2" class='selectpicker form-control'>
                         <option value="" disabled selected>--SELECCIONAR--</option>
@@ -232,7 +235,7 @@ var gfecphp='".$fechAct."'
                 </div>
                 <div class="row">
                   <div class="col-md-9">
-                    <div class="input-group m-b-5 hidden-print ">
+                    <div class="input-group m-b-5  ">
                       <span class="input-group-addon  input-sm" >Mes(es)</span>
                       <select id="sl_mes1" class='selectpicker form-control' multiple title="SELECCIONAR" data-actions-box="true">
                         <option value="*" disabled>FECHA DE ACTUALIZACIÓN</option>
@@ -264,7 +267,7 @@ var gfecphp='".$fechAct."'
             </div>
             <div class="col-md-2">
               <div class="text-center m-b-10">
-                <button onclick="getResultados()" type="button" class="hidden-print btn btn-primary btn-block bbutton ">Consultar</button>
+                <button onclick="getResultados()" type="button" class=" btn btn-primary btn-block bbutton ">Consultar</button>
               </div>
             </div>
           </div>
@@ -272,7 +275,7 @@ var gfecphp='".$fechAct."'
 
 
           <br>
-          <div date-step='2' data-intro='Aquí se muestran los totales de los años consultados '  class="row hidden-print">
+          <div class="row ">
             <div class="col-md-6">
               <div class="widget widget-stats bg-green">
                 <div class="stats-icon"><iframe src="../assets/img/vector/coin.svg" style='height: 48px;width: 48px;' frameborder="0"></iframe></div>
@@ -293,10 +296,10 @@ var gfecphp='".$fechAct."'
             </div>
 
           </div>
-          <div id='pnl_Ingresos1' date-step='3' data-intro='Este , es el Panel de Resultados en el cual, se mostrarán los resultados de las consultas que ud. Realice' class="panel panel-inverse">
+          <div id='pnl_Ingresos1' class="panel panel-inverse">
             <div class="panel-heading">
               <div class="panel-heading-btn">
-                <a href='javascript:imprimir();' class=' hidden-print btn btn-warning h btn-xs m-r-5'><i class='fa fa-print'></i> <b>Imprimir<b></button>
+                <a href='javascript:imprimir();' class='  btn btn-warning h btn-xs m-r-5'><i class='fa fa-print'></i> <b>Imprimir<b></button>
                 <!-- <a href='javascript:imprimir();' class='btn btn-success btn-xs m-r-5'><i class='fa fa-file-excel-o'></i> <b>Exportar Excel<b></button> -->
                   <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-arrows-alt"></i></a>
                 </div>
@@ -335,7 +338,7 @@ var gfecphp='".$fechAct."'
 
 
 
-      <div id='disclamer' class="hidden-print modal fade" aria-hidden='true'>
+      <div id='disclamer' class=" modal fade" aria-hidden='true'>
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header bg-orange">
@@ -371,7 +374,7 @@ var gfecphp='".$fechAct."'
         </div>
       </div>
 
-      <div id="header" class=" hidden-print navbar-fixed-bottom text-center">
+      <div id="header" class="  navbar-fixed-bottom text-center">
         <div class="btn-group">
           <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
           <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
