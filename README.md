@@ -5,6 +5,7 @@ Reportes de Operaciones
 
 * Se modifico la **clase Print** para que esta pueda imprimir el reporte en tiempo real (es decir, tomando los cambios del reporte en pantalla ej: ordenar tabla de Mayor a menor)
 * se agregó el método **printContenido()** en la **clase print** para minimizar el uso de memoria al ejecutar la funcion Imprimir() en **redo1.js**
+* Se modifico el método **printContenido()** en la **clase print** con el fin de centrar el contenido al momento de imprimir.
 * Se agregó los años en el TOTAL DE INGRESOS, ahora el sistema mostrará **TOTAL DE INGRESOS [AÑO 1] y TOTAL DE INGRESOS [AÑO 2]** donde Año1 y Año2 serán los años colocados en la consulta.
 * Se modifico la clase css **.table-responsive** en lo que respecta a height de Auto a 300px;
 * Se optimizó funcion **KillerSession()** actualmente evalua si el usuario esta más de 19 min en estado inactivo (idle) antes de cerrar la sesión de forma automática
