@@ -31,14 +31,21 @@ const reporteMes={
      return data
   }
 };
-const reporteFecha={
-  setContenidoType: function(){
-    var data=document.getElementById('tb_comp_I41').innerHTML;
-     return data}
-};
 const reporteEspecialidad={
   setContenidoType: function(){
     var data=document.getElementById('tb_comp_I31').innerHTML;;
+    return data
+  }
+};
+const reporteFecha={
+  setContenidoType: function(){
+    var data=document.getElementById('tb_comp_I41').innerHTML;
+     return data
+   }
+};
+const reporteFecha2={
+  setContenidoType: function(){
+    var data=document.getElementById('tb_comp_I51').innerHTML;;
      return data
    }
 };

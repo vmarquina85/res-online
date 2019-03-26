@@ -201,6 +201,73 @@ class consultas extends conectar
 		return $this->t;
 	}
 
+	function compEstxingresos($anio1,$anio2,$mes,$dia){
+		$sql="select case when a.operativo is null then b.operativo else a.operativo end, case when a.dia is null then date_part('day',b.dia) else date_part('day',a.dia) end as dia,case when a.dia is null then date_part('month',b.dia) else date_part('month',a.dia) end as mes,a.\"".$anio1."\",b.\"".$anio2."\"
+                FROM (select OPERATIVO||to_char(fecha,'DDMM') AS COD,operativo, fecha as dia,sum(ingresos) as \"".$anio1."\" from summary.redo
+							where	date_part('year' ,fecha) in (".$anio1.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part('month' ,fecha) in (".$mes.")";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and (fecha >='01/01/$anio1' and fecha <='$nday/$nmes/$anio1')";
+		}
+		$sql=$sql." group by operativo, fecha, date_part('year' ,fecha)order by operativo ,fecha)a
+		FULL OUTER JOIN
+		(select OPERATIVO||to_char(fecha,'DDMM') AS COD,operativo, fecha as dia,sum(ingresos) as \"".$anio2."\" from summary.redo where  date_part('year' ,fecha) in (".$anio2.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part('month' ,fecha) in (".$mes.")";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and (fecha >='01/01/$anio2' and fecha <='$nday/$nmes/$anio2')";
+		}
+	$sql=$sql." group by operativo, fecha, date_part('year' ,fecha)order by operativo ,fecha)b on a.COD=b.COD order by 1,3,2";
+		// echo $sql;
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+
+	function compEstxAtenciones($anio1,$anio2,$mes,$dia){
+		$sql="select case when a.operativo is null then b.operativo else a.operativo end, case when a.dia is null then date_part('day',b.dia) else date_part('day',a.dia) end as dia,case when a.dia is null then date_part('month',b.dia) else date_part('month',a.dia) end as mes,a.\"".$anio1."\",b.\"".$anio2."\"
+								FROM (select OPERATIVO||to_char(fecha,'DDMM') AS COD,operativo, fecha as dia,sum(atenciones) as \"".$anio1."\" from summary.redo
+							where	date_part('year' ,fecha) in (".$anio1.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part('month' ,fecha) in (".$mes.")";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and (fecha >='01/01/$anio1' and fecha <='$nday/$nmes/$anio1')";
+		}
+		$sql=$sql." group by operativo, fecha, date_part('year' ,fecha)order by operativo ,fecha)a
+		FULL OUTER JOIN
+		(select OPERATIVO||to_char(fecha,'DDMM') AS COD,operativo, fecha as dia,sum(atenciones) as \"".$anio2."\" from summary.redo where  date_part('year' ,fecha) in (".$anio2.")";
+		if ($mes!='*') {
+			$sql=$sql." and date_part('month' ,fecha) in (".$mes.")";
+		}else{
+			$nmes=substr($dia,3,2);
+			$nday=substr($dia,0,2);
+			$sql=$sql." and (fecha >='01/01/$anio2' and fecha <='$nday/$nmes/$anio2') ";
+		}
+	$sql=$sql." group by operativo, fecha, date_part('year' ,fecha)order by operativo ,fecha)b on a.COD=b.COD order by 1,3,2";
+		// echo $sql;
+		$res=pg_query(parent::conexion_resumen(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
+
+
+
+
+
+
+
+
 
 
 	function esp_aten($anio,$mes,$centro){

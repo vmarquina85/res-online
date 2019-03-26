@@ -299,9 +299,16 @@ var gfecphp='".$fechAct."'
           <div id='pnl_Ingresos1' class="panel panel-inverse">
             <div class="panel-heading">
               <div class="panel-heading-btn">
-                <a href='javascript:imprimir();' class='  btn btn-warning h btn-xs m-r-5'><i class='fa fa-print'></i> <b>Imprimir<b></button>
+                <div class="text-center pull-left">
+                  <button onclick='show_centros()' class="btn btn-success btn-xs m-b-5"> EESS</button>
+                  <button onclick='show_mes()' class="btn btn-success btn-xs m-b-5">  MES</button>
+                  <button onclick='show_especialidades()' class="btn btn-success btn-xs m-b-5">  ESPECIALIDADES</button>
+                  <button onclick='show_fechas()' class="btn btn-success btn-xs m-b-5">  DIARIO</button>
+                  <button onclick='show_fechas2()' class="btn btn-success btn-xs m-b-5">  DIA Y EESS</button>
+                </div>
+                <a href='javascript:imprimir();' class='  btn btn-default h btn-xs m-r-5'> <b>Imprimir<b>
                 <!-- <a href='javascript:imprimir();' class='btn btn-success btn-xs m-r-5'><i class='fa fa-file-excel-o'></i> <b>Exportar Excel<b></button> -->
-                  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-arrows-alt"></i></a>
+                  <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-click="panel-expand" data-original-title="" title=""></a>
                 </div>
                 <h4 class="panel-title"><strong>REPORTE DE OPERACIONES</strong></h4>
 
@@ -326,9 +333,14 @@ var gfecphp='".$fechAct."'
                     <div class="item">
                       <div id='tb_comp_I41' class="table-responsive"></div>
                     </div>
+                    <div class="item">
+                      <div id='tb_comp_I51' class="table-responsive"></div>
+                    </div>
 
                   </div>
                 </div>
+
+
               </div>
             </div>
           </div>
@@ -374,14 +386,11 @@ var gfecphp='".$fechAct."'
         </div>
       </div>
 
-      <div id="header" class="  navbar-fixed-bottom text-center">
-        <div class="btn-group">
-          <button onclick='show_centros()' class="btn btn-warning"><img src="../assets/img/hospital.png" alt=""> Centros</button>
-          <button onclick='show_mes()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Meses</button>
-          <button onclick='show_especialidades()' class="btn btn-warning"> <img src="../assets/img/health.png" alt=""> Especialidades</button>
-          <button onclick='show_fechas()' class="btn btn-warning"> <img src="../assets/img/date.png" alt=""> Fecha</button>
-        </div>
-      </div>
+      <!-- <div id="header" class="  navbar-fixed-left text-center"> -->
+        <!-- <div class="btn-group"> -->
+
+        <!-- </div> -->
+      <!-- </div> -->
       <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up p-t-5"></i></a>
       <!-- end scroll to top btn -->
     </div>
@@ -465,7 +474,7 @@ var gfecphp='".$fechAct."'
 
 
   </script>
-  <div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
+  <!-- <div id='modal_detalles' class='modal fade' aria-hidden='true' style='display: none;'>
     <div class='dialog-normal modal-dialog'>
       <div class='modal-content'>
         <div class='modal-header bg-orange'>
@@ -481,6 +490,6 @@ var gfecphp='".$fechAct."'
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </body>
 </html>

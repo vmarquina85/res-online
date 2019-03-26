@@ -17,6 +17,10 @@ function show_fechas(){
   // $("#resultados_II").carousel(2);
   $("#resultados_I").carousel(3);
 }
+function show_fechas2(){
+  // $("#resultados_II").carousel(2);
+  $("#resultados_I").carousel(4);
+}
 function pad(n, width, z) {
   z = z || '0';
   n = n + '';
@@ -73,6 +77,7 @@ function getResultados(){
       compMesIngresos1(panio1,panio2,pmes1,gfecphp);
       compEspIngresos1(panio1,panio2,pmes1,gfecphp);
       compFechaIngresos1(panio1,panio2,pmes1,gfecphp);
+      compFechaIngresos2(panio1,panio2,pmes1,gfecphp);
     }else{
       alert("Seleccionar Años Distintos")
     }
@@ -80,7 +85,7 @@ function getResultados(){
     alert("Completar Datos");
   }
 }
-var printC,printM,printE,printF;
+var printC,printM,printE,printF,printF2;
 
 function compCentrosIngresos1(anio1,anio2,mes,feact){
   startLoading('#pnl_Ingresos1');
@@ -142,6 +147,28 @@ function compFechaIngresos1(anio1,anio2,mes,feact){
         // imprimir(reporteFecha);
         //initDatatable("#tb_response_mes_I");
         initTablesorter('#tb_response_fecha_I');
+        endLoading('#pnl_Ingresos1');
+      }
+    }
+  });
+  http.send(null);
+}
+function compFechaIngresos2(anio1,anio2,mes,feact){
+  startLoading('#pnl_Ingresos1');
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var modurl = "../get/get_compCentrosFecha.php?anio1="+anio1+"&anio2="+anio2+"&mes="+mes+"&fact="+feact;
+  http.open("GET", modurl, true);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById('tb_comp_I51').innerHTML=(resultado);
+        printF2=(resultado);
+        // imprimir(reporteFecha);
+        //initDatatable("#tb_response_mes_I");
+        // initTablesorter('#tb_response_fecha_II');
         endLoading('#pnl_Ingresos1');
       }
     }
@@ -302,5 +329,9 @@ function imprimir() {
     var reporte4 = new printReport(reporteFecha);
     reporte4.setContenido();
     reporte4.printContenido();
+  }else if ($("#resultados_I").find('.active').index()==4){
+    var reporte5 = new printReport(reporteFecha2);
+    reporte5.setContenido();
+    reporte5.printContenido();
   }
 }

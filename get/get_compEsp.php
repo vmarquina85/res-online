@@ -28,10 +28,10 @@ if (sizeof($resultado)>0 ){
     <th colspan='2' class='bg-silver f-s-16 text-center'>".$anio2."</th>
   </tr>
   <tr>
-  <th class='bg-silver f-s-16 text-center'>Atenciones</th>
-  <th class='bg-silver f-s-16 text-center'>Ingresos</th>
-  <th class='bg-silver f-s-16 text-center'>Atenciones</th>
-<th class='bg-silver f-s-16 text-center'>Ingresos</th>
+  <th class='bg-silver f-s-16 text-center'>Atenciones (Productos)</th>
+  <th class='bg-silver f-s-16 text-center'>Ingresos (S/.)</th>
+  <th class='bg-silver f-s-16 text-center'>Atenciones (Productos)</th>
+<th class='bg-silver f-s-16 text-center'>Ingresos (S/.)</th>
   </tr>
   </thead>
   <tbody>";
